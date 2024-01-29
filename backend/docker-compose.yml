@@ -1,0 +1,26 @@
+version: '3.10'
+
+services:
+  web:
+    build: ./
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/usr/src/app/
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+    env_file:
+      - ./.env.dev
+  db:
+    image: postgres:15.0
+    volumes:
+      - dm_postgres_data:/var/lib/postgresql/data
+      - ./postgresql/conf:/etc/postgresql/
+    environment:
+      - POSTGRES_USER=ivan
+      - POSTGRES_PASSWORD=ivan12345
+      - POSTGRES_DB=Parma
+
+volumes:
+  dm_postgres_data:
