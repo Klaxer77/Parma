@@ -1,18 +1,23 @@
+import React, { useState } from 'react';
 import './App.css'
 import { Routes, Route, useParams } from 'react-router-dom'; 
+import Layout from '../Layout/Layout';
+import Home from '../../Pages/Home';
+import Login from '../../Pages/Login';
 
 function App() {
-
+  
   return (
     <>
       {
-        // <Routes>
-        //   {/* <Route path='/' element={<Layout />}></Route> */}
-        //   {/* <Route path="/" element={<Auth />} /> */}
-        //   {/* <Route path="*" element={<NotFound />} /> */}
-        // </Routes>
+        <Routes>
+          <Route path='/' element={<Layout />}> 
+            <Route path='/home' element={<Home />}></Route> 
+            <Route path='/login' element={<Login />}></Route> 
+            {/* <Route path="*" element={<NotFound />} /> */}
+          </Route>
+        </Routes>
       }
-      <h1>Начало</h1>
     </>
   )
 }

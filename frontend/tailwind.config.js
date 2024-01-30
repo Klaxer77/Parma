@@ -6,6 +6,15 @@ export default {
   ],
   theme: {
     extend: {},
+    colors: {
+      'main-color': '#2A2C34',
+      'purple-color': '#20232D',
+      'button-color': '#0050FF',
+      'white': '#fff'
+    },
+    fontFamily: {
+      'GothemPro': ['Gotham Pro']
+    }
   },
   plugins: [],
 }
