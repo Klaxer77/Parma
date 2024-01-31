@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "Parma",
+            "database": "Parma_test_db",
+            "username": "postgres",
+            "password": "treker123"
+        }
+    ]
+}
