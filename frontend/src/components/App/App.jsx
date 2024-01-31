@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
 import './App.css'
 import { Routes, Route, useParams } from 'react-router-dom'; 
 import Layout from '../Layout/Layout';
 import Home from '../../Pages/Home';
 import Login from '../../Pages/Login';
+import Profile from '../../Pages/Profile';
+import MapOffice from '../../Pages/Map';
 
 function App() {
   
@@ -14,6 +15,8 @@ function App() {
           <Route path='/' element={<Layout />}> 
             <Route path='/home' element={<Home />}></Route> 
             <Route path='/login' element={<Login />}></Route> 
+            <Route path='/profile' element={<Profile />}></Route> 
+            <Route path='/map' element={<MapOffice />}></Route> 
             {/* <Route path="*" element={<NotFound />} /> */}
           </Route>
         </Routes>
