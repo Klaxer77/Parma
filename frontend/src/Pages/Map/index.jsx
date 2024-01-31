@@ -13,7 +13,9 @@ import Element_9 from '../../components/MapsElements/Element_9';
 import Element_10 from '../../components/MapsElements/Element_10';
 import Element_11 from '../../components/MapsElements/Elements_11';
 import Element_12 from '../../components/MapsElements/Element_12';
+import Element_13 from '../../components/MapsElements/Element_13';
 
+//
 
 export default function MapOffice() {
   const [scale, setScale] = useState(1);
@@ -60,6 +62,7 @@ export default function MapOffice() {
             <Element_10 />
             <Element_11 />
             <Element_12 />
+            <Element_13 />
             <img className="overflow-visible w-[1800px] absolute -left-[50px]" src="/img/Mapp.png" alt="" />     
           </div>
         </div>

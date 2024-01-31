@@ -1,8 +1,8 @@
 import React from 'react';
 
-export default function Element_10() {
+export default function Element_13() {
   return (
-    <div className="10 free absolute left-[61px] top-[595px] z-[99] cursor-pointer rotate-[56deg]">
+    <div className="13 free absolute left-[210px] top-[615px] z-[99] cursor-pointer rotate-[56deg]">
       <div className="container-free">
         <div className="square-free"></div>
         <div className="circle-free"></div>

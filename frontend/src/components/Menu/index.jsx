@@ -11,12 +11,14 @@ export default function Menu() {
     setProfileMenuActive(true);
     setReservationMenuActive(false);
     setHistoryMenuActive(false);
+    setMapMenuActive(false)
   };
 
   const onReservationActive = () => {
     setProfileMenuActive(false);
     setReservationMenuActive(true);
     setHistoryMenuActive(false);
+    setMapMenuActive(false)
   };
 
   const onHistoryActive = () => {
@@ -27,10 +29,10 @@ export default function Menu() {
   };
 
   const onMapActive = () => {
+    setMapMenuActive(true)
     setProfileMenuActive(false);
     setReservationMenuActive(false);
     setHistoryMenuActive(false);
-    setMapMenuActive(true)
   };
 
   return (
