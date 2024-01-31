@@ -1,17 +1,26 @@
 from django.contrib import admin
 from .models import User
 from django.utils.safestring import mark_safe
+from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
+
 
 @admin.register(User)
-class UserAdmin(admin.ModelAdmin):
-    fields = ('image', 'first_name', 'last_name', 'gender', 'email', 'phone', 'password')
-    list_display = ('image_show', 'first_name', 'last_name', 'sur_name', 'email', 'phone')
-    list_display_links = ('image_show', 'first_name', 'last_name', 'email', 'phone')
-    
-    
-    def image_show(self,obj):
-        if obj.image:
-            return mark_safe("<img src='{}' width='60' />".format(obj.image.url))
-        return "None"
-    
-    image_show.__name__ = "Главный аватар"
+class UserAdmin(DjangoUserAdmin):
+
+    fieldsets = (
+        (None, {'fields': ('image', 'email', 'password')}),
+        (('Personal info'), {'fields': ('last_name', 'first_name',  'sur_name', 'gender', 'phone',)}),
+        (('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
+                                       'groups', 'user_permissions')}),
+        (('Important dates'), {'fields': ('last_login', 'date_joined')}),
+    )
+    add_fieldsets = (
+        (None, {
+            'classes': ('wide',),
+            'fields': ('image', 'email', 'password1', 'password2', 'last_name', 'first_name', 'sur_name', 'phone', 'gender'),
+        }),
+    )
+    list_display = ('email', 'first_name', 'last_name', 'is_staff')
+    search_fields = ('email', 'first_name', 'last_name')
+    ordering = ('email',)
+

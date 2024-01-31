@@ -9,8 +9,10 @@ class CustomTokenObtainPairSerializer(serializers.ModelSerializer):
         model = User
         fields = (
             'id',
-            'first_name',
             'last_name',
+            'first_name',
+            'sur_name',
+            'gender',
             'image',
             'email',
             'phone',

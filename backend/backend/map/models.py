@@ -52,7 +52,6 @@ class Room(models.Model):
     places = models.ManyToManyField(
         Place,
         verbose_name="Места",
-        # limit_choices_to={'id__in': Place.objects.annotate(num_rooms=models.Count('place')).filter(num_rooms__lt=4)}
     )
     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
     name = models.CharField('Название', max_length=50, validators=[MinLengthValidator(3)])
@@ -65,13 +64,4 @@ class Room(models.Model):
         verbose_name = "Комната"
         verbose_name_plural = "Комнаты"
     
-    
-    # def clean(self):
-    #     if self.places.room_set.count() >= 4:
-    #         raise ValidationError("Достигнуто максимальное количество мест для этой комнаты")
-
-    # def save(self, *args, **kwargs):
-    #     if self.places.room_set.count() >= 4:
-    #         raise ValidationError("Достигнуто максимальное количество мест для этой комнаты")
-    #     super().save(*args, **kwargs)
         
