@@ -1,0 +1,45 @@
+.free {
+  @apply flex gap-[10px]
+}
+
+.container-free {
+  @apply relative flex flex-col justify-center items-center w-[60px]
+}
+
+.circle-free {
+  @apply bg-green rounded-[50%] w-[30px] h-[30px] absolute -top-[15px]
+}
+
+.square-free {
+  @apply bg-green rounded-[5px] w-[65px] h-[30px]
+}
+
+
+
+
+
+
+
+.busy {
+  @apply flex gap-[10px]
+}
+
+.container-busy {
+  @apply relative flex flex-col justify-center items-center w-[60px]
+}
+
+.circle-busy {
+  @apply bg-black-map rounded-[50%] w-[30px] h-[30px] absolute -top-[15px]
+}
+
+.square-busy {
+  @apply bg-black-map rounded-[5px] w-[65px] h-[30px]
+}
+
+
+
+
+
+.circle-entrance {
+  @apply bg-red rounded-[50%] w-[40px] h-[40px]
+}
