@@ -1,4 +1,4 @@
-from api.map.serializers import ReservationSeriaLizer, PlaceSerialLizer, RoomSeriaLizer
+from api.map.serializers import ReservationListSeriaLizer, PlaceSerialLizer, RoomSeriaLizer, ReservationCreateSeriaLizer
 from backend.map.models import Place, Room, Reservation
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly, AllowAny
@@ -12,13 +12,13 @@ from django.contrib import messages
 
 class ReservationCreateView(generics.CreateAPIView):
     queryset = Reservation.objects.all()
-    serializer_class = ReservationSeriaLizer
+    serializer_class = ReservationCreateSeriaLizer
     permission_classes = [IsAuthenticated]
     
     def perform_create(self, serializer):
         start_date = serializer.validated_data['start_date']
         end_date = serializer.validated_data['end_date']
-        place = self.request.META.get('HTTP_PLACE')
+        # place = self.request.META.get('HTTP_PLACE')
         user = self.request.user
 
 
@@ -29,7 +29,8 @@ class ReservationCreateView(generics.CreateAPIView):
         existing_reservations = Reservation.objects.filter(user=user)
         if existing_reservations.exists():
             raise ValidationError({'error': 'У вас может быть только одна бронь'})
-        serializer.save(user=user, place=place)
+        serializer.save(user=user)
+        # place=place
         
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
@@ -47,7 +48,7 @@ class PlaceListView(generics.ListAPIView):
         
 class ReservationListView(generics.ListAPIView):
     queryset = Reservation.objects.all()
-    serializer_class = ReservationSeriaLizer
+    serializer_class = ReservationListSeriaLizer
     permission_classes = [IsAuthenticated]
     
 class RoomListView(generics.ListAPIView):

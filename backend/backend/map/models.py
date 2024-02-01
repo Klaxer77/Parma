@@ -4,7 +4,8 @@ from django.utils import timezone
 from backend.user.models import User
 from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.utils.text import slugify
-
+from django.db.models.signals import post_save, post_delete
+from django.dispatch import receiver
 
 
 class Place(models.Model):
@@ -19,11 +20,12 @@ class Place(models.Model):
         "Статус",
         max_length=13,
         choices=STATUS_CHOICES,
-        default='свободно',
+        default='Свободно',
     )
     
     def __str__(self):
         return f'{self.name}'
+    
     
     class Meta:
         verbose_name = "Место"
@@ -87,4 +89,13 @@ class Room(models.Model):
         verbose_name = "Комната"
         verbose_name_plural = "Комнаты"
     
-        
+@receiver(post_save, sender=Reservation)
+@receiver(post_delete, sender=Reservation)
+def update_place_status(sender, instance, **kwargs):
+    place = instance.place
+    reservations_exist = Reservation.objects.filter(place=place).exists()
+    if reservations_exist:
+        place.status = 'Забронировано'  # Update the status to 'Забронировано' when reservations exist
+    else:
+        place.status = 'Свободно'  # Update the status to 'Свободно' when no reservations exist
+    place.save()
