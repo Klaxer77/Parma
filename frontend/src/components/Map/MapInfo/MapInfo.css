@@ -14,6 +14,10 @@
   @apply bg-green rounded-[5px] w-[65px] h-[30px]
 }
 
+.circle-reserved {
+  @apply bg-green rounded-[50%] w-[30px] h-[30px] absolute -top-[15px]
+}
+
 
 
 
@@ -29,11 +33,11 @@
 }
 
 .circle-busy {
-  @apply bg-black-map rounded-[50%] w-[30px] h-[30px] absolute -top-[15px]
+  @apply bg-gray-map rounded-[50%] w-[30px] h-[30px] absolute -top-[15px]
 }
 
 .square-busy {
-  @apply bg-black-map rounded-[5px] w-[65px] h-[30px]
+  @apply bg-gray-map rounded-[5px] w-[65px] h-[30px]
 }
 
 

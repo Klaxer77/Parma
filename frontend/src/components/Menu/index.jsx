@@ -1,86 +1,50 @@
-import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { setMenuActive } from '../../Redux/Menu/Menu.slice';
 
 export default function Menu() {
-  const [ProfileMenuActive, setProfileMenuActive] = useState(true);
-  const [ReservationMenuActive, setReservationMenuActive] = useState(false);
-  const [HistoryMenuActive, setHistoryMenuActive] = useState(false);
-  const [MapMenuActive, setMapMenuActive] = useState(false);
+  const dispatch = useDispatch();
+  const { menuActive } = useSelector((state) => state.Menu);
 
-  const onProfielActive = () => {
-    setProfileMenuActive(true);
-    setReservationMenuActive(false);
-    setHistoryMenuActive(false);
-    setMapMenuActive(false)
+  const menu = ['Профиль', 'Активная бронь', 'История брони', 'Карта'];
+
+  const getIndexMenu = (index) => {
+    dispatch(setMenuActive(index));
   };
 
-  const onReservationActive = () => {
-    setProfileMenuActive(false);
-    setReservationMenuActive(true);
-    setHistoryMenuActive(false);
-    setMapMenuActive(false)
-  };
-
-  const onHistoryActive = () => {
-    setProfileMenuActive(false);
-    setReservationMenuActive(false);
-    setMapMenuActive(false)
-    setHistoryMenuActive(true);
-  };
-
-  const onMapActive = () => {
-    setMapMenuActive(true)
-    setProfileMenuActive(false);
-    setReservationMenuActive(false);
-    setHistoryMenuActive(false);
-  };
 
   return (
-    <nav className="flex gap-[20px] flex-wrap">
-
-      <Link to='/profile'>
-        <button
-          onClick={() => onProfielActive()}
-          className={
-            ProfileMenuActive === true
-              ? 'w-[135px] h-[35px] bg-purple-color text-white rounded-[5px] text-[14px]'
-              : 'w-[135px] h-[35px] bg-white text-[#3E3E3E] rounded-[5px] text-[14px]'
-          }>
-          Профиль
-        </button>
-      </Link>
-
-      <button
-        onClick={() => onReservationActive()}
-        className={
-          ReservationMenuActive === true
-            ? 'w-[135px] h-[35px] bg-purple-color text-white rounded-[5px] text-[14px]'
-            : 'w-[135px] h-[35px] bg-white text-[#3E3E3E] rounded-[5px] text-[14px]'
-        }>
-        Активная бронь
-      </button>
-
-      <button
-        onClick={() => onHistoryActive()}
-        className={
-          HistoryMenuActive === true
-            ? 'w-[135px] h-[35px] bg-purple-color text-white rounded-[5px] text-[14px]'
-            : 'w-[135px] h-[35px] bg-white text-[#3E3E3E] rounded-[5px] text-[14px]'
-        }>
-        История брони
-      </button> 
-
-      <Link to='/map'>
-      <button
-        onClick={() => onMapActive()}
-        className={
-          MapMenuActive === true
-            ? 'w-[135px] h-[35px] bg-purple-color text-white rounded-[5px] text-[14px]'
-            : 'w-[135px] h-[35px] bg-white text-[#3E3E3E] rounded-[5px] text-[14px]'
-        }>
-        Карта
-      </button>
-      </Link>
-    </nav>
+    <>
+      <div>
+        <Link to="/home" onClick={() => dispatch(setMenuActive(-1))}>
+          <img height={40} width={120} src="/img/logo.png" alt="logo" />
+        </Link>
+      </div>
+      <nav className="flex gap-[20px] flex-wrap">
+        {menu.map((value, index) => (
+          <Link
+            key={value}
+            to={
+              index === 0
+                ? '/profile'
+                : index === 1
+                ? '/activeReserv'
+                : index === 2
+                ? '/historyReserv'
+                : '/map'
+            }>
+            <button
+              onClick={() => getIndexMenu(index)}
+              className={
+                menuActive === index
+                  ? 'w-[135px] h-[35px] bg-purple-color text-white rounded-[5px] text-[14px]'
+                  : 'w-[135px] h-[35px] bg-white text-[#3E3E3E] rounded-[5px] text-[14px]'
+              }>
+              {value}
+            </button>
+          </Link>
+        ))}
+      </nav>
+    </>
   );
 }
