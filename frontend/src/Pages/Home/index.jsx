@@ -1,8 +1,15 @@
-import React from 'react';
-import Header from '../../components/Layout/Header';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { setMapButtonActive, setMenuActive } from '../../Redux/Menu/Menu.slice';
 
 export default function Home() {
+  const dispatch = useDispatch();
+
+  const onClickBookBtn = () => {
+    dispatch(setMenuActive(3));
+    dispatch(setMapButtonActive(true))
+  }
+
   return (
     <>
         <div className="mt-[150px] px-[20px] flex justify-between items-center w-full max-w-[1570px] mx-auto">
@@ -16,7 +23,7 @@ export default function Home() {
               потенциал вашей команды на новый уровень.
             </h2>
             <Link to='/map'>
-            <button className="text-[20px] bg-button-color max-w-[200px] w-full h-[50px] rounded-[8px]">
+            <button onClick={onClickBookBtn} className="text-[20px] bg-button-color max-w-[200px] w-full h-[50px] rounded-[8px]">
               Забронировать
             </button>
             </Link>

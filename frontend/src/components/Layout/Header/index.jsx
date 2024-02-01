@@ -5,8 +5,8 @@ import HeaderNoAuthorized from './HeaderNoAuthorized'
 export default function Header() {
   return (
     <>
-    <HeaderAuthorized />
-    {/* <HeaderNoAuthorized /> */}
+    {/* <HeaderAuthorized /> */}
+    <HeaderNoAuthorized />
     </>
   )
 }
