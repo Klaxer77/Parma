@@ -186,6 +186,13 @@ CORS_ALLOWED_ORIGINS = [
     'http://127.0.0.1:3001',
 ]
 
+#Cookie
+SESSION_COOKIE_HTTPONLY = False
+SESSION_COOKIE_SAMESITE = None
+CSRF_COOKIE_SAMESITE = None
+CSRF_TRUSTED_ORIGINS = ['http://localhost:3001', 'http://127.0.0.1:3000']
+CORS_ALLOW_CREDENTIALS = True
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
