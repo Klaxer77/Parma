@@ -12,8 +12,8 @@ export default {
       'button-color': '#0050FF',
       'white': '#fff',
       'red': '#F64343',
-      'green': '#2AAB5B',
-      'black-map': '#20232F'
+      'green': '#5DE47B',
+      'gray-map': '#67696E'
     },
     fontFamily: {
       'GothemPro': ['Gotham Pro']
