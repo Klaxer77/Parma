@@ -95,7 +95,7 @@ def update_place_status(sender, instance, **kwargs):
     place = instance.place
     reservations_exist = Reservation.objects.filter(place=place).exists()
     if reservations_exist:
-        place.status = 'Забронировано'  # Update the status to 'Забронировано' when reservations exist
+        place.status = 'Забронировано'
     else:
-        place.status = 'Свободно'  # Update the status to 'Свободно' when no reservations exist
+        place.status = 'Свободно' 
     place.save()
