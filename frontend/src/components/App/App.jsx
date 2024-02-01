@@ -1,12 +1,48 @@
 import './App.css';
 import { Routes, Route, useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import Layout from '../Layout/Layout';
 import Home from '../../Pages/Home';
 import Login from '../../Pages/Login';
 import Profile from '../../Pages/Profile';
 import MapOffice from '../../Pages/Map';
+import { useEffect } from 'react';
+import { setMapButtonActive, setMenuActive } from '../../Redux/Menu/Menu.slice';
+
 
 function App() {
+
+  const dispatch = useDispatch();
+
+  const url = window.location.href
+
+  useEffect(() => {
+    if(url == 'http://localhost:3000/home') {
+      dispatch(setMenuActive(-1));
+      dispatch(setMapButtonActive(false))
+    };
+    if(url == 'http://localhost:3000/login') {
+      dispatch(setMenuActive(-1))
+      dispatch(setMapButtonActive(false))
+    };
+    if(url == 'http://localhost:3000/profile') {
+      dispatch(setMenuActive(0))
+      dispatch(setMapButtonActive(false))
+    };
+    if(url == 'http://localhost:3000/activeReserv') {
+      dispatch(setMenuActive(1))
+      dispatch(setMapButtonActive(false))
+    };
+    if(url == 'http://localhost:3000/historyReserv') {
+      dispatch(setMenuActive(2))
+      dispatch(setMapButtonActive(false))
+    };
+    if(url == 'http://localhost:3000/map') {
+      dispatch(setMenuActive(3))
+      dispatch(setMapButtonActive(true))
+    };
+  }, [])
+
   return (
     <>
       {
