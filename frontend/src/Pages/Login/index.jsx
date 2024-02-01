@@ -9,8 +9,8 @@ export default function Login() {
   const onClickLogin = (e) => {
     e.preventDefault();
     const user = {
-      email: email,
-      password: password
+      email: '33333',
+      password: '33333'
     }
     dispatch(fetchLogin(user))
   };
