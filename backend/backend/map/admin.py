@@ -1,8 +1,8 @@
 from django.contrib import admin
-from .models import Room, Place
+from .models import Room, Place, Reservation
 from django.utils.safestring import mark_safe
 
-
+admin.site.register(Reservation)
 
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
@@ -11,15 +11,13 @@ class RoomAdmin(admin.ModelAdmin):
     fields = ('places', 'name', 'slug')
     prepopulated_fields = {'slug': ('name',)}
     filter_horizontal = ('places',)
-    
-    
-        
+          
 
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
-    list_display = ('image_show', 'name', 'slug', 'user', 'start_date', 'end_date')
-    list_display_links = ('image_show', 'name', 'slug', 'user', 'start_date', 'end_date')
-    fields = ('image', 'name', 'user', 'start_date', 'end_date', 'slug')
+    list_display = ('image_show', 'name', 'slug', 'status')
+    list_display_links = ('image_show', 'name', 'slug', 'status')
+    fields = ('image', 'name', 'slug', 'status')
     prepopulated_fields = {'slug': ('name',)}
     
     

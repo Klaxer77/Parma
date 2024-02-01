@@ -6,17 +6,44 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.utils.text import slugify
 
 
+
 class Place(models.Model):
+    STATUS_CHOICES = [
+        ('Забронировано', 'Забронировано'),
+        ('Свободно', 'Свободно'),
+    ]
     name = models.CharField('Название', max_length=50, validators=[MinLengthValidator(3)])
-    user = models.ForeignKey(
+    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
+    image = models.ImageField("Фото места", upload_to="place/")
+    status = models.CharField(
+        "Статус",
+        max_length=13,
+        choices=STATUS_CHOICES,
+        default='свободно',
+    )
+    
+    def __str__(self):
+        return f'{self.name}'
+    
+    class Meta:
+        verbose_name = "Место"
+        verbose_name_plural = "Места"
+        
+class Reservation(models.Model):
+    user = models.OneToOneField(
         User,
         verbose_name = 'Сотрудник',
         on_delete=models.CASCADE,
         null=True,
         blank=True
     )
-    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
-    image = models.ImageField("Фото места", upload_to="place/")
+    place = models.OneToOneField(
+        Place,
+        verbose_name='Место',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
     start_date = models.DateTimeField(
         "Дата начала бронирования",
         default=timezone.now,
@@ -27,25 +54,21 @@ class Place(models.Model):
     )
     
     def __str__(self):
-        return f'{self.name}'
+        return f'Бронь №{self.id}'
+    
+    class Meta:
+        verbose_name = "Бронь"
+        verbose_name_plural = "Брони"
     
     def clean(self):
 
         if self.start_date >= self.end_date:
-            raise ValidationError("Дата окончания должна быть позже даты начала.")
-
-        conflicting_reservations = Place.objects.filter(start_date__lt=self.end_date, end_date__gt=self.start_date)
-        if conflicting_reservations.exists():
-            raise ValidationError("Для этого места существует конфликтующее бронирование, проверьте правильность введенных дат")
+            raise ValidationError("Дата окончания должна быть позже даты начала")
+        
 
     def save(self, *args, **kwargs):
         self.clean()
         super().save(*args, **kwargs)
-    
-    
-    class Meta:
-        verbose_name = "Место"
-        verbose_name_plural = "Места"
     
 
 class Room(models.Model):

@@ -52,37 +52,13 @@ class User(AbstractUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['first_name', 'last_name', 'sur_name', 'gender', 'image', 'phone']
     
+    def __str__(self):
+        return f'{self.last_name} {self.first_name} {self.sur_name}'
         
     class Meta:
         verbose_name = "Пользователь"
         verbose_name_plural = "Пользователи"
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-# class Profile(models.Model):
-#     user = models.OneToOneField(User, on_delete=models.CASCADE)
-#     slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
-    
-#     def save(self, *args, **kwargs):
-#         if not self.slug:
-#             self.slug = slugify(self.user.username)
-#         super(Profile, self).save(*args, **kwargs)
-        
-        
-#     def __str__(self):
-#         return f'Профиль: {self.user.last_name} {self.user.first_name}'
     
 

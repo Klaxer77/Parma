@@ -8,7 +8,7 @@ from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 class UserAdmin(DjangoUserAdmin):
 
     fieldsets = (
-        (None, {'fields': ('image', 'email', 'password')}),
+        (None, {'fields': ('image', 'slug', 'email', 'password')}),
         (('Personal info'), {'fields': ('last_name', 'first_name',  'sur_name', 'gender', 'phone',)}),
         (('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser',
                                        'groups', 'user_permissions')}),
@@ -17,10 +17,11 @@ class UserAdmin(DjangoUserAdmin):
     add_fieldsets = (
         (None, {
             'classes': ('wide',),
-            'fields': ('image', 'email', 'password1', 'password2', 'last_name', 'first_name', 'sur_name', 'phone', 'gender'),
+            'fields': ('image', 'slug', 'email', 'password1', 'password2', 'last_name', 'first_name', 'sur_name', 'phone', 'gender'),
         }),
     )
     list_display = ('email', 'first_name', 'last_name', 'is_staff')
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
+    prepopulated_fields = {'slug': ('last_name',)}
 
