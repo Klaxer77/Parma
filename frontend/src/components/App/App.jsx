@@ -8,6 +8,7 @@ import Profile from '../../Pages/Profile';
 import MapOffice from '../../Pages/Map';
 import { useEffect } from 'react';
 import { setMapButtonActive, setMenuActive } from '../../Redux/Menu/Menu.slice';
+import NotFound from '../../Pages/NotFound';
 
 
 function App() {
@@ -52,8 +53,8 @@ function App() {
             <Route path="/home" element={<Home />}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
-            {/* <Route path="*" element={<NotFound />} /> */}
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       }
     </>
