@@ -16,9 +16,9 @@ class PlaceSerialLizer(serializers.ModelSerializer):
             'name',
             'image',
         )
-class ReservationSeriaLizer(serializers.ModelSerializer):
+class ReservationListSeriaLizer(serializers.ModelSerializer):
     user = CustomTokenObtainPairSerializer(required=False)
-    place =  PlaceSerialLizer(required=False)
+    place =  PlaceSerialLizer()
 
     class Meta:
         model = Reservation
@@ -29,7 +29,21 @@ class ReservationSeriaLizer(serializers.ModelSerializer):
             'start_date',
             'end_date',
         )
-        
+
+class ReservationCreateSeriaLizer(serializers.ModelSerializer):
+    user = CustomTokenObtainPairSerializer(required=False)
+
+
+    class Meta:
+        model = Reservation
+        fields = (
+            'id',
+            'user',
+            'place',
+            'start_date',
+            'end_date',
+        )
+
 class RoomSeriaLizer(serializers.ModelSerializer):
     places = PlaceSerialLizer(many=True)
     
