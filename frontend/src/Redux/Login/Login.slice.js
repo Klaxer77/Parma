@@ -44,6 +44,6 @@ export const Login = createSlice({
 })
 
 
-export const { setIsAuth  } = Login.actions
+export const { setIsAuth } = Login.actions
 
 export default Login.reducer

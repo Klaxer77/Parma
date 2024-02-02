@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 
 export default function ProfileInfo() {
   const { infoUser } = useSelector(state => state.ProfileInfo)
-  console.log(infoUser);
+
 
   return (
     <div className="flex justify-between items-center mb-[65px] w-full max-w-[705px]">
@@ -12,7 +12,7 @@ export default function ProfileInfo() {
           <img src={`http://localhost:8000${infoUser.image}`} alt="ava" />
         </div>
         <div>
-          <p className="font-[700] text-[30px]">Gram4ik</p>
+          <p className="font-[700] text-[30px]">{infoUser.first_name}</p>
           <p className="font-[300] text-[14px]">Сотрудник</p>
         </div>
       </div>
