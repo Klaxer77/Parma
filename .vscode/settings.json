@@ -10,5 +10,8 @@
             "username": "postgres",
             "password": "treker123"
         }
+    ],
+    "python.analysis.extraPaths": [
+        "./backend/config"
     ]
 }

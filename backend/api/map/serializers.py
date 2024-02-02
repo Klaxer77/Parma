@@ -1,11 +1,10 @@
 from rest_framework import serializers
-from backend.map.models import Room, Place, Reservation
-from api.user.serializers import CustomTokenObtainPairSerializer
+from backend.map.models import Room, Place
 
 
         
 class PlaceSerialLizer(serializers.ModelSerializer):
-    image = serializers.ImageField(use_url='image.url', read_only=True)
+    image = serializers.ImageField(use_url='image.url')
 
     
     class Meta:
@@ -15,34 +14,9 @@ class PlaceSerialLizer(serializers.ModelSerializer):
             'slug',
             'name',
             'image',
-        )
-class ReservationListSeriaLizer(serializers.ModelSerializer):
-    user = CustomTokenObtainPairSerializer(required=False)
-    place =  PlaceSerialLizer()
-
-    class Meta:
-        model = Reservation
-        fields = (
-            'id',
-            'user',
-            'place',
-            'start_date',
-            'end_date',
+            'status',
         )
 
-class ReservationCreateSeriaLizer(serializers.ModelSerializer):
-    user = CustomTokenObtainPairSerializer(required=False)
-
-
-    class Meta:
-        model = Reservation
-        fields = (
-            'id',
-            'user',
-            'place',
-            'start_date',
-            'end_date',
-        )
 
 class RoomSeriaLizer(serializers.ModelSerializer):
     places = PlaceSerialLizer(many=True)
