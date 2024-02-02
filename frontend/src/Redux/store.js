@@ -10,17 +10,20 @@ import {
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 import Menu  from './Menu/Menu.slice';
+import Login from './Login/Login.slice';
+import ProfileInfo from './Profile/ProfileInfo.slice';
 
 
 const rootReducer = combineReducers({
-  Menu
+  Menu, 
+  Login,
+  ProfileInfo
 }) 
 
 const persistConfig = {
   key: 'root',
   storage,
-  // whitelist: [],
-  // blacklist: ['что не хотим сохранять'],
+  blacklist: ['Login'], // что не хотим сохранять
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

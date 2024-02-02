@@ -1,16 +1,16 @@
 import axios from 'axios';
 
-const $profile = axios.create({
-  baseURL: 'http://127.0.0.1:8000/api/v1/client',
+export const $profile = axios.create({
+  baseURL: 'http://localhost:8000/api/v1/user/',
 });
 
- // http://localhost:8000/auth/jwt/create/
+export const $login = axios.create({
+  baseURL: 'http://localhost:8000/auth/jwt/create/',
+  withCredentials: true
+});
 
-
-//  export const config = {
-//   headers: {
-//     Authorization: `JWT ${localStorage.getItem('accessToken')}`
-//   }
-// };
-
-//  export default $api;
+ export const config = {
+  headers: {
+    Authorization: `JWT ${localStorage.getItem('access')}`
+  }
+};
