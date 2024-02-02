@@ -34,3 +34,5 @@ class UserAdmin(DjangoUserAdmin):
     
     image_show.__name__ = "Аватар"
 
+admin.site.site_title = "Администрирование Parma"
+admin.site.site_header = "Администрирование Parma"
