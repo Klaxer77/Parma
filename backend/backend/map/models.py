@@ -6,6 +6,7 @@ from django.core.validators import MinLengthValidator, MaxLengthValidator
 from django.utils.text import slugify
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
+from datetime import datetime
 
 
 class Place(models.Model):
@@ -30,6 +31,37 @@ class Place(models.Model):
     class Meta:
         verbose_name = "Место"
         verbose_name_plural = "Места"
+        
+class ReservationHistory(models.Model):
+    user = models.ForeignKey(
+        User,
+        verbose_name = 'Сотрудник',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+    place = models.ForeignKey(
+        Place,
+        verbose_name='Место',
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True
+    )
+    start_date = models.DateTimeField(
+        "Дата начала бронирования",
+        default=timezone.now,
+    )
+    end_date = models.DateTimeField(
+        "Дата окончания бронирования",
+        default=timezone.now,
+    )
+    
+    def __str__(self):
+        return f'История брони: {self.user.last_name} {self.user.first_name} {self.user.sur_name}'
+    
+    class Meta:
+        verbose_name = "История брони"
+        verbose_name_plural = "История брони"
         
 class Reservation(models.Model):
     user = models.OneToOneField(
@@ -99,3 +131,17 @@ def update_place_status(sender, instance, **kwargs):
     else:
         place.status = 'Свободно' 
     place.save()
+    
+    
+    
+# @receiver(post_save, sender=Reservation)
+# def move_to_history(sender, instance, created, **kwargs):
+#     if not created:  
+#         if instance.end_date < timezone.now():  
+#             ReservationHistory.objects.create(
+#                 user=instance.user,
+#                 place=instance.place,
+#                 start_date=instance.start_date,
+#                 end_date=instance.end_date
+#             )
+#             instance.delete()

@@ -20,8 +20,15 @@ class UserAdmin(DjangoUserAdmin):
             'fields': ('image', 'slug', 'email', 'password1', 'password2', 'last_name', 'first_name', 'sur_name', 'phone', 'gender'),
         }),
     )
-    list_display = ('email', 'first_name', 'last_name', 'is_staff')
+    list_display = ('image_show', 'email', 'first_name', 'last_name', 'is_staff')
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
     prepopulated_fields = {'slug': ('last_name',)}
+    
+    def image_show(self,obj):
+        if obj.image:
+            return mark_safe("<img src='{}' width='80' />".format(obj.image.url))
+        return "None"
+    
+    image_show.__name__ = "Аватар"
 
