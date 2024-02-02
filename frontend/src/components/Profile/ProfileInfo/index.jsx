@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function ProfileInfo() {
   return (
-    <div className="flex justify-between mb-[65px] w-full max-w-[705px]">
+    <div className="flex justify-between items-center mb-[65px] w-full max-w-[705px]">
       <div className="flex items-center gap-[20px]">
         <div className="w-[100px] h-[100px] rounded-[10px] bg-white overflow-hidden flex items-center justify-center">
           <img src="/img/ava.jpg" alt="ava" />
