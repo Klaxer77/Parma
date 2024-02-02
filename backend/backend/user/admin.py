@@ -2,7 +2,9 @@ from django.contrib import admin
 from .models import User
 from django.utils.safestring import mark_safe
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
+from admin_interface.models import Theme
 
+admin.site.unregister(Theme)
 
 @admin.register(User)
 class UserAdmin(DjangoUserAdmin):
