@@ -1,48 +1,49 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import axios from 'axios';
+import { $login } from '../../Api/http';
 
 export const fetchLogin = createAsyncThunk(
   'login',
-  async (user, thunkAPI) => {
+  async (user, { rejectWithValue }) => {
     try {
-      const response = await axios.post('http://localhost:8000/auth/jwt/create/', user)
+      const response = await $login.post('/create/', user);
+      localStorage.setItem('access', response.data.access)
     } catch (error) {
-      thunkAPI.rejectWithValue(error.message);
-      throw error;
+      return rejectWithValue([error.response.data.detail, error.response.data.email, error.response.data.password]);
     }
   },
 )
 
 const initialState = {
   loading: false,
-  error: null,
+  isAuth: false,
+  errors: [],
 }
 
 export const Login = createSlice({
-  name: 'menu',
+  name: 'login',
   initialState,
   reducers: {
-    setMenuActive: (state, action) => {
-      state.menuActive = action.payload
-    },
+    setIsAuth: (state, action) => {
+      state.isAuth = action.payload
+    }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchLogin.pending, (state, action) => {
-      state.entities.push(action.payload);
-      state.loading = true
+    builder.addCase(fetchLogin.pending, (state) => {
+      state.loading = true;
+      state.errors = []
     })
-    builder.addCase(fetchLogin.fulfilled, (state, action) => {
-      state.entities.push(action.payload);
-      state.loading = false
+    builder.addCase(fetchLogin.fulfilled, (state) => {
+      state.loading = false;
+      state.isAuth = true
     })
     builder.addCase(fetchLogin.rejected, (state, action) => {
-      state.error = action.payload;
+      state.errors = action.payload;
       state.loading = false
     })
   },
 })
 
 
-export const { setMenuActive, setMapButtonActive  } = Login.actions
+export const { setIsAuth  } = Login.actions
 
 export default Login.reducer

@@ -1,11 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux'; 
 
 export default function Email() {
-  const initialEmail = 'gram4ik01@mail.ru';
+  const { infoUser } = useSelector(state => state.ProfileInfo)
+  const initialEmail = infoUser.email;
   const [textEmail, setTextEmail] = useState(initialEmail);
   const [showSaveButtonEmail, setShowSaveButtonEmail] = useState(false);
   const [editableEmail, setEditableEmail] = useState(false);
   const inputRefEmail = useRef(null);
+
 
   useEffect(() => {
     setShowSaveButtonEmail(false);

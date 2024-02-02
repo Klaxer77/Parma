@@ -1,8 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { useSelector } from 'react-redux'; 
 
 export default function Number() {
-  const initialNumber = '79952332005';
-  const [textNumber, setTextNumber] = useState(initialNumber);
+  const { infoUser } = useSelector(state => state.ProfileInfo)
+
+  const [textNumber, setTextNumber] = useState(infoUser.phone);
+
   const [showSaveButtonNumber, setShowSaveButtonNumber] = useState(false);
   const [editableNumber, setEditableNumber] = useState(false);
   const inputRefNumber = useRef(null);
@@ -33,7 +36,7 @@ export default function Number() {
         <div className="relative w-full flex items-center">
           <input
             className="text-white h-[50px] pl-[10px] outline-none w-full bg-[#111111] rounded-[8px]"
-            type="number"
+            type="text"
             value={textNumber}
             onChange={handleInputChangeNumber}
             readOnly={!editableNumber}
