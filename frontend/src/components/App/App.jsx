@@ -1,6 +1,6 @@
 import './App.css';
 import { Routes, Route, useParams } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Layout from '../Layout/Layout';
 import Home from '../../Pages/Home';
 import Login from '../../Pages/Login';
@@ -12,6 +12,7 @@ import NotFound from '../../Pages/NotFound';
 
 function App() {
   const dispatch = useDispatch();
+  const { isAuth } = useSelector(state => state.Login)
 
   const url = window.location.href;
 
