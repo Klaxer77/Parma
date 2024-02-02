@@ -8,7 +8,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Login() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { errors, loading } = useSelector((state) => state.Login);
+  const { errors, loading, isAuth } = useSelector((state) => state.Login);
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -24,16 +24,16 @@ export default function Login() {
   };
 
   useEffect(() => {
-    if(localStorage.getItem('access')) {
+    if(isAuth) {
       navigate('/profile')
     }
-  }, [localStorage.getItem('access')])
+  }, [isAuth])
 
   return (
     <div className='h-[100vh] overflow-hidden relative'>
     <Header />
     {
-      loading === true && <Loading />
+      loading === false && <Loading />
     }
     <div className="w-full text-[24px] flex justify-center items-center h-[100vh]">
       <div className="bg-purple-color p-[40px] max-w-[500px] h-[450px] w-full rounded-[12px] text-center mb-[90px]">

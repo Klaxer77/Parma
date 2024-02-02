@@ -15,6 +15,7 @@ export const fetchLogin = createAsyncThunk(
 
 const initialState = {
   loading: false,
+  isAuth: false,
   errors: [],
 }
 
@@ -22,15 +23,18 @@ export const Login = createSlice({
   name: 'login',
   initialState,
   reducers: {
-    
+    setIsAuth: (state, action) => {
+      state.isAuth = action.payload
+    }
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchLogin.pending, (state, action) => {
+    builder.addCase(fetchLogin.pending, (state) => {
       state.loading = true;
       state.errors = []
     })
-    builder.addCase(fetchLogin.fulfilled, (state, action) => {
-      state.loading = false
+    builder.addCase(fetchLogin.fulfilled, (state) => {
+      state.loading = false;
+      state.isAuth = true
     })
     builder.addCase(fetchLogin.rejected, (state, action) => {
       state.errors = action.payload;
@@ -40,6 +44,6 @@ export const Login = createSlice({
 })
 
 
-export const { setMenuActive, setMapButtonActive  } = Login.actions
+export const { setIsAuth  } = Login.actions
 
 export default Login.reducer

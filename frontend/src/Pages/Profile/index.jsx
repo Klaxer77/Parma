@@ -5,20 +5,26 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { fetchUser } from '../../Redux/Profile/ProfileInfo.slice';
+import { setIsAuth } from '../../Redux/Login/Login.slice'; 
 
 export default function Profile() {
   const navigate = useNavigate();
   const dispatch = useDispatch()
+  const { loaded } = useSelector(state => state.ProfileInfo)
+  const { isAuth } = useSelector(state => state.Login)
   const onClickExit = () => {
     localStorage.removeItem('access')
+    dispatch(setIsAuth(false))
   }
 
   useEffect(() => {
-    if(!localStorage.getItem('access')) {
+    if(!isAuth) {
       navigate('/login')
     }
-    dispatch(fetchUser())
-  }, [localStorage.getItem('access')])
+    if(!loaded) {
+      dispatch(fetchUser())
+    }
+  }, [loaded, isAuth])
 
   return (
     <div className="w-full flex items-center justify-center mt-[50px]">

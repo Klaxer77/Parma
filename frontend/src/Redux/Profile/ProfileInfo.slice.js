@@ -12,8 +12,8 @@ export const fetchUser = createAsyncThunk(
 )
 
 const initialState = {
-  loading: false,
   infoUser: {},
+  loaded: false
 }
 
 export const ProfileInfo = createSlice({
@@ -22,15 +22,12 @@ export const ProfileInfo = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(fetchUser.pending, (state) => {
-      state.loading = true;
-      state.infoUser = {}
     })
     builder.addCase(fetchUser.fulfilled, (state, action) => {
-      state.loading = false
-      state.infoUser = action.payload
+      state.infoUser = action.payload;
+      state.loaded = true
     })
     builder.addCase(fetchUser.rejected, (state, action) => {
-      state.loading = false
     })
   },
 })
