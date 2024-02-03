@@ -6,7 +6,7 @@ import { config } from '../../Api/http'
 export const fetchUser = createAsyncThunk(
   'infoUser',
   async () => {
-    const response = await $profile.get('profile/', config)
+    const response = await $profile.get('profile/')
     return response.data
   },
 )
