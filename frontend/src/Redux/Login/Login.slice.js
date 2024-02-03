@@ -6,7 +6,7 @@ export const fetchLogin = createAsyncThunk(
   async (user, { rejectWithValue }) => {
     try {
       const response = await $login.post('/create/', user);
-      localStorage.setItem('access', response.data.access)
+      return response.data.access
     } catch (error) {
       return rejectWithValue([error.response.data.detail, error.response.data.email, error.response.data.password]);
     }
@@ -14,6 +14,7 @@ export const fetchLogin = createAsyncThunk(
 )
 
 const initialState = {
+  access: null,
   loading: false,
   isAuth: false,
   errors: [],
@@ -32,8 +33,9 @@ export const Login = createSlice({
       state.loading = true;
       state.errors = []
     })
-    builder.addCase(fetchLogin.fulfilled, (state) => {
+    builder.addCase(fetchLogin.fulfilled, (state, action) => {
       state.loading = false;
+      state.access = localStorage.setItem('access', action.payload)
       state.isAuth = true
     })
     builder.addCase(fetchLogin.rejected, (state, action) => {
