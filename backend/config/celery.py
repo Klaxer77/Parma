@@ -21,6 +21,6 @@ app.conf.beat_schedule = {
     },
     'remove_code_confirm': {
         'task': 'backend.map.tasks.remove_code_confirm',
-        'schedule': 3600,
+        'schedule': 5,
     }
 }
