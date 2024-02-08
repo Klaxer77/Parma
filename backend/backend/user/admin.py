@@ -1,10 +1,15 @@
 from django.contrib import admin
-from .models import User
+from .models import User, ConfirmationCodeEmail, ConfirmationCodePhone
 from django.utils.safestring import mark_safe
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
-from admin_interface.models import Theme
+# from admin_interface.models import Theme
 
-admin.site.unregister(Theme)
+# admin.site.unregister(Theme)
+
+admin.site.register(ConfirmationCodeEmail)
+admin.site.register(ConfirmationCodePhone)
+
+
 
 @admin.register(User)
 class UserAdmin(DjangoUserAdmin):

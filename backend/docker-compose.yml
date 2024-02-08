@@ -2,11 +2,10 @@ version: '3.10'
 
 services:
   web:
-    container_name: backend-Parma
     build: ./
-    command: python manage.py runserver 0.0.0.0:8000
+    command: python /usr/src/app/manage.py runserver 0.0.0.0:8000
     volumes:
-      - .:/usr/src/app/
+      - .:/usr/src/app
     ports:
       - 8000:8000
     depends_on:
@@ -14,15 +13,15 @@ services:
     env_file:
       - ./.env.dev
   db:
-    container_name: db-Parma
-    image: postgres:15.0
+    image: postgres:15.0-alpine
+    ports:
+      - 5432:5432
     volumes:
-      - dm_postgres_data:/var/lib/postgresql/data/
-      - ./postgresql/conf:/etc/postgresql/
+      - postgres_data:/var/lib/postgresql/data/
     environment:
       - POSTGRES_USER=ivan
       - POSTGRES_PASSWORD=ivan12345
       - POSTGRES_DB=Parma
 
 volumes:
-  dm_postgres_data:
+  postgres_data:

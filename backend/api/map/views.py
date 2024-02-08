@@ -17,6 +17,6 @@ class PlaceListView(generics.ListAPIView):
     
     
 class RoomListView(generics.ListAPIView):
-    queryset = Room.objects.all()
+    queryset = Room.objects.all().prefetch_related('places')
     serializer_class = RoomSeriaLizer
     permission_classes = [IsAuthenticated]

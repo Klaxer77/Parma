@@ -10,11 +10,11 @@ RUN apt-get update && apt-get install -y netcat-traditional
 RUN apt-get install -y --no-install-recommends postgresql gcc python3 musl-dev
 RUN pip install --upgrade pip
 
-COPY ./req.txt .
-RUN pip install -r req.txt
+COPY ./req.txt /usr/src/req.txt
+RUN pip install -r /usr/src/req.txt
 
-COPY ./entrypoint.sh .
+COPY ./entrypoint.sh /usr/src/app
 
-COPY . .
+COPY . /usr/src/app
 
 ENTRYPOINT ["/usr/src/app/entrypoint.sh"]

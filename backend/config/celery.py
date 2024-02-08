@@ -13,12 +13,14 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 
 app.autodiscover_tasks()
 
-# reservation_id = 28
 
 app.conf.beat_schedule = {
     'move-reservation-to-history': {
         'task': 'backend.map.tasks.move_expired_reservations_to_history',
-        'schedule': 10,
-        # 'args': (),
+        'schedule': 5,
     },
+    'remove_code_confirm': {
+        'task': 'backend.map.tasks.remove_code_confirm',
+        'schedule': 3600,
+    }
 }
