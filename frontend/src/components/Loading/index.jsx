@@ -23,7 +23,7 @@ export default function Loading() {
             </linearGradient>
           </defs>
           <circle
-            class="pl__ring"
+            ClassName="pl__ring"
             cx="100"
             cy="100"
             r="82"
@@ -36,7 +36,7 @@ export default function Loading() {
             transform="rotate(-90,100,100)"
           />
           <line
-            class="pl__ball"
+            ClassName="pl__ball"
             stroke="url(#pl-grad2)"
             x1="100"
             y1="18"
