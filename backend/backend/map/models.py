@@ -37,6 +37,7 @@ class ReservationHistory(models.Model):
         User,
         verbose_name = 'Сотрудник',
         on_delete=models.CASCADE,
+        related_name='reservation_history',
         null=True,
         blank=True
     )
@@ -68,15 +69,12 @@ class Reservation(models.Model):
         User,
         verbose_name = 'Сотрудник',
         on_delete=models.CASCADE,
-        null=True,
-        blank=True
     )
     place = models.OneToOneField(
         Place,
         verbose_name='Место',
         on_delete=models.CASCADE,
-        null=True,
-        blank=True
+        related_name='reservation_place',
     )
     start_date = models.DateTimeField(
         "Дата начала бронирования",
