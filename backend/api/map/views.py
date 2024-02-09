@@ -1,4 +1,3 @@
-from api.map.serializers import PlaceSerialLizer, RoomSeriaLizer
 from backend.map.models import Place, Room, Reservation, ReservationHistory
 from rest_framework import generics
 from rest_framework.permissions import IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly, AllowAny
@@ -7,7 +6,7 @@ from rest_framework import status
 from rest_framework.views import APIView
 from rest_framework.exceptions import ValidationError
 from django.contrib import messages
-
+from api.user.serializers import PlaceSerialLizer, RoomSeriaLizer
 
 
 class PlaceListView(generics.ListAPIView):

@@ -19,8 +19,8 @@ app.conf.beat_schedule = {
         'task': 'backend.map.tasks.move_expired_reservations_to_history',
         'schedule': 5,
     },
-    'remove_code_confirm': {
-        'task': 'backend.map.tasks.remove_code_confirm',
-        'schedule': 3600,
+    'remove_code_confirm_email': {
+        'task': 'backend.map.tasks.remove_code_confirm_email',
+        'schedule': 5,
     }
 }

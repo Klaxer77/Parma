@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'drf_yasg',
-    'debug_toolbar',
     'backend.user',
     'backend.map',
     'django_cleanup',
@@ -42,7 +41,6 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
-    # "debug_toolbar.middleware.DebugToolbarMiddleware",
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -52,9 +50,6 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'config.urls'
 
-# INTERNAL_IPS = [
-#     "127.0.0.1",
-# ]
 
 
 TEMPLATES = [
@@ -91,7 +86,7 @@ X_FRAME_OPTIONS = "SAMEORIGIN"
 SILENCED_SYSTEM_CHECKS = ["security.W019"]
 
 
-# settings REST framework
+# settings REST frameworkk
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
@@ -118,12 +113,12 @@ CELERY_TIMEZONE = 'Asia/Yekaterinburg'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ivanhomok07@gmail.com'
-EMAIL_HOST_PASSWORD = 'omqm mtlc jjtk wndx'
+EMAIL_HOST_USER = 'parma.verify.code@gmail.com'
+EMAIL_HOST_PASSWORD = 'hewa ahxl uazv qnbu'
 EMAIL_PORT = 587
-EMAIL_ADMIN=['ivanhomok07@gmail.com']
-EMAIL_SERVER = 'ivanhomok07@gmail.com'
-DEFAULT_FROM_EMAIL = 'ivanhomok07@gmail.com'
+EMAIL_ADMIN=['parma.verify.code@gmail.com']
+EMAIL_SERVER = 'parma.verify.code@gmail.com'
+DEFAULT_FROM_EMAIL = 'parma.verify.code@gmail.com'
 
 
 #Cookie
