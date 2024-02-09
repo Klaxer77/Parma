@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { $profile } from '../../Api/http'
-import { config } from '../../Api/http' 
+import { $profile } from '../../Api/http' 
 
 
 export const fetchUser = createAsyncThunk(

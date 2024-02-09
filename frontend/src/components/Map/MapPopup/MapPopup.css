@@ -1,0 +1,33 @@
+.modal {
+  display: none; 
+  position: fixed; 
+  bottom: 0; 
+  left: 0; 
+  width: 100%; 
+  overflow: hidden; 
+  background-color: rgba(0,0,0,0.5); 
+  transition: all 0.3s ease-in-out; 
+  z-index: 99;
+}
+.modal-content {
+  position: relative; 
+  bottom: 0; 
+  background-color: #20232D; 
+  margin: auto; 
+  padding: 20px; 
+  width: 60%; 
+  height: 600px;
+  border-radius: 8px;
+}
+.close {
+  color: #aaaaaa; 
+  float: right; 
+  font-size: 28px; 
+  font-weight: bold;
+}
+
+.modal.show {
+  display: flex; 
+  height: 100%; 
+  transition: all 1s ease-in-out;
+}

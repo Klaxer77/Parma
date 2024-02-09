@@ -1,0 +1,62 @@
+.burger {
+  display: flex;
+  gap: 5px;
+  position: relative;
+}
+
+.burger span {
+  width: 25px;
+  height: 3px;
+  background-color: #20232D;
+  border-radius: 10px;
+}
+
+.burger span.active {
+  position: absolute;
+  transition: all 0.3s ease-in-out;
+  top: 8px;
+}
+
+.burger span.active:first-child {
+  transform: rotate(45deg);
+}
+
+.burger span.active:nth-child(2) {
+  display: none;
+}
+
+.burger span.active:last-child {
+  transform: rotate(-45deg);
+}
+
+
+.menu-block.active {
+  left: 20px;
+  transition: all .3s ease-in-out;
+}
+
+@media only screen and (max-width:950px) {
+    .menu-block {
+      position: absolute;
+      width: 200px;
+      left: -200px;
+      top: 80px;
+      flex-direction: column;
+      display: flex !important;
+      border-radius: 5px;
+    }
+
+    .menu {
+      flex-direction: column;
+    }
+
+    .burger {
+    
+      position: relative;
+      top: 0px;
+      width: 25px;
+      height: 20px;
+      display: flex !important;
+      flex-direction: column;
+    }
+}

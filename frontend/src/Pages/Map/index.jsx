@@ -25,10 +25,10 @@ import Element_21 from '../../components/MapsElements/Element_21';
 import Element_22 from '../../components/MapsElements/Element_22';
 import Element_23 from '../../components/MapsElements/Element_23';
 import Element_24 from '../../components/MapsElements/Element_24';
-import Header from '../../components/Layout/Header';
 import Element_25 from '../../components/MapsElements/Element_25';
 import Element_26 from '../../components/MapsElements/Element_26';
 import Element_27 from '../../components/MapsElements/Element_27';
+import MapPopup from '../../components/Map/MapPopup';
 
 export default function MapOffice() {
   const [scale, setScale] = useState(1);
@@ -43,6 +43,7 @@ export default function MapOffice() {
 
   return (
     <>
+    <MapPopup />
       <div className="w-full relative max-w-[1570px] mx-auto">
         <h3 className="text-white text-[24px] pt-[20px] text-center font-[400] mb-[50px]">Карта</h3>
         <MapInfo />
@@ -57,7 +58,7 @@ export default function MapOffice() {
           -
         </button>
 
-        <div className="relative overflow-x-auto w-full max-w-[1500px] h-[100vh]">
+        <div className="relative overflow-x-auto w-full max-w-[1500px] h-[100vh] test">
           <div
             style={{
               transform: `scale(${scale})`,

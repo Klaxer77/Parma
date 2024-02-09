@@ -23,7 +23,7 @@ export default function Home() {
               потенциал вашей команды на новый уровень.
             </h2>
             <Link to='/map'>
-            <button onClick={onClickBookBtn} className="text-[20px] bg-button-color max-w-[200px] w-full h-[50px] rounded-[8px]">
+            <button onClick={onClickBookBtn} className="text-[20px] bg-red max-w-[200px] w-full h-[50px] rounded-[8px]">
               Забронировать
             </button>
             </Link>
