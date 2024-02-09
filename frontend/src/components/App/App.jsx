@@ -9,6 +9,7 @@ import MapOffice from '../../Pages/Map';
 import { useEffect } from 'react';
 import { setMapButtonActive, setMenuActive } from '../../Redux/Menu/Menu.slice';
 import NotFound from '../../Pages/NotFound';
+import HistoryReselve from '../../Pages/HistoryReselve';
 
 function App() {
   const dispatch = useDispatch();
@@ -29,10 +30,6 @@ function App() {
       dispatch(setMenuActive(0));
       dispatch(setMapButtonActive(false));
     }
-    if (url == 'http://localhost:3000/activeReserv') {
-      dispatch(setMenuActive(1));
-      dispatch(setMapButtonActive(false));
-    }
     if (url == 'http://localhost:3000/historyReserv') {
       dispatch(setMenuActive(2));
       dispatch(setMapButtonActive(false));
@@ -51,6 +48,7 @@ function App() {
             <Route path="/map" element={<MapOffice />}></Route>
             <Route path="/home" element={<Home />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
+            <Route path="/history" element={<HistoryReselve />}></Route>
           </Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="*" element={<NotFound />} />
