@@ -118,12 +118,12 @@ CELERY_TIMEZONE = 'Asia/Yekaterinburg'
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'ivanhomok07@gmail.com'
-EMAIL_HOST_PASSWORD = 'omqm mtlc jjtk wndx'
+EMAIL_HOST_USER = 'parma.verify.code@gmail.com'
+EMAIL_HOST_PASSWORD = 'hewa ahxl uazv qnbu'
 EMAIL_PORT = 587
-EMAIL_ADMIN=['ivanhomok07@gmail.com']
-EMAIL_SERVER = 'ivanhomok07@gmail.com'
-DEFAULT_FROM_EMAIL = 'ivanhomok07@gmail.com'
+EMAIL_ADMIN=['parma.verify.code@gmail.com']
+EMAIL_SERVER = 'parma.verify.code@gmail.com'
+DEFAULT_FROM_EMAIL = 'parma.verify.code@gmail.com'
 
 
 #Cookie

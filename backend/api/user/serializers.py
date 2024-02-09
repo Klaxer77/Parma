@@ -1,14 +1,14 @@
 from rest_framework import serializers
 from backend.user.models import User, ConfirmationCodeEmail, ConfirmationCodePhone
 from backend.map.models import Reservation, ReservationHistory
-from api.map.serializers import PlaceSerialLizer
+from backend.map.models import Room, Place
 
 
 
 
 class ReservationHistoryListSeriaLizer(serializers.ModelSerializer):
     # user = CustomTokenObtainPairSerializer(required=False)
-    place =  PlaceSerialLizer()
+    # place =  PlaceSerialLizer()
 
     class Meta:
         model = ReservationHistory
@@ -44,7 +44,7 @@ class CustomTokenObtainPairSerializer(serializers.ModelSerializer):
 
 class ReservationListSeriaLizer(serializers.ModelSerializer):
     user = CustomTokenObtainPairSerializer(required=False)
-    place = PlaceSerialLizer()
+
 
     class Meta:
         model = Reservation
@@ -54,6 +54,34 @@ class ReservationListSeriaLizer(serializers.ModelSerializer):
             'place',
             'start_date',
             'end_date',
+        )
+        
+class PlaceSerialLizer(serializers.ModelSerializer):
+    image = serializers.ImageField(use_url='image.url')
+    reservation_place=ReservationListSeriaLizer()
+
+    
+    class Meta:
+        model = Place
+        fields = (
+            'id',
+            'slug',
+            'name',
+            'image',
+            'status',
+            'reservation_place',
+        )
+        
+class RoomSeriaLizer(serializers.ModelSerializer):
+    places = PlaceSerialLizer(many=True)
+    
+    class Meta:
+        model = Room
+        fields = (
+            'id',
+            'slug',
+            'name',
+            'places',
         )
         
 
