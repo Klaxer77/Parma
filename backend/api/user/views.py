@@ -24,7 +24,7 @@ class ChangePhoneView(APIView):
         confirmation_code = generate_confirmation_code()
         ConfirmationCodePhone.objects.create(user=request.user, phone=new_phone, code=confirmation_code)
 
-        send_sms(new_phone, f'Код подтверждения: {confirmation_code}')
+        send_sms(new_phone,confirmation_code)
 
         return Response({'message': 'Код подтверждения отправлен на ваш новый номер телефона и действителен в течении 1-ого часа'}, status=200)
     
