@@ -19,7 +19,6 @@ django-admin-interface==0.26.0
 django-cleanup==8.1.0
 django-colorfield==0.11.0
 django-cors-headers==4.3.1
-django-debug-toolbar==4.3.0
 django-extensions==3.2.3
 django-templated-mail==1.1.1
 djangorestframework==3.14.0
