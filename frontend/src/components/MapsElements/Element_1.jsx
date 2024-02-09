@@ -1,8 +1,23 @@
-import React from 'react';
+import { useDispatch, useSelector } from "react-redux"; 
+import { setIsActivePopup, setPlace, setMarkerClose } from "../../Redux/Map/Map.slice";
+import { useState } from "react";
+
 
 export default function Element_1() {
+  const { markerClose } = useSelector(state => state.Map)
+  const [marker, setMarker] = useState(false)
+  const dispath = useDispatch();
+  const onClickPlace = () => {
+    dispath(setPlace(1));
+    dispath(setMarkerClose(true))
+    setMarker(true);
+    setTimeout(() => {
+      dispath(setIsActivePopup(true))
+    }, 700);
+  }
   return (
-    <div className="1 free absolute left-[380px] top-[70px] z-[99] cursor-pointer">
+    <div onClick={onClickPlace} className="1 free absolute left-[380px] top-[70px] z-[99] cursor-pointer">
+      <img className={marker && markerClose ? 'marker active' : 'marker'} src="/img/icons/pin-mark.png" alt="" /> 
       <svg
         width="49"
         height="40"
