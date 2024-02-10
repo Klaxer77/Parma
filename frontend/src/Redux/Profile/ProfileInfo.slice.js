@@ -12,6 +12,9 @@ export const ProfileInfo = createSlice({
   name: 'profile',
   initialState,
   reducers: {
+    setLoaded:(state, action) => {
+      state.loaded = action.payload
+    },
     setInfoUser:(state, action) => {
       state.infoUser = action.payload
     },
@@ -24,6 +27,6 @@ export const ProfileInfo = createSlice({
   },
 })
 
-export const { setInfoUser, setTextEmail, setTextNumber } = ProfileInfo.actions
+export const { setLoaded, setInfoUser, setTextEmail, setTextNumber } = ProfileInfo.actions
 
 export default ProfileInfo.reducer

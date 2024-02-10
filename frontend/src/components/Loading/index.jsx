@@ -4,7 +4,7 @@ import './Loading.scss';
 export default function Loading() {
   return (
     <>
-      <div className="w-full h-[100vh] flex justify-center items-center absolute left-0 bg-[black] opacity-[80%] overflow-hidden"></div>
+      <div className="w-full h-[100vh] flex justify-center items-center absolute left-0 top-[120px] bg-[black] opacity-[80%] overflow-hidden"></div>
       <div className="bg-[transparent] absolute left-0 w-full h-[100vh] flex justify-center items-center">
         <svg
           className="pl mb-[90px]"
