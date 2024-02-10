@@ -268,7 +268,7 @@ JAZZMIN_SETTINGS = {
     "site_header": "Admin workspace",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": 'group',
+    "site_brand": 'Technologies group',
 
     # Logo to use for your site, must be present in static files, used for brand on top left
     "site_logo": "my_admin/img/P.png",
@@ -309,7 +309,7 @@ JAZZMIN_SETTINGS = {
         {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
 
         # external url that opens in a new window (Permissions can be added)
-        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        {"name": "Support", "url": "", "new_window": True},
 
         # model admin to link to (Permissions checked against model)
         {"model": "auth.User"},
