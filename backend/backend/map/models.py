@@ -69,12 +69,14 @@ class Reservation(models.Model):
         User,
         verbose_name = 'Сотрудник',
         on_delete=models.CASCADE,
+        null=True
     )
     place = models.OneToOneField(
         Place,
         verbose_name='Место',
         on_delete=models.CASCADE,
         related_name='reservation_place',
+        null=True
     )
     start_date = models.DateTimeField(
         "Дата начала бронирования",
@@ -118,7 +120,21 @@ class Room(models.Model):
     class Meta:
         verbose_name = "Комната"
         verbose_name_plural = "Комнаты"
+        
+class Map(models.Model):
+    room = models.ManyToManyField(
+        Room,
+        verbose_name='Комнаты'
+    )
     
+    def __str__(self):
+        return f'Вся карта'
+    
+    class Meta:
+        verbose_name='Карта'
+        verbose_name_plural='Карта'
+        
+            
 @receiver(post_save, sender=Reservation)
 @receiver(post_delete, sender=Reservation)
 def update_place_status(sender, instance, **kwargs):

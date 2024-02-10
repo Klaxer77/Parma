@@ -2,13 +2,27 @@ from rest_framework import serializers
 from backend.user.models import User, ConfirmationCodeEmail, ConfirmationCodePhone
 from backend.map.models import Reservation, ReservationHistory
 from backend.map.models import Room, Place
-
-
+from importlib import import_module
 
 
 class ReservationHistoryListSeriaLizer(serializers.ModelSerializer):
     # user = CustomTokenObtainPairSerializer(required=False)
-    # place =  PlaceSerialLizer()
+    place =  serializers.SerializerMethodField()
+    
+    def get_modules(self, obj):
+        PlaceSerialLizer = import_module('.PlaceSerialLizer', package=__package__)
+        return PlaceSerialLizer(obj.modules.all(), many=True).data
+    
+    def get_place(self, obj):
+        place = obj.place
+        place_data = {
+            'id': place.id,
+            'name': place.name,
+            'slug': place.slug,
+            'image': place.image.url,
+            'status': place.status,
+        }
+        return place_data
 
     class Meta:
         model = ReservationHistory
