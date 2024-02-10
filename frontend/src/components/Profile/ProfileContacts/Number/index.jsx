@@ -1,10 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux'; 
+import { setTextNumber } from '../../../../Redux/Profile/ProfileInfo.slice';
 
 export default function Number() {
-  const { infoUser } = useSelector(state => state.ProfileInfo)
-
-  const [textNumber, setTextNumber] = useState(infoUser.phone);
+  const { textNumber } = useSelector(state => state.ProfileInfo)
 
   const [showSaveButtonNumber, setShowSaveButtonNumber] = useState(false);
   const [editableNumber, setEditableNumber] = useState(false);
@@ -16,7 +15,7 @@ export default function Number() {
 
   const handleInputChangeNumber = (e) => {
     if (editableNumber) {
-      setTextNumber(e.target.value);
+      dispatch(setTextNumber(e.target.value));
     }
     setShowSaveButtonNumber(true);
   };
@@ -37,7 +36,7 @@ export default function Number() {
           <input
             className="text-white h-[50px] pl-[10px] outline-none w-full bg-[#111111] rounded-[8px]"
             type="text"
-            value={textNumber}
+            defaultValue={textNumber}
             onChange={handleInputChangeNumber}
             readOnly={!editableNumber}
             ref={inputRefNumber}

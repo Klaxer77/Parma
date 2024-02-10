@@ -1,22 +1,22 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSelector } from 'react-redux'; 
+import { useSelector, useDispatch } from 'react-redux'; 
+import { setTextEmail } from '../../../../Redux/Profile/ProfileInfo.slice';
 
 export default function Email() {
-  const { infoUser } = useSelector(state => state.ProfileInfo)
-  const initialEmail = infoUser.email;
-  const [textEmail, setTextEmail] = useState(initialEmail);
+  const dispatch = useDispatch();
+  const { textEmail } = useSelector(state => state.ProfileInfo)
   const [showSaveButtonEmail, setShowSaveButtonEmail] = useState(false);
   const [editableEmail, setEditableEmail] = useState(false);
   const inputRefEmail = useRef(null);
 
-
+  console.log(textEmail);
   useEffect(() => {
     setShowSaveButtonEmail(false);
   }, []);
 
   const handleInputChange = (e) => {
     if (editableEmail) {
-      setTextEmail(e.target.value);
+      dispatch(setTextEmail(e.target.value));
     }
     setShowSaveButtonEmail(true);
   };
@@ -37,9 +37,9 @@ export default function Email() {
           <input
             className="text-white h-[50px] pl-[10px] outline-none w-full bg-[#111111] rounded-[8px]"
             type="text"
-            value={textEmail}
             onChange={handleInputChange}
             readOnly={!editableEmail}
+            defaultValue={textEmail}
             ref={inputRefEmail}
           />
           {showSaveButtonEmail && editableEmail ? (
