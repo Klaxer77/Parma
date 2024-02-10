@@ -1,35 +1,29 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { $profile } from '../../Api/http' 
+import { createSlice } from '@reduxjs/toolkit'
 
-
-export const fetchUser = createAsyncThunk(
-  'infoUser',
-  async () => {
-    const response = await $profile.get('profile/')
-    return response.data
-  },
-)
 
 const initialState = {
   infoUser: {},
-  loaded: false
+  loaded: false,
+  textEmail: '',
+  textNumber: ''
 }
 
 export const ProfileInfo = createSlice({
   name: 'profile',
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder.addCase(fetchUser.pending, (state) => {
-    })
-    builder.addCase(fetchUser.fulfilled, (state, action) => {
-      state.infoUser = action.payload;
-      state.loaded = true
-    })
-    builder.addCase(fetchUser.rejected, (state, action) => {
-    })
+  reducers: {
+    setInfoUser:(state, action) => {
+      state.infoUser = action.payload
+    },
+    setTextEmail:(state, action) => {
+      state.textEmail = action.payload
+    },
+    setTextNumber:(state, action) => {
+      state.textNumber = action.payload
+    }
   },
 })
 
+export const { setInfoUser, setTextEmail, setTextNumber } = ProfileInfo.actions
 
 export default ProfileInfo.reducer
