@@ -7,7 +7,13 @@ from rest_framework.views import APIView
 from rest_framework.exceptions import ValidationError
 from django.contrib import messages
 from api.user.serializers import PlaceSerialLizer, RoomSeriaLizer
+from .serializers import MapSerialLizer
+from backend.map.models import Map
 
+class MapView(generics.ListAPIView):
+    queryset=Map.objects.all().prefetch_related('room')
+    serializer_class=MapSerialLizer
+    permission_classes= [IsAuthenticated]
 
 class PlaceListView(generics.ListAPIView):
     queryset = Place.objects.all()

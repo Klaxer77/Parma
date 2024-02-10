@@ -2,9 +2,10 @@ from django.contrib import admin
 from .models import User, ConfirmationCodeEmail, ConfirmationCodePhone
 from django.utils.safestring import mark_safe
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
-from admin_interface.models import Theme
+# from admin_interface.models import Theme
 
-admin.site.unregister(Theme)
+
+# admin.site.unregister(Theme)
 
 admin.site.register(ConfirmationCodeEmail)
 admin.site.register(ConfirmationCodePhone)
@@ -31,6 +32,7 @@ class UserAdmin(DjangoUserAdmin):
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
     prepopulated_fields = {'slug': ('last_name',)}
+    save_on_top = True
     
     def image_show(self,obj):
         if obj.image:
@@ -39,5 +41,5 @@ class UserAdmin(DjangoUserAdmin):
     
     image_show.__name__ = "Аватар"
 
-admin.site.site_title = "Администрирование Parma"
-admin.site.site_header = "Администрирование Parma"
+# admin.site.site_title = "Администрирование Parma"
+# admin.site.site_header = "Администрирование Parma"
