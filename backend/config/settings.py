@@ -290,6 +290,7 @@ JAZZMIN_SETTINGS = {
 
     # Welcome text on the login screen
     "welcome_sign": "Добро пожаловать в административную панель",
+    
 
     # Copyright on the footer
     "copyright": "Parma technologies group",
@@ -299,7 +300,7 @@ JAZZMIN_SETTINGS = {
     "search_model": ["auth.User", "auth.Group",],
 
     # Field name on user model that contains avatar ImageField/URLField/Charfield or a callable that receives the user
-    "user_avatar": None,
+    "user_avatar": 'image',
 
     ############
     # Top Menu #
