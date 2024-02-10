@@ -25,6 +25,9 @@ export const Login = createSlice({
   name: 'login',
   initialState,
   reducers: {
+    setLoading: (state, action) => {
+      state.loading = action.payload
+    },
     setIsAuth: (state, action) => {
       state.isAuth = action.payload
     }
@@ -36,8 +39,8 @@ export const Login = createSlice({
     })
     builder.addCase(fetchLogin.fulfilled, (state, action) => {
       state.loading = false;
+      state.isAuth = true;
       state.access = localStorage.setItem('access', action.payload);
-      state.isAuth = true
     })
     builder.addCase(fetchLogin.rejected, (state, action) => {
       state.errors = action.payload;
@@ -47,6 +50,6 @@ export const Login = createSlice({
 })
 
 
-export const { setIsAuth } = Login.actions
+export const { setLoading, setIsAuth } = Login.actions
 
 export default Login.reducer

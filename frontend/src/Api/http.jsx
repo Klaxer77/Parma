@@ -9,3 +9,7 @@ export const $login = axios.create({
   baseURL: 'http://localhost:8000/auth/jwt/create/',
 });
 
+const baseUrl = 'http://localhost:3000/'
+
+export default baseUrl
+
