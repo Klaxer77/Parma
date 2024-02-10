@@ -36,7 +36,6 @@ class User(AbstractUser):
         ('Мужской', 'Мужской'),
         ('Женский', 'Женский'),
     )
-    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
     email = models.EmailField('email address', unique=True)
     username = None
     first_name = models.CharField('Имя', max_length=150, validators=[MinLengthValidator(3)])
@@ -49,7 +48,7 @@ class User(AbstractUser):
     objects = CustomUserManager()
     
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['first_name', 'last_name', 'sur_name', 'gender', 'image', 'phone']
+    REQUIRED_FIELDS = []
     
     def __str__(self):
         return f'{self.last_name} {self.first_name} {self.sur_name}'
