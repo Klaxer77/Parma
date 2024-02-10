@@ -73,10 +73,10 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     "default": {
-        "ENGINE": os.environ.get("SQL_ENGINE", 'django.db.backends.postgresql'),
-        "NAME": os.environ.get("SQL_DATABASE", 'Parma_test_db'),
-        "USER": os.environ.get("SQL_USER", "postgres"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD", "Botanikus"),
+        "ENGINE": os.environ.get("SQL_ENGINE", 'django.db.backends.sqlite3'),
+        "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
+        "USER": os.environ.get("SQL_USER", "user"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "treker123"),
         "HOST": os.environ.get("SQL_HOST", "localhost"),
         "PORT": os.environ.get("SQL_PORT", "5432"),
     }
@@ -238,6 +238,7 @@ USE_I18N = True
 
 USE_TZ = True
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
@@ -289,7 +290,7 @@ JAZZMIN_SETTINGS = {
     "welcome_sign": "Добро пожаловать в административную панель",
 
     # Copyright on the footer
-    "copyright": "Acme Library Ltd",
+    "copyright": "Parma technologies group",
 
     # List of model admins to search from the search bar, search bar omitted if excluded
     # If you want to use a single search field you dont need to use a list, you can use a simple string 
@@ -309,7 +310,8 @@ JAZZMIN_SETTINGS = {
         {"name": "Home",  "url": "admin:index", "permissions": ["auth.view_user"]},
 
         # external url that opens in a new window (Permissions can be added)
-        {"name": "Support", "url": "", "new_window": True},
+        {"name": "Parma technologies group", "url": "https://www.parma.ru/", "new_window": True},
+        {"name": "Parma Team", "url": "https://parma.team/", "new_window": True},
 
         # model admin to link to (Permissions checked against model)
         {"model": "auth.User"},
@@ -324,7 +326,7 @@ JAZZMIN_SETTINGS = {
 
     # Additional links to include in the user menu on the top right ("app" url type is not allowed)
     "usermenu_links": [
-        {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
+        # {"name": "Support", "url": "https://github.com/farridav/django-jazzmin/issues", "new_window": True},
         {"model": "auth.user"}
     ],
 
@@ -372,7 +374,7 @@ JAZZMIN_SETTINGS = {
     # Related Modal #
     #################
     # Use modals instead of popups
-    "related_modal_active": False,
+    "related_modal_active": True,
 
     #############
     # UI Tweaks #
@@ -399,4 +401,44 @@ JAZZMIN_SETTINGS = {
     "changeform_format_overrides": {"auth.user": "collapsible", "auth.group": "vertical_tabs"},
     # Add a language dropdown into the admin
     # "language_chooser": True,
+}
+# JAZZMIN_SETTINGS["show_ui_builder"] = True
+
+
+JAZZMIN_UI_TWEAKS = {
+    "theme": "flatly",
+    "dark_mode_theme": "darkly",
+}
+
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": False,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": False,
+    "accent": "accent-primary",
+    "navbar": "navbar-dark",
+    "no_navbar_border": False,
+    "navbar_fixed": True,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": False,
+    "sidebar": "sidebar-dark-danger",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": False,
+    "sidebar_nav_child_indent": False,
+    "sidebar_nav_compact_style": True,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "cyborg",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-primary",
+        "secondary": "btn-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    },
+    "actions_sticky_top": False
 }
