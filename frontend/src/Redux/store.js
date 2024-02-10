@@ -19,13 +19,13 @@ const rootReducer = combineReducers({
   Menu, 
   Login,
   ProfileInfo,
-  Map
+  Map,
 }) 
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['Map'], // что не хотим сохранять
+  blacklist: ['Map', 'ProfileInfo', 'Login'], // что не хотим сохранять
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
