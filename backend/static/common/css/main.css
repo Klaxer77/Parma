@@ -1,0 +1,25 @@
+option {
+    color: black;
+}
+
+.btn.btn.btn-xs.btn-success.addlink {
+    background-color: #00bc8c;
+    border-color: None;
+}
+
+.btn.btn-xs.btn-info.changelink {
+    background: rgb(246 67 67);
+    border: None;
+}
+
+.img-circle.elevation-2 {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+}
+
+.img-circle.brand-image.elevation-3 {
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+}
