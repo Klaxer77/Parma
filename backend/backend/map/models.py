@@ -38,15 +38,11 @@ class ReservationHistory(models.Model):
         verbose_name = 'Сотрудник',
         on_delete=models.CASCADE,
         related_name='reservation_history',
-        null=True,
-        blank=True
     )
     place = models.ForeignKey(
         Place,
         verbose_name='Место',
         on_delete=models.CASCADE,
-        null=True,
-        blank=True
     )
     start_date = models.DateTimeField(
         "Дата начала бронирования",
