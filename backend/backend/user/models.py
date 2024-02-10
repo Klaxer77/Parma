@@ -36,7 +36,6 @@ class User(AbstractUser):
         ('Мужской', 'Мужской'),
         ('Женский', 'Женский'),
     )
-    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL")
     email = models.EmailField('email address', unique=True)
     username = None
     first_name = models.CharField('Имя', max_length=150, validators=[MinLengthValidator(3)])
