@@ -9,7 +9,6 @@ export default function Email() {
   const [editableEmail, setEditableEmail] = useState(false);
   const inputRefEmail = useRef(null);
 
-  console.log(textEmail);
   useEffect(() => {
     setShowSaveButtonEmail(false);
   }, []);

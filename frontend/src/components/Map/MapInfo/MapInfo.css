@@ -1,5 +1,5 @@
 .free {
-  @apply flex gap-[10px]
+  @apply flex gap-[10px] z-[999]
 }
 
 .container-free {
@@ -25,7 +25,7 @@
 
 
 .busy {
-  @apply flex gap-[10px]
+  @apply flex gap-[10px] z-[999]
 }
 
 .container-busy {
