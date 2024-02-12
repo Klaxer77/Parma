@@ -18,7 +18,6 @@ class ReservationHistoryListSeriaLizer(serializers.ModelSerializer):
         place_data = {
             'id': place.id,
             'name': place.name,
-            'slug': place.slug,
             'image': place.image.url,
             'status': place.status,
         }
@@ -34,31 +33,27 @@ class ReservationHistoryListSeriaLizer(serializers.ModelSerializer):
             'end_date',
         )
         
-         
+      
 
-
-class CustomTokenObtainPairSerializer(serializers.ModelSerializer):
-    image = serializers.ImageField(use_url='image.url')
-    reservation_history = ReservationHistoryListSeriaLizer(many=True, read_only=True)
-
-    class Meta:
-        model = User
-        fields = (
-            'id',
-            'last_name',
-            'first_name',
-            'sur_name',
-            'gender',
-            'image',
-            'email',
-            'phone',
-            'reservation_history',
-        )
             
 
 class ReservationListSeriaLizer(serializers.ModelSerializer):
-    user = CustomTokenObtainPairSerializer(required=False)
-
+    # user = CustomTokenObtainPairSerializer(required=False)
+    place =  serializers.SerializerMethodField()
+    
+    def get_modules(self, obj):
+        PlaceSerialLizer = import_module('.PlaceSerialLizer', package=__package__)
+        return PlaceSerialLizer(obj.modules.all(), many=True).data
+    
+    def get_place(self, obj):
+        place = obj.place
+        place_data = {
+            'id': place.id,
+            'name': place.name,
+            'image': place.image.url,
+            'status': place.status,
+        }
+        return place_data
 
     class Meta:
         model = Reservation
@@ -79,11 +74,31 @@ class PlaceSerialLizer(serializers.ModelSerializer):
         model = Place
         fields = (
             'id',
-            'slug',
             'name',
             'image',
             'status',
             'reservation_place',
+        )
+        
+class CustomTokenObtainPairSerializer(serializers.ModelSerializer):
+    image = serializers.ImageField(use_url='image.url')
+    reservation_history = ReservationHistoryListSeriaLizer(many=True, read_only=True)
+    reservation=ReservationListSeriaLizer()
+    
+    
+    class Meta:
+        model = User
+        fields = (
+            'id',
+            'last_name',
+            'first_name',
+            'sur_name',
+            'gender',
+            'image',
+            'email',
+            'phone',
+            'reservation_history',
+            'reservation',
         )
         
 class RoomSeriaLizer(serializers.ModelSerializer):

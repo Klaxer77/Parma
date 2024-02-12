@@ -22,10 +22,10 @@ class RoomAdmin(admin.ModelAdmin):
 
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
-    list_display = ('image_show', 'name', 'slug', 'status')
-    list_display_links = ('image_show', 'name', 'slug', 'status')
-    fields = ('image', 'name', 'slug', 'status')
-    prepopulated_fields = {'slug': ('name',)}
+    list_display = ('image_show', 'name', 'status')
+    list_display_links = ('image_show', 'name', 'status')
+    fields = ('image', 'name', 'status')
+    # prepopulated_fields = {'slug': ('name',)}
 
     
     

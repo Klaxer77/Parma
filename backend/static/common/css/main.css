@@ -23,3 +23,13 @@ option {
     height: 30px;
     width: 30px;
 }
+
+.jazzmin-login-page {
+    background: #282A32;
+}
+
+
+.btn.btn-primary.btn-block {
+    background: rgb(246 67 67);
+    border: None;
+}
