@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Loading from '../../components/Loading';
 import Header from '../../components/Layout/Header';
 import { useNavigate } from 'react-router-dom';
+import { setMenuActive } from '../../Redux/Menu/Menu.slice';
 
 export default function Login() {
   const navigate = useNavigate();
@@ -38,6 +39,7 @@ export default function Login() {
 
   useEffect(() => {
     if (isAuth === true) {
+      dispatch(setMenuActive(0));
       navigate('/profile');
     }
   }, [isAuth]);

@@ -12,7 +12,8 @@ from backend.user.models import ConfirmationCodeEmail, ConfirmationCodePhone
 from backend.user.utils import generate_confirmation_code, send_sms
 from django.core.validators import validate_email
 from backend.map.tasks import code_email
-
+from datetime import datetime,timezone
+import pytz
 
 class ChangePhoneView(APIView):
     def post(self, request):
@@ -95,10 +96,14 @@ class ReservationCreateView(generics.CreateAPIView):
         end_date = serializer.validated_data['end_date']
         # place = self.request.META.get('HTTP_PLACE')
         user = self.request.user
+        current_time = datetime.now()
+        start_date_naive = start_date.astimezone(pytz.timezone('Asia/Yekaterinburg')).replace(tzinfo=None)
+
+        if start_date_naive <= current_time:
+            raise ValidationError({'error': 'Дата начала должна быть меньше или равна текущему времени'})
 
         if end_date <= start_date:
             raise ValidationError({'error': 'Дата окончания должна быть позже даты начала'})
-        
         
         existing_reservations = Reservation.objects.filter(user=user)
         if existing_reservations.exists():
@@ -113,7 +118,24 @@ class ReservationCreateView(generics.CreateAPIView):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         return Response({'detail': 'Бронь успешно создана'}, status=status.HTTP_201_CREATED, headers=headers)
-    
+
+
+class ReservationDeleteView(generics.DestroyAPIView):
+        queryset = Reservation.objects.all().select_related('user').select_related('place')
+        serializer_class = ReservationListSeriaLizer
+        permission_classes=[IsAuthenticated]
+        lookup_field = 'pk'
+        
+        def get_queryset(self):
+            user = self.request.user
+            return Reservation.objects.filter(user=user)
+
+        
+        def destroy(self, request, *args, **kwargs):
+            instance = self.get_object()
+            self.perform_destroy(instance)
+            return Response({'detail': 'Бронь успешно удалена'}, status=status.HTTP_204_NO_CONTENT)
+
 
         
 class ReservationListView(generics.ListAPIView):

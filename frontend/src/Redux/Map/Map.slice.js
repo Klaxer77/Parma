@@ -3,7 +3,12 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   isActivePopup: false,
   place: null,
-  markerClose: false
+  markers: [
+    { id: 1, element: false },
+    { id: 2, element: false },
+    { id: 3, element:false },
+    { id: 4, element:false }
+]
 }
 
 export const Map = createSlice({
@@ -16,13 +21,22 @@ export const Map = createSlice({
     setPlace: (state, action) => {
       state.place = action.payload
     },
-    setMarkerClose: (state, action) => {
-      state.markerClose = action.payload
+    setMarkers: (state, action) => {
+      const { id, newBool } = action.payload;
+      const user = state.markers.find(user => user.id === id);
+      if (user) {
+        user.element = newBool;
+      }
     },
+    updateMarkers: (state) => {
+      return state.markers.map(item => ({
+          element: true
+      }));
+  }
   },
 })
 
 
-export const { setIsActivePopup, setPlace, setMarkerClose  } = Map.actions
+export const { setIsActivePopup, setPlace, setMarkers, updateMarkers  } = Map.actions
 
 export default Map.reducer
