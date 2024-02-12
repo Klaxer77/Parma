@@ -12,20 +12,19 @@ class MapAdmin(admin.ModelAdmin):
 
 @admin.register(Room)
 class RoomAdmin(admin.ModelAdmin):
-    list_display = ('name', 'slug')
-    list_display_links = ('name', 'slug')
-    fields = ('places', 'name', 'slug')
-    prepopulated_fields = {'slug': ('name',)}
+    list_display = ('name',)
+    list_display_links = ('name',)
+    fields = ('places', 'name',)
     filter_horizontal = ('places',)
 
           
 
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
-    list_display = ('image_show', 'name', 'status')
+    list_display = ('image_show', 'name', 'status',)
     list_display_links = ('image_show', 'name', 'status')
     fields = ('image', 'name', 'status')
-    # prepopulated_fields = {'slug': ('name',)}
+
 
     
     
