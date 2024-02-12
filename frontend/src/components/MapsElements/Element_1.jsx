@@ -1,23 +1,29 @@
-import { useDispatch, useSelector } from "react-redux"; 
-import { setIsActivePopup, setPlace, setMarkerClose } from "../../Redux/Map/Map.slice";
-import { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsActivePopup, setPlace, setMarkers } from '../../Redux/Map/Map.slice';
+import { useState } from 'react';
 
+export default function Element_2() {
+  const { markers } = useSelector((state) => state.Map);
+  const dispatch = useDispatch();
+  const [test, setTest] = useState(false);
 
-export default function Element_1() {
-  const { markerClose } = useSelector(state => state.Map)
-  const [marker, setMarker] = useState(false)
-  const dispath = useDispatch();
-  const onClickPlace = () => {
-    dispath(setPlace(1));
-    dispath(setMarkerClose(true))
-    setMarker(true);
-    setTimeout(() => {
-      dispath(setIsActivePopup(true))
-    }, 700);
-  }
+  const onClickPlace = (place, id) => {
+      dispatch(setPlace(place));
+      dispatch(setMarkers({ id, newBool: true }));
+      setTimeout(() => {
+        dispatch(setIsActivePopup(true));
+      }, 600);
+  };
+
   return (
-    <div onClick={onClickPlace} className="1 free absolute left-[380px] top-[70px] z-[99] cursor-pointer">
-      <img className={marker && markerClose ? 'marker active' : 'marker'} src="/img/icons/pin-mark.png" alt="" /> 
+    <div
+      onClick={() => onClickPlace(1, 1)}
+      className="2 free absolute left-[380px] top-[70px] cursor-pointer">
+      <img
+        className={markers[0].element ? 'marker active top-0' : 'marker -top-[20px] z-0'}
+        src="/img/icons/pin-mark.png"
+        alt=""
+      />
       <svg
         width="49"
         height="40"
@@ -43,7 +49,7 @@ export default function Element_1() {
       </svg>
 
       {/* <svg
-      className='rotate-[180deg]'
+      className='cursor-pointer'
         width="49"
         height="40"
         viewBox="0 0 49 40"
@@ -56,7 +62,6 @@ export default function Element_1() {
           fill="#67696E"
         />
       </svg> */}
-
     </div>
   );
 }

@@ -1,22 +1,22 @@
-import { useState } from "react"; 
 import { useDispatch, useSelector } from "react-redux"; 
-import { setIsActivePopup, setPlace, setMarkerClose } from "../../Redux/Map/Map.slice";
+import { setIsActivePopup, setPlace, setMarkers } from "../../Redux/Map/Map.slice";
 export default function Element_2() {
-  const { markerClose } = useSelector(state => state.Map)
-  const [marker, setMarker] = useState(false)
-  const dispath = useDispatch();
-  const onClickPlace = () => {
-    dispath(setPlace(2));
-    dispath(setMarkerClose(true));
-    setMarker(true);
+  const { markers } = useSelector(state => state.Map)
+  const dispatch = useDispatch();
+
+  const onClickPlace = (place, id) => {
+    dispatch(setPlace(place));
+    dispatch(setMarkers({id, newBool: true}))
     setTimeout(() => {
-      dispath(setIsActivePopup(true))
-    }, 700);
+      dispatch(setIsActivePopup(true))
+    }, 600);
   }
 
+  console.log(markers[0].element);
+
   return (
-    <div onClick={onClickPlace} className="2 free absolute left-[380px] top-[115px] z-[99] cursor-pointer">
-      <img className={marker && markerClose ? 'marker active' : setPlace ? 'marker' : 'marker'} src="/img/icons/pin-mark.png" alt="" />
+    <div onClick={() => onClickPlace(2,2)} className="2 free absolute left-[380px] top-[115px] z-[99] cursor-pointer">
+      <img className={markers[1].element ? 'marker active -top-[5px]' : 'marker -top-[25px]'} src="/img/icons/pin-mark.png" alt="" />
       <svg
         className="rotate-[180deg]"
         width="49"

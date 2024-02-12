@@ -7,16 +7,18 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   setInfoUser,
   setLoaded,
+  setLoadedProfile,
   setTextEmail,
   setTextNumber,
 } from '../../Redux/Profile/ProfileInfo.slice';
-import { setIsAuth, setLoading } from '../../Redux/Login/Login.slice';
+import { setIsAuth } from '../../Redux/Login/Login.slice';
 import baseUrl, { $profile } from '../../Api/http';
 import Loading from '../../components/Loading';
 
 export default function Profile() {
-  const [scroll, setScroll] = useState(true)
+  const [scroll, setScroll] = useState(false)
   const loaded = useSelector((state) => state.ProfileInfo.loaded);
+  const loadedProfile = useSelector((state) => state.ProfileInfo.loadedProfile);
   const dispatch = useDispatch();
   const onClickExit = () => {
     localStorage.removeItem('access');
@@ -25,8 +27,13 @@ export default function Profile() {
   };
 
   useEffect(() => {
+    if (!localStorage.getItem('access')) {
+      window.location.href = `${baseUrl}login`;
+    }
+
     const fetchProfile = async () => {
       dispatch(setLoaded(true));
+      setScroll(true)
       try {
         if (scroll) {
           document.body.style.overflow = 'hidden';
@@ -40,7 +47,6 @@ export default function Profile() {
         dispatch(setTextEmail(response.data.email));
         dispatch(setTextNumber(response.data.phone));
         dispatch(setLoaded(false));
-        setScroll(false)
         if (!scroll) {
           document.body.style.overflow = 'auto';
         } 
@@ -48,8 +54,10 @@ export default function Profile() {
         console.log(error);
       }
     };
-
-    fetchProfile();
+    if (loadedProfile) {
+      fetchProfile();
+    }
+    dispatch(setLoadedProfile(false))
   }, [scroll]);
 
   return (

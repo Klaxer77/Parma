@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import './Map.css';
 import MapInfo from '../../components/Map/MapInfo';
-import Element_1 from '../../components/MapsElements/Element_1';
 import Element_2 from '../../components/MapsElements/Element_2';
 import Element_3 from '../../components/MapsElements/Element_3';
 import Element_4 from '../../components/MapsElements/Element_4';
@@ -29,6 +28,7 @@ import Element_25 from '../../components/MapsElements/Element_25';
 import Element_26 from '../../components/MapsElements/Element_26';
 import Element_27 from '../../components/MapsElements/Element_27';
 import MapPopup from '../../components/Map/MapPopup';
+import Element_1 from '../../components/MapsElements/Element_1';
 
 export default function MapOffice() {
   const [scale, setScale] = useState(1);
@@ -40,6 +40,7 @@ export default function MapOffice() {
   const zoomOut = () => {
     setScale((prevScale) => Math.max(prevScale - 0.2, 0.3));
   };
+
 
   return (
     <>
@@ -65,6 +66,7 @@ export default function MapOffice() {
               transformOrigin: '0 0',
               transition: 'transform 0.3s ease',
               position: 'relative',
+              zIndex: '99'
             }}>
             <Element_1 />
             <Element_2 />
