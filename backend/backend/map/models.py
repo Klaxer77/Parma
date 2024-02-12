@@ -15,7 +15,6 @@ class Place(models.Model):
         ('Свободно', 'Свободно'),
     ]
     name = models.CharField('Название', max_length=50, validators=[MinLengthValidator(3)])
-    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL", help_text='Изменять вручную при необходимости')
     image = models.ImageField("Фото места", upload_to="place/")
     status = models.CharField(
         "Статус",
@@ -65,6 +64,7 @@ class Reservation(models.Model):
         User,
         verbose_name = 'Сотрудник',
         on_delete=models.CASCADE,
+        related_name='reservation',
         null=True
     )
     place = models.OneToOneField(
@@ -106,7 +106,6 @@ class Room(models.Model):
         Place,
         verbose_name="Места",
     )
-    slug = models.SlugField(max_length=255, unique=True, db_index=True, verbose_name="URL", help_text='Изменять вручную при необходимости')
     name = models.CharField('Название', max_length=50, validators=[MinLengthValidator(3)])
     
     def __str__(self):
