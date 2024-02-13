@@ -1,11 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsActivePopup, setPlace, setMarkers } from '../../Redux/Map/Map.slice';
-import { useState } from 'react';
+
 
 export default function Element_2() {
   const { markers } = useSelector((state) => state.Map);
   const dispatch = useDispatch();
-  const [test, setTest] = useState(false);
 
   const onClickPlace = (place, id) => {
       dispatch(setPlace(place));
@@ -18,9 +17,9 @@ export default function Element_2() {
   return (
     <div
       onClick={() => onClickPlace(1, 1)}
-      className="2 free absolute left-[380px] top-[70px] cursor-pointer">
+      className="1 free absolute left-[380px] top-[70px] cursor-pointer">
       <img
-        className={markers[0].element ? 'marker active top-0' : 'marker -top-[20px] z-0'}
+        className={markers[0].element ? 'marker active top-0 left-[8.5px]' : 'marker -top-[20px] z-0 left-[8.5px]'}
         src="/img/icons/pin-mark.png"
         alt=""
       />
