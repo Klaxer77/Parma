@@ -108,7 +108,6 @@ class RoomSeriaLizer(serializers.ModelSerializer):
         model = Room
         fields = (
             'id',
-            'slug',
             'name',
             'places',
         )
