@@ -38,8 +38,27 @@ class ReservationHistoryListSeriaLizer(serializers.ModelSerializer):
             
 
 class ReservationListSeriaLizer(serializers.ModelSerializer):
-    # user = CustomTokenObtainPairSerializer(required=False)
+    user = serializers.SerializerMethodField()
     place =  serializers.SerializerMethodField()
+    
+    def get_modules(self, obj):
+        CustomTokenObtainPairSerializer = import_module('.CustomTokenObtainPairSerializer', package=__package__)
+        return CustomTokenObtainPairSerializer(obj.modules.all(), many=True).data
+    
+    def get_user(self, obj):
+        user = obj.user
+        user_data = {
+            'id': user.id,
+            'email': user.email,
+            'image': user.image.url,
+            'first_name': user.first_name,
+            'last_name': user.last_name,
+            'sur_name': user.sur_name,
+            'gender': user.gender,
+            'phone': user.phone,
+        }
+        return user_data
+    
     
     def get_modules(self, obj):
         PlaceSerialLizer = import_module('.PlaceSerialLizer', package=__package__)
