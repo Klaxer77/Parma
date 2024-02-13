@@ -28,9 +28,10 @@ class UserAdmin(DjangoUserAdmin):
             'fields': ('image','email', 'password1', 'password2', 'last_name', 'first_name', 'sur_name', 'phone', 'gender'),
         }),
     )
-    list_display = ('image_show', 'email', 'first_name', 'last_name', 'is_staff')
+    list_display = ('image_show', 'email', 'first_name', 'last_name', 'sur_name', 'is_staff')
     search_fields = ('email', 'first_name', 'last_name')
     ordering = ('email',)
+    list_filter = ['email', 'first_name', 'last_name', 'sur_name', 'is_staff']
     save_on_top = True
     
     def image_show(self,obj):
@@ -39,5 +40,9 @@ class UserAdmin(DjangoUserAdmin):
         return "None"
     
     image_show.__name__ = "Аватар"
+    
+
+    
+    
 
 
