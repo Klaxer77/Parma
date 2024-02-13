@@ -13,6 +13,7 @@ import Menu  from './Menu/Menu.slice';
 import Login from './Login/Login.slice';
 import ProfileInfo from './Profile/ProfileInfo.slice';
 import Map from './Map/Map.slice';
+import MapInfoPlace from './Map/MapInfoPlace.slice';
 
 
 const rootReducer = combineReducers({
@@ -20,12 +21,13 @@ const rootReducer = combineReducers({
   Login,
   ProfileInfo,
   Map,
+  MapInfoPlace
 }) 
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['Map', 'ProfileInfo', 'Login'], // что не хотим сохранять
+  blacklist: ['Map', 'ProfileInfo', 'Login', 'MapInfoPlace'], // что не хотим сохранять
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)
