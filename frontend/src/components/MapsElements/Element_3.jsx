@@ -19,7 +19,7 @@ export default function Element_3() {
       onClick={() => onClickPlace(3, 3)}
       className="3 free absolute left-[475px] top-[210px] z-[99] cursor-pointer">
         <img
-          className={markers[2].element ? 'marker active -top-[5px]' : 'marker -top-[25px]'}
+          className={markers[2].element ? 'marker active -top-[5px] left-[8.5px]' : 'marker -top-[25px] left-[8.5px]'}
           src="/img/icons/pin-mark.png"
           alt=""
         />
