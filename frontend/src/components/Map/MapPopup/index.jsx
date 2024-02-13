@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export default function MapPopup() {
   const dispatch = useDispatch();
-  const { isActivePopup, place, markers } = useSelector((state) => state.Map);
+  const { isActivePopup, place } = useSelector((state) => state.Map);
 
   const onClickClose = (ids) => {
     ids.forEach(id => {
@@ -17,7 +17,7 @@ export default function MapPopup() {
   return (
     <div class={isActivePopup ? 'modal show' : 'modal'}>
       <div class="modal-content">
-        <span onClick={() => onClickClose([1,2,3])} class="close cursor-pointer">&times;</span>
+        <span onClick={() => onClickClose([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27])} class="close cursor-pointer">&times;</span>
         <p>место {place}</p>
       </div>
     </div>

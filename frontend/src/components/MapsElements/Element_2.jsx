@@ -16,7 +16,7 @@ export default function Element_2() {
 
   return (
     <div onClick={() => onClickPlace(2,2)} className="2 free absolute left-[380px] top-[115px] z-[99] cursor-pointer">
-      <img className={markers[1].element ? 'marker active -top-[5px]' : 'marker -top-[25px]'} src="/img/icons/pin-mark.png" alt="" />
+      <img className={markers[1].element ? 'marker active -top-[5px] left-[8px]' : 'marker -top-[25px] left-[8px]'} src="/img/icons/pin-mark.png" alt="" />
       <svg
         className="rotate-[180deg]"
         width="49"
