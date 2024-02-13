@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import { setMapButtonActive, setMenuActive } from '../../Redux/Menu/Menu.slice';
 import NotFound from '../../Pages/NotFound';
 import HistoryReselve from '../../Pages/HistoryReselve';
+import ActiveReselve from '../../Pages/ActiveReselve' 
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
             <Route path="/home" element={<Home />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/history" element={<HistoryReselve />}></Route>
+            <Route path="/activeReselve" element={<ActiveReselve />}></Route>
           </Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="*" element={<NotFound />} />
