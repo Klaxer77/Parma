@@ -5,6 +5,10 @@ import NumberPlace from '../../components/ActiveReselve/NumberPlace';
 import {
   setLoading,
   setInfoActiveReselve,
+  setNumberPlace,
+  setDateStart,
+  setDateEnd,
+  setFirstName,
 } from '../../Redux/Profile/ActiveReselve/ActiveReselve.slice';
 import { $profile } from '../../Api/http';
 import Loading from '../../components/Loading';
@@ -12,7 +16,7 @@ import Loading from '../../components/Loading';
 export default function ActiveReselve() {
   const [scroll, setScroll] = useState(false);
   const dispatch = useDispatch();
-  const { loading, infoActiveReselve } = useSelector((state) => state.ActiveReselve);
+  const { loading, infoActiveReselve, first_name, numberPlace } = useSelector((state) => state.ActiveReselve);
 
   useEffect(() => {
     if (!localStorage.getItem('access')) {
@@ -31,8 +35,14 @@ export default function ActiveReselve() {
             Authorization: `JWT ${localStorage.getItem('access')}`,
           },
         });
-        dispatch(setInfoActiveReselve(response.data.reservation));
-        dispatch(setLoading(false));
+        dispatch(setInfoActiveReselve(response.data))
+        infoActiveReselve.map((obj) => (
+          dispatch(setNumberPlace(obj.reservation.id)),
+          dispatch(setDateStart(obj.reservation.start_date.split(' ').join(', '))),
+          dispatch(setDateEnd(obj.reservation.end_date.split(' ').join(', '))),
+          dispatch(setFirstName(obj.reservation.user.first_name))
+        ))
+          dispatch(setLoading(false));
         if (!scroll) {
           document.body.style.overflow = 'auto';
         }
@@ -40,7 +50,6 @@ export default function ActiveReselve() {
         console.log(error);
       }
     };
-
     fetchProfile();
   }, [scroll]);
 
@@ -49,10 +58,8 @@ export default function ActiveReselve() {
   return (
     <div className="w-full flex items-center justify-center mt-[40px]">
       <div className="bg-purple-color h-[720px] w-full max-w-[1330px] rounded-[8px] p-[20px] relative">
-        {infoActiveReselve.length === 0 ? (
+        {loading ? <Loading /> : infoActiveReselve[0] === null ? (
           <p>Нет брони</p>
-        ) : loading ? (
-          <Loading />
         ) : (
           <>
             <svg
