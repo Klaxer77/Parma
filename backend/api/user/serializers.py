@@ -122,15 +122,19 @@ class CustomTokenObtainPairSerializer(serializers.ModelSerializer):
     room = serializers.SerializerMethodField() 
 
     def get_room(self, obj):
-        place = obj.reservation.place
-        rooms = place.room.all()
-        room_data = []
+        reservation = getattr(obj, 'reservation', None)
+        if reservation:
+            place = reservation.place
+            rooms = place.room.all()
+            room_data = []
 
-        for room in rooms:
-            room_name = room.name if room.name else "Unknown"
-            room_data.append({'name': room_name})
+            for room in rooms:
+                room_name = room.name if room.name else "Unknown"
+                room_data.append({'name': room_name})
 
-        return room_data
+            return room_data
+        else:
+            return None
 
 
     class Meta:
@@ -174,9 +178,9 @@ class ReservationCreateSeriaLizer(serializers.ModelSerializer):
             'start_date',
             'end_date',
         )
-        
+     
         extra_kwargs = {
-            'place': {'required': True}
+            'place': {'required': True},
         }
         
     
