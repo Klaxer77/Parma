@@ -8,7 +8,7 @@ export default {
     extend: {},
     colors: {
       'main-color': '#293240',
-      'purple-color': '#20232D',
+      'purple-color': '#20232F',
       'button-color': '#0050FF',
       'white': '#fff',
       'red': '#F64343',

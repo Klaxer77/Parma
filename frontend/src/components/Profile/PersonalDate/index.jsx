@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 
 export default function PersonalDate() {
   const { infoUser } = useSelector(state => state.ProfileInfo)
-  console.log(infoUser);
 
   return (
     <div className='mb-[40px]'>
