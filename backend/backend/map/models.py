@@ -105,12 +105,12 @@ class Room(models.Model):
     places = models.ManyToManyField(
         Place,
         verbose_name="Места",
+        related_name='room',
     )
     name = models.CharField('Название', max_length=50, validators=[MinLengthValidator(3)])
     
     def __str__(self):
         return f'{self.name}'
-    
     
     class Meta:
         verbose_name = "Комната"
