@@ -33,17 +33,18 @@ class ReservationHistoryListSeriaLizer(serializers.ModelSerializer):
             'end_date',
         )
         
-      
-
-            
+               
 
 class ReservationListSeriaLizer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField()
     place =  serializers.SerializerMethodField()
     
+    
     def get_modules(self, obj):
         CustomTokenObtainPairSerializer = import_module('.CustomTokenObtainPairSerializer', package=__package__)
         return CustomTokenObtainPairSerializer(obj.modules.all(), many=True).data
+    
+    
     
     def get_user(self, obj):
         user = obj.user
@@ -87,7 +88,21 @@ class ReservationListSeriaLizer(serializers.ModelSerializer):
 class PlaceSerialLizer(serializers.ModelSerializer):
     image = serializers.ImageField(use_url='image.url')
     reservation_place=ReservationListSeriaLizer()
-
+    room=serializers.SerializerMethodField()
+    
+    def get_modules(self, obj):
+        RoomSeriaLizer = import_module('.RoomSeriaLizer', package=__package__)
+        return RoomSeriaLizer(obj.modules.all(), many=True).data
+    
+    def get_room(self, obj):
+        rooms = obj.room.all()  
+        room_data = []
+    
+        for room in rooms:
+            room_name = room.name if room.name else "Unknown"  
+            room_data.append({'name': room_name})
+    
+        return room_data
     
     class Meta:
         model = Place
@@ -97,14 +112,27 @@ class PlaceSerialLizer(serializers.ModelSerializer):
             'image',
             'status',
             'reservation_place',
+            'room',
         )
         
 class CustomTokenObtainPairSerializer(serializers.ModelSerializer):
     image = serializers.ImageField(use_url='image.url')
     reservation_history = ReservationHistoryListSeriaLizer(many=True, read_only=True)
     reservation=ReservationListSeriaLizer()
-    
-    
+    room = serializers.SerializerMethodField() 
+
+    def get_room(self, obj):
+        place = obj.reservation.place
+        rooms = place.room.all()
+        room_data = []
+
+        for room in rooms:
+            room_name = room.name if room.name else "Unknown"
+            room_data.append({'name': room_name})
+
+        return room_data
+
+
     class Meta:
         model = User
         fields = (
@@ -118,6 +146,7 @@ class CustomTokenObtainPairSerializer(serializers.ModelSerializer):
             'phone',
             'reservation_history',
             'reservation',
+            'room',
         )
         
 class RoomSeriaLizer(serializers.ModelSerializer):

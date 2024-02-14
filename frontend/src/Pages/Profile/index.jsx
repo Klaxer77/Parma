@@ -44,6 +44,7 @@ export default function Profile() {
           },
         });
         dispatch(setInfoUser(response.data));
+        console.log(response.data);
         dispatch(setTextEmail(response.data.email));
         dispatch(setTextNumber(response.data.phone));
         dispatch(setLoaded(false));
@@ -61,13 +62,13 @@ export default function Profile() {
   }, [scroll]);
 
   return (
-    <div className="w-full flex items-center justify-center mt-[50px]">
-      <div className="bg-purple-color h-[820px] w-full max-w-[1330px] rounded-[8px] px-[60px] pb-[60px] pt-[40px]">
+    <div className="w-full flex items-center justify-center mt-[40px]">
+      <div className="bg-purple-color h-[820px] w-full max-w-[1330px] rounded-[8px] px-[60px] pb-[60px] pt-[20px]">
         {loaded ? (
           <Loading />
         ) : (
           <>
-            <h3 className="text-center text-[26px] mb-[40px]">ПРОФИЛЬ</h3>
+            <h3 className="text-center font-bold text-[26px] mb-[40px]">ПРОФИЛЬ</h3>
             <ProfileInfo />
             <ProfileContacts />
             <PersonalDate />

@@ -8,9 +8,9 @@ export default function Menu() {
   const dispatch = useDispatch();
   const { menuActive } = useSelector((state) => state.Menu);
 
-  const [burger, setBurger] = useState(false)
+  const [burger, setBurger] = useState(false);
 
-  const menu = ['Профиль', 'История брони', 'Карта'];
+  const menu = ['Профиль', 'Активная бронь', 'История брони', 'Карта'];
 
   const getIndexMenu = (index) => {
     dispatch(setMenuActive(index));
@@ -33,19 +33,13 @@ export default function Menu() {
           {menu.map((value, index) => (
             <Link
               key={value}
-              to={
-                index === 0
-                  ? '/profile'
-                  : index === 1
-                    ? '/historyReserv'
-                      : '/map'
-              }>
+              to={index === 0 ? '/profile' : index === 1 ? '/activeReselve' : index === 2 ? '/history' : '/map'}>
               <button
                 onClick={() => getIndexMenu(index)}
                 className={
                   menuActive === index
-                    ? 'w-[135px] h-[35px] bg-white text-[#3E3E3E] rounded-[5px] text-[14px] font-medium'
-                    : 'w-[135px] h-[35px] bg-purple-color text-white rounded-[5px] text-[14px] font-medium'
+                    ? 'w-[135px] h-[35px] bg-purple-color text-white rounded-[5px] text-[14px] font-medium'
+                    : 'w-[135px] h-[35px] bg-[#D9D9D9] text-purple-color rounded-[5px] text-[14px] font-medium'
                 }>
                 {value}
               </button>
