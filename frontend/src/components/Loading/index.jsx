@@ -14,12 +14,12 @@ export default function Loading() {
           xmlns="http://www.w3.org/2000/svg">
           <defs>
             <linearGradient id="pl-grad1" x1="1" y1="0.5" x2="0" y2="0.5">
-              <stop offset="0%" stopColor="#0050FF" />
-              <stop offset="100%" stopColor="#0050FF" />
+              <stop offset="0%" stopColor="#F64343" />
+              <stop offset="100%" stopColor="#F64343" />
             </linearGradient>
             <linearGradient id="pl-grad2" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#0050FF" />
-              <stop offset="100%" stopColor="#0050FF" />
+              <stop offset="0%" stopColor="#F64343" />
+              <stop offset="100%" stopColor="#F64343" />
             </linearGradient>
           </defs>
           <circle
