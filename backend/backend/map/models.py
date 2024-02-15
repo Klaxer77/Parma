@@ -83,6 +83,7 @@ class Reservation(models.Model):
         default=timezone.now,
     )
     
+    
     @property
     def remaining_time(self):
         current_time = timezone.now()
