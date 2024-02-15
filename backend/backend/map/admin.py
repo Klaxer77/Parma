@@ -3,12 +3,23 @@ from django.contrib import admin
 from .models import Room, Place, Reservation, ReservationHistory, Map
 from django.utils.safestring import mark_safe
 from django.http import HttpResponse
-
+from django.utils import timezone
 
 
 class ReservationAdmin(admin.ModelAdmin):
     list_display = ['user', 'place', 'start_date', 'end_date', 'remaining_time']
     list_filter = ['place', 'start_date', 'end_date', 'user',]
+    
+    def remaining_time(self, obj):
+        current_time = timezone.now()
+        remaining_time = obj.end_date - current_time
+        days = remaining_time.days
+        hours = remaining_time.days * 24 + remaining_time.seconds // 3600
+        minutes = (remaining_time.seconds % 3600) // 60
+        formatted_time = f"{days:02d}:{hours:02d}:{minutes:02d}"
+        return formatted_time
+    
+    remaining_time.short_description = 'Оставшееся время бронирования'
 
 
 class ReservationHistoryAdmin(admin.ModelAdmin):
