@@ -10,7 +10,6 @@ export default function InfoPlace() {
     const fetchDeleteReselve = async (numberPlace) => {
       try {
         dispatch(setLoading(true));
-        localStorage.setItem('check', false)
         await $profile.delete(`reservation-delete/${numberPlace}/`, {
           headers: {
             Authorization: `JWT ${localStorage.getItem('access')}`,

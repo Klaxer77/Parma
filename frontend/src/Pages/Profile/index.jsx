@@ -2,7 +2,6 @@ import ProfileInfo from '../../components/Profile/ProfileInfo';
 import ProfileContacts from '../../components/Profile/ProfileContacts';
 import PersonalDate from '../../components/Profile/PersonalDate';
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setInfoUser,
@@ -20,16 +19,21 @@ export default function Profile() {
   const loaded = useSelector((state) => state.ProfileInfo.loaded);
   const loadedProfile = useSelector((state) => state.ProfileInfo.loadedProfile);
   const dispatch = useDispatch();
+
   const onClickExit = () => {
     localStorage.removeItem('access');
     dispatch(setIsAuth(false));
+    dispatch(setLoaded(true));
     window.location.href = `${baseUrl}login`;
+    dispatch(setLoaded(false));
   };
 
   useEffect(() => {
+    dispatch(setLoaded(true));
     if (!localStorage.getItem('access')) {
       window.location.href = `${baseUrl}login`;
     }
+    dispatch(setLoaded(false));
 
     const fetchProfile = async () => {
       dispatch(setLoaded(true));

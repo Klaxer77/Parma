@@ -11,6 +11,7 @@ import { setMapButtonActive, setMenuActive } from '../../Redux/Menu/Menu.slice';
 import NotFound from '../../Pages/NotFound';
 import HistoryReselve from '../../Pages/HistoryReselve';
 import ActiveReselve from '../../Pages/ActiveReselve' 
+import baseUrl from '../../Api/http';
 
 
 function App() {
@@ -39,7 +40,9 @@ function App() {
       dispatch(setMenuActive(3));
       dispatch(setMapButtonActive(true));
     }
-  }, []);
+  }, [window.location.href]);
+
+  
 
   return (
     <>

@@ -12,7 +12,7 @@ import {
   setLoading,
   setRoom,
 } from '../../Redux/Profile/ActiveReselve/ActiveReselve.slice';
-import { $profile } from '../../Api/http';
+import baseUrl, { $profile } from '../../Api/http';
 import Loading from '../../components/Loading';
 
 export default function ActiveReselve() {
@@ -22,16 +22,18 @@ export default function ActiveReselve() {
 
   useEffect(() => {
     fetchCheck();
-    if (!localStorage.getItem('access')) {
-      window.location.href = `${baseUrl}login`;
-    }
   }, []);
 
   useEffect(() => {
+    dispatch(setLoading(true))
+    if (!localStorage.getItem('access')) {
+      window.location.href = `${baseUrl}login`;
+    }
+    dispatch(setLoading(false))
     if (checkData !== null) {
       fetchProfile();
     }
-  }, [checkData]);
+  }, [checkData, localStorage.getItem('access')]);
 
 
   const fetchCheck = async () => {
@@ -54,6 +56,9 @@ export default function ActiveReselve() {
     setScroll(true);
     try {
       dispatch(setLoading(true));
+      if (scroll) {
+        document.body.style.overflow = 'hidden';
+      }
       const response = await $profile.get('profile', {
         headers: {
           Authorization: `JWT ${localStorage.getItem('access')}`,
@@ -64,7 +69,10 @@ export default function ActiveReselve() {
       dispatch(setRoom(response.data.room[0].name)),
         dispatch(setDateStart(response.data.reservation.start_date.split(' ').join(', '))),
         dispatch(setDateEnd(response.data.reservation.end_date.split(' ').join(', '))),
-        dispatch(setFirstName(response.data.reservation.user.first_name)),
+        dispatch(setFirstName(response.data.reservation.user.first_name));
+        if (!scroll) {
+          document.body.style.overflow = 'auto';
+        }
         dispatch(setLoading(false));
     } catch (error) {
       console.log(error);
