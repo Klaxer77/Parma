@@ -3,56 +3,94 @@ import { useSelector, useDispatch } from 'react-redux';
 import InfoPlace from '../../components/ActiveReselve/InfoPlace';
 import NumberPlace from '../../components/ActiveReselve/NumberPlace';
 import {
-  setLoading,
   setInfoActiveReselve,
+  setNumberPlace,
+  setDateStart,
+  setDateEnd,
+  setFirstName,
+  setCheckData,
+  setLoading,
+  setRoom,
 } from '../../Redux/Profile/ActiveReselve/ActiveReselve.slice';
-import { $profile } from '../../Api/http';
+import baseUrl, { $profile } from '../../Api/http';
 import Loading from '../../components/Loading';
 
 export default function ActiveReselve() {
   const [scroll, setScroll] = useState(false);
   const dispatch = useDispatch();
-  const { loading, infoActiveReselve } = useSelector((state) => state.ActiveReselve);
+  const { infoActiveReselve, checkData, loading } = useSelector((state) => state.ActiveReselve);
 
   useEffect(() => {
+    fetchCheck();
+  }, []);
+
+  useEffect(() => {
+    dispatch(setLoading(true))
     if (!localStorage.getItem('access')) {
       window.location.href = `${baseUrl}login`;
     }
+    dispatch(setLoading(false))
+    if (checkData !== null) {
+      fetchProfile();
+    }
+  }, [checkData, localStorage.getItem('access')]);
 
-    const fetchProfile = async () => {
+
+  const fetchCheck = async () => {
+    setScroll(true);
+    try {
       dispatch(setLoading(true));
-      setScroll(true);
-      try {
-        if (scroll) {
-          document.body.style.overflow = 'hidden';
-        }
-        const response = await $profile.get('profile', {
-          headers: {
-            Authorization: `JWT ${localStorage.getItem('access')}`,
-          },
-        });
-        dispatch(setInfoActiveReselve(response.data.reservation));
-        dispatch(setLoading(false));
+      const response = await $profile.get('profile', {
+        headers: {
+          Authorization: `JWT ${localStorage.getItem('access')}`,
+        },
+      });
+      dispatch(setCheckData(response.data.reservation));
+      dispatch(setLoading(false));
+    } catch (error) {
+      dispatch(setLoading(false));
+    }
+  };
+
+  const fetchProfile = async () => {
+    setScroll(true);
+    try {
+      dispatch(setLoading(true));
+      if (scroll) {
+        document.body.style.overflow = 'hidden';
+      }
+      const response = await $profile.get('profile', {
+        headers: {
+          Authorization: `JWT ${localStorage.getItem('access')}`,
+        },
+      });
+      dispatch(setInfoActiveReselve(response.data));
+      dispatch(setNumberPlace(response.data.reservation.id)),
+      dispatch(setRoom(response.data.room[0].name)),
+        dispatch(setDateStart(response.data.reservation.start_date.split(' ').join(', '))),
+        dispatch(setDateEnd(response.data.reservation.end_date.split(' ').join(', '))),
+        dispatch(setFirstName(response.data.reservation.user.first_name));
         if (!scroll) {
           document.body.style.overflow = 'auto';
         }
-      } catch (error) {
-        console.log(error);
-      }
-    };
-
-    fetchProfile();
-  }, [scroll]);
+        dispatch(setLoading(false));
+    } catch (error) {
+      console.log(error);
+      setLoading(false);
+    }
+  };
 
   console.log(infoActiveReselve);
 
   return (
     <div className="w-full flex items-center justify-center mt-[40px]">
       <div className="bg-purple-color h-[720px] w-full max-w-[1330px] rounded-[8px] p-[20px] relative">
-        {infoActiveReselve.length === 0 ? (
-          <p>Нет брони</p>
-        ) : loading ? (
+        {loading ? (
           <Loading />
+        ) : checkData === null ? (
+          <div className='flex items-center justify-center h-[100vh]'>
+            <p className="text-[28px] font-bold">Нет активной брони</p>
+          </div>
         ) : (
           <>
             <svg

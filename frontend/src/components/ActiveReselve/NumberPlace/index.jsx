@@ -2,12 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 export default function NumberPlace() {
-  const [numberPlace, setNumberPlace] = useState();
-  const { infoActiveReselve } = useSelector((state) => state.ActiveReselve);
-
-  useEffect(() => {
-    infoActiveReselve.map((reselve) => setNumberPlace(reselve.id));
-  }, []);
+  const { numberPlace } = useSelector((state) => state.ActiveReselve);
 
   return (
     <div>
