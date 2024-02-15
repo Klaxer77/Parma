@@ -1,22 +1,22 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { $profile } from '../../../Api/http';
-import { deleteInfoActiveReselve, setLoading } from '../../../Redux/Profile/ActiveReselve/ActiveReselve.slice';
+import { setCheckData, setLoading } from '../../../Redux/Profile/ActiveReselve/ActiveReselve.slice';
 
 export default function InfoPlace() {
   const dispatch = useDispatch();
-  const { date_start, date_end, numberPlace, first_name } = useSelector((state) => state.ActiveReselve);
-
+  const { date_start, date_end, numberPlace, room, first_name } = useSelector((state) => state.ActiveReselve);
 
   const onClickDelete = () => {
     const fetchDeleteReselve = async (numberPlace) => {
-
       try {
         dispatch(setLoading(true));
+        localStorage.setItem('check', false)
         await $profile.delete(`reservation-delete/${numberPlace}/`, {
           headers: {
             Authorization: `JWT ${localStorage.getItem('access')}`,
           },
         });
+        dispatch(setCheckData(null))
         dispatch(setLoading(false));
       } catch (error) {
         console.log(error);
@@ -24,7 +24,6 @@ export default function InfoPlace() {
       }
     };
     fetchDeleteReselve(numberPlace);
-    dispatch(deleteInfoActiveReselve())
   };
 
   return (
@@ -37,7 +36,7 @@ export default function InfoPlace() {
       <div className="flex gap-[25px]">
         <div>
           <p className="font-medium text-[14px] mb-[10px]">Комната</p>
-          <p className="text-[30px] font-bold leading-[1]">Холл</p>
+          <p className="text-[30px] font-bold leading-[1]">{room}</p>
         </div>
         <div>
           <p className="font-medium text-[14px] mb-[10px]">Место</p>

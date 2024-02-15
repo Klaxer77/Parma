@@ -3,29 +3,28 @@ import { createSlice } from '@reduxjs/toolkit'
 
 
 const initialState = {
-  infoActiveReselve: [],
+  loading: false,
+  infoActiveReselve: null,
   numberPlace: null,
+  romm: null,
   date_start: null,
   date_end: null,
   first_name: null,
-  loading: false,
+  checkData: false
 }
 
 export const ActiveReselve = createSlice({
   name: 'activeReselve',
   initialState,
   reducers: {
-    setLoading: (state, action) => {
-      state.loading = action.payload
-    },
     setInfoActiveReselve: (state, action) => {
-      state.infoActiveReselve.push(action.payload)
-    },
-    deleteInfoActiveReselve: (state) => {
-      state.infoActiveReselve = []
+      state.infoActiveReselve = action.payload
     },
     setNumberPlace: (state, action) => {
       state.numberPlace = action.payload
+    },
+    setRoom: (state, action) => {
+      state.room = action.payload
     },
     setDateStart: (state, action) => {
       state.date_start = action.payload
@@ -34,11 +33,17 @@ export const ActiveReselve = createSlice({
       state.date_end = action.payload
     },
     setFirstName: (state, action) => {
-      state.date_end = action.payload
+      state.first_name = action.payload
     },
+    setCheckData: (state, action) => {
+      state.checkData = action.payload
+    },
+    setLoading: (state, action) => {
+      state.loading = action.payload
+    }
   },
 })
 
-export const { setLoading, setInfoActiveReselve, setNumberPlace, setDateStart, setDateEnd, setFirstName, deleteInfoActiveReselve } = ActiveReselve.actions
+export const { setInfoActiveReselve, setNumberPlace, setRoom, setDateStart, setDateEnd, setFirstName, setCheckData, setLoading } = ActiveReselve.actions
 
 export default ActiveReselve.reducer
