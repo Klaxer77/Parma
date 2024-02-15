@@ -14,7 +14,7 @@ class Place(models.Model):
         ('Забронировано', 'Забронировано'),
         ('Свободно', 'Свободно'),
     ]
-    name = models.CharField('Название', max_length=50, validators=[MinLengthValidator(3)])
+    name = models.IntegerField('Номер места', unique=True)
     image = models.ImageField("Фото места", upload_to="place/")
     status = models.CharField(
         "Статус",
@@ -83,6 +83,17 @@ class Reservation(models.Model):
         default=timezone.now,
     )
     
+    @property
+    def remaining_time(self):
+        current_time = timezone.now()
+        remaining_time = self.end_date - current_time
+        days = remaining_time.days
+        hours = remaining_time.days * 24 + remaining_time.seconds // 3600
+        minutes = (remaining_time.seconds % 3600) // 60
+        formatted_time = f"{days:02d}:{hours:02d}:{minutes:02d}"
+        return formatted_time
+    
+    
     def __str__(self):
         return f'Бронь №{self.id}'
     
@@ -143,14 +154,14 @@ def update_place_status(sender, instance, **kwargs):
     
     
     
-# @receiver(post_save, sender=Reservation)
-# def move_to_history(sender, instance, created, **kwargs):
-#     if not created:  
-#         if instance.end_date < timezone.now():  
-#             ReservationHistory.objects.create(
-#                 user=instance.user,
-#                 place=instance.place,
-#                 start_date=instance.start_date,
-#                 end_date=instance.end_date
-#             )
-#             instance.delete()
+@receiver(post_save, sender=Reservation)
+def move_to_history(sender, instance, created, **kwargs):
+    if not created:  
+        if instance.end_date < timezone.now():  
+            ReservationHistory.objects.create(
+                user=instance.user,
+                place=instance.place,
+                start_date=instance.start_date,
+                end_date=instance.end_date
+            )
+            instance.delete()

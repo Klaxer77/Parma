@@ -7,8 +7,8 @@ from django.http import HttpResponse
 
 
 class ReservationAdmin(admin.ModelAdmin):
-    list_display = ['user', 'place', 'start_date', 'end_date']
-    list_filter = ['place', 'start_date', 'end_date', 'user']
+    list_display = ['user', 'place', 'start_date', 'end_date', 'remaining_time']
+    list_filter = ['place', 'start_date', 'end_date', 'user',]
 
 
 class ReservationHistoryAdmin(admin.ModelAdmin):
