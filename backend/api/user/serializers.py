@@ -3,11 +3,29 @@ from backend.user.models import User, ConfirmationCodeEmail, ConfirmationCodePho
 from backend.map.models import Reservation, ReservationHistory
 from backend.map.models import Room, Place
 from importlib import import_module
+from datetime import datetime
+from django.utils import timezone
 
 
 class ReservationHistoryListSeriaLizer(serializers.ModelSerializer):
-    # user = CustomTokenObtainPairSerializer(required=False)
     place =  serializers.SerializerMethodField()
+    room = serializers.SerializerMethodField() 
+
+    def get_room(self, obj):
+        place = obj.place
+        if place:
+            rooms = place.room.all()
+            room_data = []
+
+            for room in rooms:
+                room_name = room.name if room.name else "Unknown"
+                room_data.append({'name': room_name})
+
+            return room_data
+        else:
+            return None
+
+
     
     def get_modules(self, obj):
         PlaceSerialLizer = import_module('.PlaceSerialLizer', package=__package__)
@@ -31,6 +49,7 @@ class ReservationHistoryListSeriaLizer(serializers.ModelSerializer):
             'place',
             'start_date',
             'end_date',
+            'room',
         )
         
                
@@ -38,12 +57,21 @@ class ReservationHistoryListSeriaLizer(serializers.ModelSerializer):
 class ReservationListSeriaLizer(serializers.ModelSerializer):
     user = serializers.SerializerMethodField()
     place =  serializers.SerializerMethodField()
+    remaining_time = serializers.SerializerMethodField()
+
+    def get_remaining_time(self, obj):
+        current_time = timezone.now()
+        remaining_time = obj.end_date - current_time
+        days = remaining_time.days
+        hours = remaining_time.days * 24 + remaining_time.seconds // 3600
+        minutes = (remaining_time.seconds % 3600) // 60
+        formatted_time = f"{days:02d}:{hours:02d}:{minutes:02d}"
+        return formatted_time
     
     
     def get_modules(self, obj):
         CustomTokenObtainPairSerializer = import_module('.CustomTokenObtainPairSerializer', package=__package__)
         return CustomTokenObtainPairSerializer(obj.modules.all(), many=True).data
-    
     
     
     def get_user(self, obj):
@@ -83,6 +111,7 @@ class ReservationListSeriaLizer(serializers.ModelSerializer):
             'place',
             'start_date',
             'end_date',
+            'remaining_time',
         )
         
 class PlaceSerialLizer(serializers.ModelSerializer):
