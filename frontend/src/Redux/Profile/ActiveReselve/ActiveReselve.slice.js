@@ -6,10 +6,12 @@ const initialState = {
   loading: false,
   infoActiveReselve: null,
   numberPlace: null,
-  romm: null,
+  room: null,
   date_start: null,
   date_end: null,
   first_name: null,
+  deleteReservation: null,
+  remainingTime: null,
   checkData: false
 }
 
@@ -40,10 +42,16 @@ export const ActiveReselve = createSlice({
     },
     setLoading: (state, action) => {
       state.loading = action.payload
-    }
+    },
+    setRemainingTime: (state, action) => {
+      state.remainingTime = action.payload
+    },
+    setDeleteReservation: (state, action) => {
+      state.deleteReservation = action.payload
+    },
   },
 })
 
-export const { setInfoActiveReselve, setNumberPlace, setRoom, setDateStart, setDateEnd, setFirstName, setCheckData, setLoading } = ActiveReselve.actions
+export const { setInfoActiveReselve, setNumberPlace, setRoom, setDateStart, setDateEnd, setFirstName, setRemainingTime, setDeleteReservation, setCheckData, setLoading } = ActiveReselve.actions
 
 export default ActiveReselve.reducer

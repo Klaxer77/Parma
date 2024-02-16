@@ -33,7 +33,7 @@ export default function Menu() {
           {menu.map((value, index) => (
             <Link
               key={value}
-              to={index === 0 ? '/profile' : index === 1 ? '/activeReselve' : index === 2 ? '/history' : '/map'}>
+              to={index === 0 ? '/profile' : index === 1 ? '/active' : index === 2 ? '/history' : '/map'}>
               <button
                 onClick={() => getIndexMenu(index)}
                 className={

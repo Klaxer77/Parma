@@ -57,6 +57,7 @@ export default function Profile() {
         } 
       } catch (error) {
         console.log(error);
+        dispatch(setLoaded(false));
       }
     };
     if (loadedProfile) {

@@ -70,8 +70,11 @@ export default function MapOffice() {
 
   useEffect(() => {
     const updatedPlaces = room.map((obj) => obj.places);
+    console.log(updatedPlaces);
     setPlaces(updatedPlaces);
   }, [room]);
+
+  console.log(places);
 
   return (
     <>
