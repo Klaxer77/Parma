@@ -15,6 +15,7 @@ class MapView(generics.ListAPIView):
     serializer_class=MapSerialLizer
     permission_classes= [IsAuthenticated]
 
+
 class PlaceListView(generics.ListAPIView):
     queryset = Place.objects.all()
     serializer_class = PlaceSerialLizer
