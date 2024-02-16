@@ -4,25 +4,27 @@ import { setCheckData, setLoading } from '../../../Redux/Profile/ActiveReselve/A
 
 export default function InfoPlace() {
   const dispatch = useDispatch();
-  const { date_start, date_end, numberPlace, room, first_name } = useSelector((state) => state.ActiveReselve);
+  const { date_start, date_end, numberPlace, room, first_name, remainingTime, deleteReservation } = useSelector(
+    (state) => state.ActiveReselve,
+  );
 
   const onClickDelete = () => {
-    const fetchDeleteReselve = async (numberPlace) => {
+    const fetchDeleteReselve = async () => {
       try {
         dispatch(setLoading(true));
-        await $profile.delete(`reservation-delete/${numberPlace}/`, {
+        await $profile.delete(`reservation-delete/${deleteReservation}/`, {
           headers: {
             Authorization: `JWT ${localStorage.getItem('access')}`,
           },
         });
-        dispatch(setCheckData(null))
+        dispatch(setCheckData(null));
         dispatch(setLoading(false));
       } catch (error) {
         console.log(error);
         dispatch(setLoading(false));
       }
     };
-    fetchDeleteReselve(numberPlace);
+    fetchDeleteReselve();
   };
 
   return (
@@ -60,14 +62,17 @@ export default function InfoPlace() {
       <div>
         <p className="font-medium text-[14px] mb-[10px]">Осталось</p>
         <div className="bg-[#293240] flex items-center justify-center w-[240px] h-[55px] rounded-[8px] border-[1px] border-[#4D4F59]">
-          <p className="text-[22px] font-bold">7ч 00мин</p>
+          <p className="text-[22px] font-bold">{remainingTime}</p>
         </div>
       </div>
 
       <div>
         <button
-          onClick={() => onClickDelete(numberPlace)}
-          className="bg-[#293240] w-full h-[50px] rounded-[8px]">
+        style={{
+          transition: '0.3s'
+        }}
+          onClick={() => onClickDelete()}
+          className="bg-[#293240] w-full h-[50px] rounded-[8px] hover:bg-red hover:transition hover:ease-in-out">
           Завершить
         </button>
       </div>

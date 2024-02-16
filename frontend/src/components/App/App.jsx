@@ -9,9 +9,8 @@ import MapOffice from '../../Pages/Map';
 import { useEffect } from 'react';
 import { setMapButtonActive, setMenuActive } from '../../Redux/Menu/Menu.slice';
 import NotFound from '../../Pages/NotFound';
-import HistoryReselve from '../../Pages/HistoryReselve';
-import ActiveReselve from '../../Pages/ActiveReselve' 
-import baseUrl from '../../Api/http';
+import HistoryReservation from '../../Pages/HistoryReservation';
+import ActiveReservation from '../../Pages/ActiveReservation' 
 
 
 function App() {
@@ -52,8 +51,8 @@ function App() {
             <Route path="/map" element={<MapOffice />}></Route>
             <Route path="/home" element={<Home />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
-            <Route path="/history" element={<HistoryReselve />}></Route>
-            <Route path="/activeReselve" element={<ActiveReselve />}></Route>
+            <Route path="/history" element={<HistoryReservation />}></Route>
+            <Route path="/active" element={<ActiveReservation />}></Route>
           </Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="*" element={<NotFound />} />

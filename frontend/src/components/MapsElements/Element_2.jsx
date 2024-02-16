@@ -21,15 +21,13 @@ export default function Element_2({ places }) {
 
     places.forEach((subArray) => {
       subArray.forEach((obj) => {
-        if (obj.id === 4) {
+        if (obj.id === 5) {
           result = obj.status;
           setStatus(result);
         }
       });
     });
   }, [places, setStatus, status]);
-
-  console.log(places);
 
   return (
     <div onClick={() => onClickPlace(2,2)} className="2 free absolute left-[380px] top-[115px] z-[99] cursor-pointer">
