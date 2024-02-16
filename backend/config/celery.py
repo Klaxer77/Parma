@@ -22,5 +22,9 @@ app.conf.beat_schedule = {
     'remove_code_confirm_email': {
         'task': 'backend.map.tasks.remove_code_confirm_email',
         'schedule': 5,
+    },
+    'remove_code_confirm_phone': {
+        'task': 'backend.map.tasks.remove_code_confirm_phone',
+        'schedule': 5,
     }
 }

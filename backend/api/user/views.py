@@ -9,13 +9,17 @@ from rest_framework import status
 from rest_framework.exceptions import ValidationError
 from rest_framework.decorators import api_view
 from backend.user.models import ConfirmationCodeEmail, ConfirmationCodePhone
-from backend.user.utils import generate_confirmation_code, send_sms
+from backend.user.utils import generate_confirmation_code
 from django.core.validators import validate_email
 from backend.map.tasks import code_email
-from datetime import datetime,timezone
+from datetime import datetime
 import pytz
+import requests
+from django.utils import timezone
 
 class ChangePhoneView(APIView):
+    permission_classes = [IsAuthenticated]
+    
     def post(self, request):
         new_phone = request.data.get('new_phone')
         if not new_phone:
@@ -25,29 +29,42 @@ class ChangePhoneView(APIView):
         confirmation_code = generate_confirmation_code()
         ConfirmationCodePhone.objects.create(user=request.user, phone=new_phone, code=confirmation_code)
 
-        send_sms(new_phone,confirmation_code)
+        api_key = 'FE33CF10-C23F-E3BA-F726-AB080A5BFC99' 
+        url = 'https://sms.ru/sms/send'
+        payload = {
+            'api_id': api_key,
+            'to': new_phone,
+            'msg': f'Код подтверждения: {confirmation_code}',
+            'json': 1
+        }
+
+        requests.get(url, params=payload)
 
         return Response({'message': 'Код подтверждения отправлен на ваш новый номер телефона и действителен в течении 1-ого часа'}, status=200)
     
 
 class ConfirmPhoneChangeView(APIView):
+    permission_classes = [IsAuthenticated]
+    
     def post(self, request):
         confirmation_code = request.data.get('confirmation_code')
         if not confirmation_code:
             return Response({'error': 'Введите код подтверждения'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            confirmation = ConfirmationCodePhone.objects.get(code=confirmation_code)
+            confirmation = ConfirmationCodePhone.objects.get(code=confirmation_code, user=request.user)
             user = confirmation.user
             user.phone = confirmation.phone
             user.save()
             confirmation.delete()
             return Response({'message': 'Изменение номера телефона успешно выполнено'}, status=status.HTTP_200_OK)
-        except ConfirmationCodeEmail.DoesNotExist:
+        except ConfirmationCodePhone.DoesNotExist:
             return Response({'error': 'Код подтверждения неверный или срок его действия истёк'}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class ChangeEmailView(APIView):
+    permission_classes = [IsAuthenticated]
+    
     def post(self, request):
         new_email = request.data.get('new_email')
         
@@ -70,13 +87,15 @@ class ChangeEmailView(APIView):
     
 
 class ConfirmEmailChangeView(APIView):
+    permission_classes = [IsAuthenticated]
+    
     def post(self, request):
         confirmation_code = request.data.get('confirmation_code')
         if not confirmation_code:
             return Response({'error': 'Введите код подтверждения'}, status=status.HTTP_400_BAD_REQUEST)
 
         try:
-            confirmation = ConfirmationCodeEmail.objects.get(code=confirmation_code)
+            confirmation = ConfirmationCodeEmail.objects.get(code=confirmation_code, user=request.user)
             user = confirmation.user
             user.email = confirmation.email
             user.save()
@@ -133,6 +152,12 @@ class ReservationDeleteView(generics.DestroyAPIView):
         
         def destroy(self, request, *args, **kwargs):
             instance = self.get_object()
+            ReservationHistory.objects.create(
+            user = instance.user,
+            place = instance.place,
+            start_date = instance.start_date,
+            end_date = timezone.now()
+            )
             self.perform_destroy(instance)
             return Response({'detail': 'Бронь успешно удалена'}, status=status.HTTP_204_NO_CONTENT)
 
