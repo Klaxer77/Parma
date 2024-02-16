@@ -6,7 +6,7 @@ from backend.user.models import ConfirmationCodeEmail, ConfirmationCodePhone
 from datetime import datetime
 from django.template.loader import render_to_string
 from django.core.mail import EmailMessage
-
+import requests
 
 
 @shared_task
@@ -52,5 +52,7 @@ def code_email(new_email,confirmation_code):
     #     email.attach('image.jpg', image_file.read(), 'image/jpeg')
         
     email.send()
+    
+    
     
     

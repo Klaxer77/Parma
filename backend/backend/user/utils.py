@@ -14,21 +14,3 @@ def generate_confirmation_code(length=6):
     return code
 
     
-def send_sms(new_phone, confirmation_code):
-    api_key = '2bd0A1028e1938f69952838100d00e4c'
-    url = 'https://sms-activate.ru/stubs/handler_api.php'
-    params = {
-        'api_key': api_key,
-        'action': 'sendSMS',
-        'new_phone': new_phone,
-        'message': f'Код подтверждения: {confirmation_code}'
-    }
-
-    try:
-        response = requests.post(url, params=params)
-        if response.status_code == 200:
-            print('SMS успешно отправлено')
-        else:
-            print('Ошибка при отправке SMS')
-    except requests.exceptions.RequestException as e:
-        print('Ошибка при отправке SMS:', str(e))
