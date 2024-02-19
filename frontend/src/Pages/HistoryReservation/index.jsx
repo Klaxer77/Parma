@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setFirstName } from '../../Redux/Profile/ActiveReselve/ActiveReselve.slice';
-import baseUrl, { $profile } from '../../Api/http';
+import { $profile } from '../../Api/http';
 import HistoryReservationBlock from '../../components/HistoryReservation';
 import Loading from '../../components/Loading';
 import { setCheckData } from '../../Redux/Profile/HistoryReservation/History.slice';
@@ -18,13 +18,10 @@ export default function HistoryReservation() {
   }, []);
 
   useEffect(() => {
-    if (!localStorage.getItem('access')) {
-      window.location.href = `${baseUrl}login`;
-    }
     if (checkData.length !== 0) {
       fetchProfile();
     }
-  }, [checkData, localStorage.getItem('access')]);
+  }, [localStorage.getItem('access')]);
 
   const fetchCheck = async () => {
     setScroll(true);

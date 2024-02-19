@@ -16,6 +16,8 @@ import Map from './Map/Map.slice';
 import MapInfoPlace from './Map/MapInfoPlace.slice';
 import ActiveReselve from './Profile/ActiveReselve/ActiveReselve.slice';
 import History from './Profile/HistoryReservation/History.slice';
+import LoadedProfile from './Profile/LoadedProfile.slice';
+import VerificationCode from './Profile/VerificationCode/VerificationCode.slice';
 
 
 const rootReducer = combineReducers({
@@ -25,13 +27,15 @@ const rootReducer = combineReducers({
   ActiveReselve,
   Map,
   MapInfoPlace,
-  History
+  History,
+  LoadedProfile,
+  VerificationCode
 }) 
 
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['Map', 'ProfileInfo', 'Login', 'MapInfoPlace', 'ActiveReselve', 'History'], // что не хотим сохранять
+  blacklist: ['Map', 'Login', 'MapInfoPlace', 'ActiveReselve', 'History', 'LoadedProfile', 'VerificationCode'], // что не хотим сохранять
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

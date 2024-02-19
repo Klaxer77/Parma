@@ -4,9 +4,8 @@ import { createSlice } from '@reduxjs/toolkit'
 const initialState = {
   infoUser: {},
   loaded: false,
-  loadedProfile: true,
   textEmail: '',
-  textNumber: ''
+  textNumber: '',
 }
 
 export const ProfileInfo = createSlice({
@@ -16,9 +15,6 @@ export const ProfileInfo = createSlice({
     setLoaded:(state, action) => {
       state.loaded = action.payload
     },
-    setLoadedProfile:(state, action) => {
-      state.loadedProfile = action.payload
-    },
     setInfoUser:(state, action) => {
       state.infoUser = action.payload
     },
@@ -27,10 +23,10 @@ export const ProfileInfo = createSlice({
     },
     setTextNumber:(state, action) => {
       state.textNumber = action.payload
-    }
+    },
   },
 })
 
-export const { setLoaded, setLoadedProfile, setInfoUser, setTextEmail, setTextNumber } = ProfileInfo.actions
+export const { setLoaded, setInfoUser, setTextEmail, setTextNumber } = ProfileInfo.actions
 
 export default ProfileInfo.reducer

@@ -12,7 +12,8 @@ const initialState = {
   first_name: null,
   deleteReservation: null,
   remainingTime: null,
-  checkData: false
+  checkData: false,
+  messageCompleted: false
 }
 
 export const ActiveReselve = createSlice({
@@ -49,9 +50,12 @@ export const ActiveReselve = createSlice({
     setDeleteReservation: (state, action) => {
       state.deleteReservation = action.payload
     },
+    setMessageCompleted: (state, action) => {
+      state.messageCompleted = action.payload
+    }
   },
 })
 
-export const { setInfoActiveReselve, setNumberPlace, setRoom, setDateStart, setDateEnd, setFirstName, setRemainingTime, setDeleteReservation, setCheckData, setLoading } = ActiveReselve.actions
+export const { setInfoActiveReselve, setNumberPlace, setRoom, setDateStart, setDateEnd, setFirstName, setRemainingTime, setDeleteReservation, setCheckData, setLoading, setMessageCompleted } = ActiveReselve.actions
 
 export default ActiveReselve.reducer
