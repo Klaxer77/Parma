@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Layout from '../Layout/Layout';
 import Home from '../../Pages/Home';
@@ -14,11 +14,15 @@ import ActiveReservation from '../../Pages/ActiveReservation'
 
 
 function App() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const url = window.location.href;
 
   useEffect(() => {
+    if (!localStorage.getItem('access')) {
+      navigate('/login');
+    }
     if (url == 'http://localhost:3000/home') {
       dispatch(setMenuActive(-1));
       dispatch(setMapButtonActive(false));

@@ -1,23 +1,41 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { useSelector, useDispatch } from 'react-redux'; 
+import { useSelector, useDispatch } from 'react-redux';
 import { setTextEmail } from '../../../../Redux/Profile/ProfileInfo.slice';
+import VerificationCode from './VerificationCode';
+import { fetchChangeEmail } from '../../../../Redux/Profile/VerificationCode/VerificationCode.slice';
+import SuccessfulProfile from '../../Successful'
 
 export default function Email() {
   const dispatch = useDispatch();
-  const { textEmail } = useSelector(state => state.ProfileInfo)
+  const { textEmail } = useSelector((state) => state.ProfileInfo);
+  const [initialTextEmail, setInitialTextEmail] = useState(textEmail);
+  const { showCode, messageCompleted, errorsChangeEmail } = useSelector((state) => state.VerificationCode);
+  const inputRefEmail = useRef(null);
+  const prevTextEmailRef = useRef();
   const [showSaveButtonEmail, setShowSaveButtonEmail] = useState(false);
   const [editableEmail, setEditableEmail] = useState(false);
-  const inputRefEmail = useRef(null);
 
   useEffect(() => {
     setShowSaveButtonEmail(false);
   }, []);
 
+  useEffect(() => {
+    setInitialTextEmail(textEmail);
+  }, []); 
+
+  useEffect(() => {
+    prevTextEmailRef.current = textEmail;
+  }, [textEmail]);
+
   const handleInputChange = (e) => {
     if (editableEmail) {
       dispatch(setTextEmail(e.target.value));
     }
-    setShowSaveButtonEmail(true);
+    if (e.target.value !== initialTextEmail) {
+      setShowSaveButtonEmail(true);
+    } else {
+      setShowSaveButtonEmail(false);
+    }
   };
 
   const toggleEditable = () => {
@@ -26,11 +44,25 @@ export default function Email() {
   };
 
   const toggleEditableSave = () => {
-    setEditableEmail(false);
+    if (textEmail) {
+      setEditableEmail(false);
+      const email = {
+        new_email: textEmail,
+      };
+      dispatch(fetchChangeEmail(email));
+    }
   };
+
+  const resetTextEmail = () => {
+    dispatch(setTextEmail(initialTextEmail));
+  };
+
+  console.log(messageCompleted);
+
 
   return (
     <div className="flex justify-between gap-[65px] mb-[65px] w-full">
+      {showCode && <VerificationCode />}
       <div className="w-full">
         <div className="relative w-full flex items-center">
           <input
@@ -41,10 +73,13 @@ export default function Email() {
             defaultValue={textEmail}
             ref={inputRefEmail}
           />
-          {showSaveButtonEmail && editableEmail ? (
+          {showSaveButtonEmail && editableEmail && textEmail === textEmail ? (
             <button
               className="absolute right-[7px] w-[130px] bg-red h-[35px] rounded-[6px]"
-              onClick={toggleEditableSave}>
+              onClick={() => {
+                toggleEditableSave();
+                resetTextEmail();
+              }}>
               Сохранить
             </button>
           ) : (
@@ -55,6 +90,10 @@ export default function Email() {
             </button>
           )}
         </div>
+        {errorsChangeEmail && <p className="text-red mt-[10px]">{errorsChangeEmail}</p>}
+        {
+          messageCompleted && <SuccessfulProfile />
+        }
       </div>
     </div>
   );

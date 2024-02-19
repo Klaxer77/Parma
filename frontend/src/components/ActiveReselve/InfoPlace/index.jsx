@@ -1,17 +1,21 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { $profile } from '../../../Api/http';
-import { setCheckData, setLoading } from '../../../Redux/Profile/ActiveReselve/ActiveReselve.slice';
+import {
+  setCheckData,
+  setLoading,
+  setMessageCompleted,
+} from '../../../Redux/Profile/ActiveReselve/ActiveReselve.slice';
 
 export default function InfoPlace() {
   const dispatch = useDispatch();
-  const { date_start, date_end, numberPlace, room, first_name, remainingTime, deleteReservation } = useSelector(
-    (state) => state.ActiveReselve,
-  );
+  const { date_start, date_end, numberPlace, room, first_name, remainingTime, deleteReservation } =
+    useSelector((state) => state.ActiveReselve);
 
   const onClickDelete = () => {
     const fetchDeleteReselve = async () => {
       try {
         dispatch(setLoading(true));
+        dispatch(setMessageCompleted(true));
         await $profile.delete(`reservation-delete/${deleteReservation}/`, {
           headers: {
             Authorization: `JWT ${localStorage.getItem('access')}`,
@@ -68,9 +72,9 @@ export default function InfoPlace() {
 
       <div>
         <button
-        style={{
-          transition: '0.3s'
-        }}
+          style={{
+            transition: '0.3s',
+          }}
           onClick={() => onClickDelete()}
           className="bg-[#293240] w-full h-[50px] rounded-[8px] hover:bg-red hover:transition hover:ease-in-out">
           Завершить

@@ -1,11 +1,8 @@
-import React from 'react';
-import './Loading.scss';
+import React from 'react'
 
-export default function Loading() {
+export default function LoadingSmall() {
   return (
-    <>
-      <div className="w-full h-[100vh] flex justify-center items-center fixed left-0 top-0 bg-[black] opacity-[80%] overflow-hidden"></div>
-      <div className="bg-[transparent] fixed left-0 top-0 w-full h-[100vh] flex justify-center items-center">
+    <div className="fixed left-0 top-0 w-full h-[100vh] flex justify-center items-center">
         <svg
           className="pl"
           viewBox="0 0 200 200"
@@ -48,6 +45,5 @@ export default function Loading() {
           />
         </svg>
       </div>
-    </>
-  );
+  )
 }

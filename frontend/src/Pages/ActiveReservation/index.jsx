@@ -14,28 +14,26 @@ import {
   setRemainingTime,
   setDeleteReservation,
 } from '../../Redux/Profile/ActiveReselve/ActiveReselve.slice';
-import baseUrl, { $profile } from '../../Api/http';
 import Loading from '../../components/Loading';
+import { $profile } from '../../Api/http';
+import SuccessfulActiveReselve from '../../components/ActiveReselve/Successful';
 
 export default function ActiveReselve() {
   const [scroll, setScroll] = useState(false);
   const dispatch = useDispatch();
-  const { infoActiveReselve, checkData, loading } = useSelector((state) => state.ActiveReselve);
+  const { checkData, loading } = useSelector((state) => state.ActiveReselve);
+  const { messageCompleted } = useSelector((state) => state.ActiveReselve);
+
 
   useEffect(() => {
     fetchCheck();
   }, []);
 
   useEffect(() => {
-    dispatch(setLoading(true));
-    if (!localStorage.getItem('access')) {
-      window.location.href = `${baseUrl}login`;
-    }
-    dispatch(setLoading(false));
     if (checkData !== null) {
       fetchProfile();
     }
-  }, [checkData, localStorage.getItem('access')]);
+  }, [localStorage.getItem('access')]);
 
   const fetchCheck = async () => {
     setScroll(true);
@@ -85,7 +83,6 @@ export default function ActiveReselve() {
       }
       dispatch(setLoading(false));
     } catch (error) {
-      console.log(error);
       setLoading(false);
     }
   };
@@ -95,9 +92,12 @@ export default function ActiveReselve() {
       <div
         className={
           checkData === null
-            ? 'bg-purple-color h-[720px] w-full max-w-[1330px] rounded-[8px] p-[20px] relative flex items-center justify-center'
-            : 'bg-purple-color h-[720px] w-full max-w-[1330px] rounded-[8px] p-[20px] relative'
+            ? 'bg-purple-color h-[720px] overflow-hidden w-full max-w-[1330px] rounded-[8px] p-[20px] relative flex items-center justify-center'
+            : 'bg-purple-color h-[720px] overflow-hidden w-full max-w-[1330px] rounded-[8px] p-[20px] relative'
         }>
+          {
+            messageCompleted && <SuccessfulActiveReselve />
+          }
         {loading ? (
           <Loading />
         ) : checkData === null ? (
