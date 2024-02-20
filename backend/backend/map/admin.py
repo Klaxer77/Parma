@@ -33,15 +33,19 @@ class ReservationHistoryAdmin(admin.ModelAdmin):
 
         writer = csv.writer(response, delimiter=';', quoting=csv.QUOTE_NONNUMERIC)
 
-        writer.writerow(['User ID', 'Имя', 'Фамилия', 'Отчество', 'Место', 'Дата начала', 'Дата окончания'])
+        writer.writerow(['User ID', 'Имя', 'Фамилия', 'Отчество', 'Место', 'Комната', 'Дата начала', 'Дата окончания'])
+        
     
         for reservation in queryset:
+            place_name = reservation.place.name
+            room_names = ", ".join(room.name for room in reservation.place.room.all())
             writer.writerow([
                 reservation.user.id, 
                 reservation.user.first_name, 
                 reservation.user.last_name,
                 reservation.user.sur_name, 
-                reservation.place.name, 
+                place_name,
+                room_names,
                 reservation.start_date.strftime('%Y-%m-%d %H:%M'), 
                 reservation.end_date.strftime('%Y-%m-%d %H:%M')
             ])
@@ -71,7 +75,7 @@ class RoomAdmin(admin.ModelAdmin):
 
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
-    list_display = ('image_show', 'name', 'status',)
+    list_display = ('image_show', 'name', 'status', 'id')
     list_display_links = ('image_show', 'name', 'status')
     fields = ('image', 'name', 'status')
 
