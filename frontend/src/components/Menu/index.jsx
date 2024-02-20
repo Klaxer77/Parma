@@ -25,7 +25,7 @@ export default function Menu() {
           <span className={burger === true ? 'active' : ''}></span>
         </div>
         <Link to="/home" onClick={() => dispatch(setMenuActive(-1))}>
-          <img height={40} width={120} src="/img/logo.png" alt="logo" />
+          <img height={40} width={120} src="/img/icons/logo.png" alt="logo" />
         </Link>
       </div>
       <div className={burger == true ? 'menu-block active bg-[gray]' : 'menu-block'}>
@@ -33,7 +33,7 @@ export default function Menu() {
           {menu.map((value, index) => (
             <Link
               key={value}
-              to={index === 0 ? '/profile' : index === 1 ? '/activeReselve' : index === 2 ? '/history' : '/map'}>
+              to={index === 0 ? '/profile' : index === 1 ? '/active' : index === 2 ? '/history' : '/map'}>
               <button
                 onClick={() => getIndexMenu(index)}
                 className={

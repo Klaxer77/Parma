@@ -1,47 +1,43 @@
 import ProfileInfo from '../../components/Profile/ProfileInfo';
 import ProfileContacts from '../../components/Profile/ProfileContacts';
 import PersonalDate from '../../components/Profile/PersonalDate';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setInfoUser,
   setLoaded,
-  setLoadedProfile,
   setTextEmail,
   setTextNumber,
 } from '../../Redux/Profile/ProfileInfo.slice';
 import { setIsAuth } from '../../Redux/Login/Login.slice';
-import baseUrl, { $profile } from '../../Api/http';
+import { $profile } from '../../Api/http';
 import Loading from '../../components/Loading';
+import { setLoadedProfile } from '../../Redux/Profile/LoadedProfile.slice';
+import { useNavigate } from 'react-router-dom';
+import { setMessageCompleted } from '../../Redux/Profile/VerificationCode/VerificationCode.slice';
+
 
 export default function Profile() {
-  const [scroll, setScroll] = useState(false)
+  const navigate = useNavigate();
   const loaded = useSelector((state) => state.ProfileInfo.loaded);
-  const loadedProfile = useSelector((state) => state.ProfileInfo.loadedProfile);
+  const { loadingChangeEmail } = useSelector((state) => state.VerificationCode);
+  const loadedProfile = useSelector((state) => state.LoadedProfile.loadedProfile);
   const dispatch = useDispatch();
 
   const onClickExit = () => {
     localStorage.removeItem('access');
     dispatch(setIsAuth(false));
     dispatch(setLoaded(true));
-    window.location.href = `${baseUrl}login`;
+    navigate('/login');
     dispatch(setLoaded(false));
+    dispatch(setMessageCompleted({}))
+    dispatch(setLoadedProfile(true));
   };
 
   useEffect(() => {
-    dispatch(setLoaded(true));
-    if (!localStorage.getItem('access')) {
-      window.location.href = `${baseUrl}login`;
-    }
-    dispatch(setLoaded(false));
-
     const fetchProfile = async () => {
       dispatch(setLoaded(true));
-      setScroll(true)
       try {
-        if (scroll) {
-          document.body.style.overflow = 'hidden';
-        } 
         const response = await $profile.get('profile', {
           headers: {
             Authorization: `JWT ${localStorage.getItem('access')}`,
@@ -52,23 +48,23 @@ export default function Profile() {
         dispatch(setTextEmail(response.data.email));
         dispatch(setTextNumber(response.data.phone));
         dispatch(setLoaded(false));
-        if (!scroll) {
-          document.body.style.overflow = 'auto';
-        } 
+
       } catch (error) {
         console.log(error);
+        dispatch(setLoaded(false));
       }
     };
     if (loadedProfile) {
       fetchProfile();
     }
-    dispatch(setLoadedProfile(false))
-  }, [scroll]);
+    dispatch(setMessageCompleted({}))
+    dispatch(setLoadedProfile(false));
+  }, [loadedProfile]);
 
   return (
     <div className="w-full flex items-center justify-center mt-[40px]">
-      <div className="bg-purple-color h-[820px] w-full max-w-[1330px] rounded-[8px] px-[60px] pb-[60px] pt-[20px]">
-        {loaded ? (
+      <div className="bg-purple-color h-[820px] w-full max-w-[1330px] rounded-[8px] px-[60px] pb-[60px] pt-[20px] overflow-hidden relative">
+        {loaded || loadingChangeEmail ? (
           <Loading />
         ) : (
           <>

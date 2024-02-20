@@ -11,35 +11,36 @@ import {
   setCheckData,
   setLoading,
   setRoom,
+  setRemainingTime,
+  setDeleteReservation,
+  setMessageCompleted,
 } from '../../Redux/Profile/ActiveReselve/ActiveReselve.slice';
-import baseUrl, { $profile } from '../../Api/http';
 import Loading from '../../components/Loading';
+import { $profile } from '../../Api/http';
+import SuccessfulActiveReselve from '../../components/ActiveReselve/Successful';
 
 export default function ActiveReselve() {
   const [scroll, setScroll] = useState(false);
   const dispatch = useDispatch();
-  const { infoActiveReselve, checkData, loading } = useSelector((state) => state.ActiveReselve);
+  const { checkData, loading } = useSelector((state) => state.ActiveReselve);
+  const { messageCompleted } = useSelector((state) => state.ActiveReselve);
+
 
   useEffect(() => {
     fetchCheck();
   }, []);
 
   useEffect(() => {
-    dispatch(setLoading(true))
-    if (!localStorage.getItem('access')) {
-      window.location.href = `${baseUrl}login`;
-    }
-    dispatch(setLoading(false))
     if (checkData !== null) {
       fetchProfile();
     }
-  }, [checkData, localStorage.getItem('access')]);
-
+  }, [localStorage.getItem('access')]);
 
   const fetchCheck = async () => {
     setScroll(true);
     try {
       dispatch(setLoading(true));
+      dispatch(setMessageCompleted(null))
       const response = await $profile.get('profile', {
         headers: {
           Authorization: `JWT ${localStorage.getItem('access')}`,
@@ -65,32 +66,44 @@ export default function ActiveReselve() {
         },
       });
       dispatch(setInfoActiveReselve(response.data));
-      dispatch(setNumberPlace(response.data.reservation.id)),
-      dispatch(setRoom(response.data.room[0].name)),
-        dispatch(setDateStart(response.data.reservation.start_date.split(' ').join(', '))),
-        dispatch(setDateEnd(response.data.reservation.end_date.split(' ').join(', '))),
-        dispatch(setFirstName(response.data.reservation.user.first_name));
-        if (!scroll) {
-          document.body.style.overflow = 'auto';
-        }
-        dispatch(setLoading(false));
+      dispatch(setNumberPlace(response.data.reservation.place.name));
+      dispatch(setRoom(response.data.room[0].name));
+      dispatch(setDateStart(response.data.reservation.start_date.split(' ').join(', ')));
+      dispatch(setDateEnd(response.data.reservation.end_date.split(' ').join(', ')));
+      dispatch(setFirstName(response.data.reservation.user.first_name));
+      dispatch(
+        setRemainingTime(
+          response.data.reservation.remaining_time.replace(
+            /(\d{2}):(\d{2}):(\d{2})/,
+            `$1д $2ч $3мин`,
+          ),
+        ),
+      );
+      dispatch(setDeleteReservation(response.data.reservation.id));
+      if (!scroll) {
+        document.body.style.overflow = 'auto';
+      }
+      dispatch(setLoading(false));
     } catch (error) {
-      console.log(error);
       setLoading(false);
     }
   };
 
-  console.log(infoActiveReselve);
-
   return (
     <div className="w-full flex items-center justify-center mt-[40px]">
-      <div className="bg-purple-color h-[720px] w-full max-w-[1330px] rounded-[8px] p-[20px] relative">
+      <div
+        className={
+          checkData === null
+            ? 'bg-purple-color h-[720px] overflow-hidden w-full max-w-[1330px] rounded-[8px] p-[20px] relative flex items-center justify-center'
+            : 'bg-purple-color h-[720px] overflow-hidden w-full max-w-[1330px] rounded-[8px] p-[20px] relative'
+        }>
+          {
+            messageCompleted && <SuccessfulActiveReselve />
+          }
         {loading ? (
           <Loading />
         ) : checkData === null ? (
-          <div className='flex items-center justify-center h-[100vh]'>
-            <p className="text-[28px] font-bold">Нет активной брони</p>
-          </div>
+          <p className="text-[28px] font-bold">Нет активной брони</p>
         ) : (
           <>
             <svg

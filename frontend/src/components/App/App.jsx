@@ -1,5 +1,5 @@
 import './App.css';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import Layout from '../Layout/Layout';
 import Home from '../../Pages/Home';
@@ -9,17 +9,20 @@ import MapOffice from '../../Pages/Map';
 import { useEffect } from 'react';
 import { setMapButtonActive, setMenuActive } from '../../Redux/Menu/Menu.slice';
 import NotFound from '../../Pages/NotFound';
-import HistoryReselve from '../../Pages/HistoryReselve';
-import ActiveReselve from '../../Pages/ActiveReselve' 
-import baseUrl from '../../Api/http';
+import HistoryReservation from '../../Pages/HistoryReservation';
+import ActiveReservation from '../../Pages/ActiveReservation' 
 
 
 function App() {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const url = window.location.href;
 
   useEffect(() => {
+    if (!localStorage.getItem('access')) {
+      navigate('/login');
+    }
     if (url == 'http://localhost:3000/home') {
       dispatch(setMenuActive(-1));
       dispatch(setMapButtonActive(false));
@@ -52,8 +55,8 @@ function App() {
             <Route path="/map" element={<MapOffice />}></Route>
             <Route path="/home" element={<Home />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
-            <Route path="/history" element={<HistoryReselve />}></Route>
-            <Route path="/activeReselve" element={<ActiveReselve />}></Route>
+            <Route path="/history" element={<HistoryReservation />}></Route>
+            <Route path="/active" element={<ActiveReservation />}></Route>
           </Route>
           <Route path="/login" element={<Login />}></Route>
           <Route path="*" element={<NotFound />} />

@@ -118,6 +118,19 @@ class PlaceSerialLizer(serializers.ModelSerializer):
     image = serializers.ImageField(use_url='image.url')
     reservation_place=ReservationListSeriaLizer()
     room=serializers.SerializerMethodField()
+    remaining_time = serializers.SerializerMethodField()
+
+    def get_remaining_time(self, obj):
+        current_time = timezone.now()
+        reservation = Reservation.objects.filter(place=obj).first() 
+        if reservation:
+            remaining_time = reservation.end_date - current_time
+            days = remaining_time.days
+            hours = remaining_time.days * 24 + remaining_time.seconds // 3600
+            minutes = (remaining_time.seconds % 3600) // 60
+            formatted_time = f"{days:02d}:{hours:02d}:{minutes:02d}"
+            return formatted_time
+        return None
     
     def get_modules(self, obj):
         RoomSeriaLizer = import_module('.RoomSeriaLizer', package=__package__)
@@ -142,6 +155,7 @@ class PlaceSerialLizer(serializers.ModelSerializer):
             'status',
             'reservation_place',
             'room',
+            'remaining_time',
         )
         
 class CustomTokenObtainPairSerializer(serializers.ModelSerializer):

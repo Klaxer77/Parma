@@ -20,7 +20,7 @@ export default function Element_1({ places }) {
 
     places.forEach((subArray) => {
       subArray.forEach((obj) => {
-        if (obj.id === 3) {
+        if (obj.id === 6) {
           result = obj.status;
           setStatus(result);
         }
