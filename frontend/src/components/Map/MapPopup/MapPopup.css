@@ -8,6 +8,7 @@
   background-color: rgba(0,0,0,0.5); 
   transition: all 0.3s ease-in-out; 
   z-index: 999;
+  padding: 0 20px;
 }
 .modal-content {
   position: relative; 
@@ -15,8 +16,9 @@
   background-color: #20232D; 
   margin: auto; 
   padding: 20px; 
-  width: 60%; 
-  height: 600px;
+  width: 100%;
+  max-width: 800px; 
+  height: 350px;
   border-radius: 8px;
 }
 .close {
