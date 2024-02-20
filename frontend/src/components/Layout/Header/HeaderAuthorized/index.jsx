@@ -3,8 +3,12 @@ import Menu from '../../../Menu';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMapButtonActive, setMenuActive } from '../../../../Redux/Menu/Menu.slice';
+import { useEffect, useRef } from 'react';
 
 export default function HeaderAuthorized() {
+  const headerRef = useRef();
+  const { messageCompleted } = useSelector((state) => state.VerificationCode);
+  const messageCompletedActiveReselve = useSelector((state) => state.ActiveReselve.messageCompleted);
   const dispatch = useDispatch();
   const { infoUser } = useSelector((state) => state.ProfileInfo);
 
@@ -13,8 +17,16 @@ export default function HeaderAuthorized() {
     dispatch(setMapButtonActive(false));
   };
 
+  useEffect(() => {
+    if (messageCompleted.message || messageCompletedActiveReselve) {
+      headerRef.current.scrollIntoView({behavior: 'smooth'})
+    }
+  }, [messageCompleted, messageCompletedActiveReselve])
+
+  console.log(messageCompletedActiveReselve);
+
   return (
-    <header className="bg-white h-[120px] border-b-[3px] flex items-center flex-wrap z-[999]">
+    <header ref={headerRef} className="bg-white h-[120px] border-b-[3px] flex items-center flex-wrap z-[999]">
       <div className="flex justify-between items-center w-full max-w-[1570px] mx-auto px-[20px] h-[90px] pb-[4px] flex-wrap">
         <Menu />
         <Link onClick={onClickNickName} to="/profile">

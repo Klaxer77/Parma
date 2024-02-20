@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
-import { $login } from '../../Api/http';
+import { $login } from '../../Api/http'; 
+import { LoadedProfile } from '../Profile/LoadedProfile.slice';
 
 
 export const fetchLogin = createAsyncThunk(
@@ -41,6 +42,7 @@ export const Login = createSlice({
       state.loading = false;
       state.isAuth = true;
       state.access = localStorage.setItem('access', action.payload);
+      LoadedProfile.reducer(LoadedProfile.getInitialState(), LoadedProfile.actions.setLoadedProfile(true));
     })
     builder.addCase(fetchLogin.rejected, (state, action) => {
       state.errors = action.payload;

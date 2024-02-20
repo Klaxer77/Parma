@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setTextEmail } from '../../../../Redux/Profile/ProfileInfo.slice';
-import VerificationCode from './VerificationCode';
+import VerificationCode from '../VerificationCode';
 import { fetchChangeEmail } from '../../../../Redux/Profile/VerificationCode/VerificationCode.slice';
 import SuccessfulProfile from '../../Successful'
 
@@ -14,6 +14,7 @@ export default function Email() {
   const prevTextEmailRef = useRef();
   const [showSaveButtonEmail, setShowSaveButtonEmail] = useState(false);
   const [editableEmail, setEditableEmail] = useState(false);
+
 
   useEffect(() => {
     setShowSaveButtonEmail(false);
@@ -50,14 +51,13 @@ export default function Email() {
         new_email: textEmail,
       };
       dispatch(fetchChangeEmail(email));
+      setInitialTextEmail(prevTextEmailRef.current)
     }
   };
 
   const resetTextEmail = () => {
     dispatch(setTextEmail(initialTextEmail));
   };
-
-  console.log(messageCompleted);
 
 
   return (

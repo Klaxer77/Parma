@@ -3,10 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   fetchConfirmEmail,
   fetchConfirmPhone,
+  setErrorsConfirm,
   setShowCode,
   setVerificationCodes,
-} from '../../../../../Redux/Profile/VerificationCode/VerificationCode.slice';
-import LoadingSmall from '../../../../Loading/LoadingSmall';
+} from '../../../../Redux/Profile/VerificationCode/VerificationCode.slice';
+import LoadingSmall from '../../../Loading/LoadingSmall';
+import { setLoadedProfile } from '../../../../Redux/Profile/LoadedProfile.slice';
 
 export default function VerificationCode() {
   const dispatch = useDispatch();
@@ -41,9 +43,11 @@ export default function VerificationCode() {
         };
         if (messageEmail) {
           dispatch(fetchConfirmEmail(confirmation_code));
+          dispatch(setLoadedProfile(true))
         }
         if (messagePhone) {
           dispatch(fetchConfirmPhone(confirmation_code))
+          dispatch(setLoadedProfile(true))
         }
         dispatch(setVerificationCodes(['', '', '', '', '', '']))
       }
@@ -51,6 +55,7 @@ export default function VerificationCode() {
   };
 
   const onClickShowCode = () => {
+    dispatch(setErrorsConfirm(null))
     dispatch(setShowCode(false));
   };
 

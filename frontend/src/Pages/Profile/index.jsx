@@ -1,7 +1,7 @@
 import ProfileInfo from '../../components/Profile/ProfileInfo';
 import ProfileContacts from '../../components/Profile/ProfileContacts';
 import PersonalDate from '../../components/Profile/PersonalDate';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   setInfoUser,
@@ -14,11 +14,13 @@ import { $profile } from '../../Api/http';
 import Loading from '../../components/Loading';
 import { setLoadedProfile } from '../../Redux/Profile/LoadedProfile.slice';
 import { useNavigate } from 'react-router-dom';
+import { setMessageCompleted } from '../../Redux/Profile/VerificationCode/VerificationCode.slice';
+
 
 export default function Profile() {
   const navigate = useNavigate();
   const loaded = useSelector((state) => state.ProfileInfo.loaded);
-  const { loadingChangeEmail, messageCompleted } = useSelector((state) => state.VerificationCode);
+  const { loadingChangeEmail } = useSelector((state) => state.VerificationCode);
   const loadedProfile = useSelector((state) => state.LoadedProfile.loadedProfile);
   const dispatch = useDispatch();
 
@@ -28,6 +30,8 @@ export default function Profile() {
     dispatch(setLoaded(true));
     navigate('/login');
     dispatch(setLoaded(false));
+    dispatch(setMessageCompleted({}))
+    dispatch(setLoadedProfile(true));
   };
 
   useEffect(() => {
@@ -53,11 +57,9 @@ export default function Profile() {
     if (loadedProfile) {
       fetchProfile();
     }
-    if (messageCompleted) {
-      fetchProfile();
-    }
+    dispatch(setMessageCompleted({}))
     dispatch(setLoadedProfile(false));
-  }, [messageCompleted]);
+  }, [loadedProfile]);
 
   return (
     <div className="w-full flex items-center justify-center mt-[40px]">

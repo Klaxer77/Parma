@@ -13,6 +13,7 @@ import {
   setRoom,
   setRemainingTime,
   setDeleteReservation,
+  setMessageCompleted,
 } from '../../Redux/Profile/ActiveReselve/ActiveReselve.slice';
 import Loading from '../../components/Loading';
 import { $profile } from '../../Api/http';
@@ -39,6 +40,7 @@ export default function ActiveReselve() {
     setScroll(true);
     try {
       dispatch(setLoading(true));
+      dispatch(setMessageCompleted(null))
       const response = await $profile.get('profile', {
         headers: {
           Authorization: `JWT ${localStorage.getItem('access')}`,
