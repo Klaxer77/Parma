@@ -16,10 +16,11 @@ class MapView(generics.ListAPIView):
     permission_classes= [IsAuthenticated]
 
 
-class PlaceListView(generics.ListAPIView):
+class PlaceListView(generics.RetrieveAPIView):
     queryset = Place.objects.all()
     serializer_class = PlaceSerialLizer
     permission_classes = [IsAuthenticated]
+    lookup_field = 'id'
     
     
 class RoomListView(generics.ListAPIView):
