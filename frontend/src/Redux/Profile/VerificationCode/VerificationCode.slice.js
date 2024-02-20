@@ -72,10 +72,10 @@ const initialState = {
   loadingConfirmEmail: false,
   showCode: false,
   errorsChangeEmail: null,
-  errorsConfirmEmail: null,
+  errorsConfirm: null,
   messageEmail: null,
   messagePhone: null,
-  messageCompleted: {},
+  messageCompleted: {}
 }
 
 export const VerificationCode = createSlice({
@@ -85,8 +85,14 @@ export const VerificationCode = createSlice({
     setShowCode: (state, action) => {
       state.showCode = action.payload
     },
+    setErrorsConfirm: (state, action) => {
+      state.errorsConfirm = action.payload
+    },
     setVerificationCodes: (state, action) => {
       state.verificationCodes = action.payload
+    },
+    setMessageCompleted: (state, action) => {
+      state.messageCompleted = action.payload
     },
   },
   extraReducers: (builder) => {
@@ -114,9 +120,10 @@ export const VerificationCode = createSlice({
       state.loadingConfirmEmail = false;
       state.showCode = false;
       state.messageCompleted = action.payload;
+      state.errorsConfirm = null;
     })
     builder.addCase(fetchConfirmEmail.rejected, (state, action) => {
-      state.errorsConfirmEmail = action.payload;
+      state.errorsConfirm = action.payload;
       state.loadingConfirmEmail = false;
       state.verificationCodes = ['', '', '', '', '', '']
     })
@@ -146,15 +153,16 @@ export const VerificationCode = createSlice({
       state.loadingConfirmEmail = false;
       state.showCode = false;
       state.messageCompleted = action.payload;
+      state.errorsConfirm = null;
     })
     builder.addCase(fetchConfirmPhone.rejected, (state, action) => {
-      state.errorsConfirmEmail = action.payload;
+      state.errorsConfirm = action.payload;
       state.loadingConfirmEmail = false;
       state.verificationCodes = ['', '', '', '', '', '']
     })
   },
 })
 
-export const { setShowCode, setVerificationCodes } = VerificationCode.actions
+export const { setShowCode, setVerificationCodes, setMessageCompleted, setErrorsConfirm  } = VerificationCode.actions
 
 export default VerificationCode.reducer
