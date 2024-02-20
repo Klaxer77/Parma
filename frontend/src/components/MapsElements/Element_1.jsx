@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsActivePopup, setPlace, setMarkers } from '../../Redux/Map/Map.slice';
+import { setActiveStatusPopup } from '../../Redux/Map/MapPopupInfo.slice';
 
 export default function Element_1({ places }) {
   const { markers } = useSelector((state) => state.Map);
@@ -14,6 +15,14 @@ export default function Element_1({ places }) {
       dispatch(setIsActivePopup(true));
     }, 600);
   };
+
+  const onClickGrayReservation = () => {
+    dispatch(setActiveStatusPopup(false))
+  }
+
+  const onClickGreenReservation = () => {
+    dispatch(setActiveStatusPopup(true))
+  }
 
   useEffect(() => {
     let result = null;
@@ -43,6 +52,7 @@ export default function Element_1({ places }) {
       />
       {status === 'Свободно' ? (
         <svg
+        onClick={onClickGreenReservation}
           width="49"
           height="40"
           viewBox="0 0 49 40"
@@ -67,6 +77,7 @@ export default function Element_1({ places }) {
         </svg>
       ) : (
         <svg
+        onClick={onClickGrayReservation}
           className="cursor-pointer rotate-[180deg]"
           width="49"
           height="40"
