@@ -1,29 +1,29 @@
 import { useEffect, useState } from 'react';
-import { useDispatch, useSelector } from "react-redux"; 
-import { setIsActivePopup, setPlace, setMarkers } from "../../Redux/Map/Map.slice";
-import { setActiveStatusPopup } from '../../Redux/Map/MapPopupInfo.slice';
-
+import { useDispatch, useSelector } from 'react-redux';
+import { setIsActivePopup, setPlace, setMarkers } from '../../Redux/Map/Map.slice';
+import { setActiveStatusPopup, setNumberPlace } from '../../Redux/Map/MapPopupInfo.slice';
 
 export default function Element_2({ places }) {
-  const { markers } = useSelector(state => state.Map);
+  const { markers } = useSelector((state) => state.Map);
   const [status, setStatus] = useState();
   const dispatch = useDispatch();
 
   const onClickPlace = (place, id) => {
     dispatch(setPlace(place));
-    dispatch(setMarkers({id, newBool: true}))
+    dispatch(setMarkers({ id, newBool: true }));
     setTimeout(() => {
-      dispatch(setIsActivePopup(true))
+      dispatch(setIsActivePopup(true));
     }, 600);
-  }
+  };
 
   const onClickGrayReservation = () => {
-    dispatch(setActiveStatusPopup(false))
-  }
+    dispatch(setActiveStatusPopup(false));
+    dispatch(setNumberPlace(5));
+  };
 
   const onClickGreenReservation = () => {
-    dispatch(setActiveStatusPopup(true))
-  }
+    dispatch(setActiveStatusPopup(true));
+  };
 
   useEffect(() => {
     let result = null;
@@ -39,12 +39,22 @@ export default function Element_2({ places }) {
   }, [places, setStatus, status]);
 
   return (
-    <div onClick={() => onClickPlace(2,2)} className="2 free absolute left-[380px] top-[115px] z-[99] cursor-pointer">
-      <img className={markers[1].element ? 'marker active -top-[5px] left-[8px]' : 'marker -top-[25px] left-[8px]'} src="/img/icons/pin-mark.png" alt="" />
+    <div
+      onClick={() => onClickPlace(2, 2)}
+      className="2 free absolute left-[380px] top-[115px] z-[99] cursor-pointer">
+      <img
+        className={
+          markers[1].element
+            ? 'marker active -top-[5px] left-[8px]'
+            : 'marker -top-[25px] left-[8px]'
+        }
+        src="/img/icons/pin-mark.png"
+        alt=""
+      />
       {status === 'Свободно' ? (
         <svg
-        onClick={onClickGreenReservation}
-        className='rotate-[180deg]'
+          onClick={onClickGreenReservation}
+          className="rotate-[180deg]"
           width="49"
           height="40"
           viewBox="0 0 49 40"
@@ -69,7 +79,7 @@ export default function Element_2({ places }) {
         </svg>
       ) : (
         <svg
-        onClick={onClickGrayReservation}
+          onClick={onClickGrayReservation}
           className="cursor-pointer"
           width="49"
           height="40"

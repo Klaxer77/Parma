@@ -14,6 +14,26 @@ export const $map = axios.create({
   withCredentials: true,
 });
 
+$map.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('access');
+    if (token) {
+      config.headers.Authorization = `JWT ${token}`;
+    }
+    return config;
+  }
+);
+
+$profile.interceptors.request.use(
+  (config) => {
+    const token = localStorage.getItem('access');
+    if (token) {
+      config.headers.Authorization = `JWT ${token}`;
+    }
+    return config;
+  }
+);
+
 const baseUrl = 'http://localhost:3000/'
 
 export default baseUrl

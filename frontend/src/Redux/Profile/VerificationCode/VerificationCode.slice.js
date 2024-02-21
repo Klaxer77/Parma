@@ -1,17 +1,6 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { $profile } from '../../../Api/http'; 
 
-
-$profile.interceptors.request.use(
-  (config) => {
-    const token = localStorage.getItem('access');
-    if (token) {
-      config.headers.Authorization = `JWT ${token}`;
-    }
-    return config;
-  }
-);
-
 // email
 
 export const fetchChangeEmail = createAsyncThunk(

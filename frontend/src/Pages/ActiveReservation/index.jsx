@@ -28,7 +28,7 @@ export default function ActiveReselve() {
 
   useEffect(() => {
     fetchCheck();
-  }, []);
+  }, [localStorage.getItem('access')]);
 
   useEffect(() => {
     if (checkData !== null) {
