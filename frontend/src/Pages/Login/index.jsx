@@ -79,7 +79,7 @@ export default function Login() {
           <button
             onClick={onClickLogin}
             className="text-[20px] bg-button-color max-w-[180px] w-full h-[40px] rounded-[8px] mt-[40px] mb-[40px]">
-            Войти
+            Войт
           </button>
         </div>
       </div>
