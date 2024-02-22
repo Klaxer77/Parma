@@ -52,6 +52,7 @@ export default function Login() {
     }
   }, [isAuth]);
 
+
   return (
     <div className="h-[100vh] overflow-hidden relative">
       <Header />
@@ -83,7 +84,7 @@ export default function Login() {
                 placeholder="Password"
               />
               <button onClick={handleTogglePasswordVisibility}>
-                {passwordVisible ? (
+                {password ? passwordVisible ? (
                   <svg
                     className="absolute w-[16px] right-[10px] top-[13px]"
                     width="16"
@@ -129,7 +130,7 @@ export default function Login() {
                       fill="#20232F"
                     />
                   </svg>
-                )}
+                ) : undefined}
               </button>
               {errors[2] && (
                 <p className="text-red text-start mt-[10px] text-[16px] mb-[10px]">{errors[2]}</p>
@@ -138,6 +139,9 @@ export default function Login() {
           </form>
           <button
             onClick={onClickLogin}
+            className="text-[20px] bg-red max-w-[180px] w-full h-[40px] rounded-[8px] mt-[40px]">
+            Войти
+          </button>
           {errors[0] && <p className="text-red text-[16px] mt-[25px]">{errors[0]}</p>}
         </div>
       </div>

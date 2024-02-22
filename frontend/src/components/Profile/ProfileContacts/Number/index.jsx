@@ -41,7 +41,9 @@ export default function Number() {
 
   const toggleEditable = () => {
     setEditablePhone(true);
-    inputRefPhone.current.focus();
+    if (inputRefPhone.current) {
+      inputRefPhone.current.getInputDOMNode().focus(); 
+    }
   };
 
   const toggleEditableSave = () => {

@@ -23,11 +23,10 @@ export default function HeaderAuthorized() {
     }
   }, [messageCompleted, messageCompletedActiveReselve])
 
-  console.log(messageCompletedActiveReselve);
 
   return (
-    <header ref={headerRef} className="bg-white h-[120px] border-b-[3px] flex items-center flex-wrap z-[999]">
-      <div className="flex justify-between items-center w-full max-w-[1530px] mx-auto px-[20px] h-[90px] flex-wrap">
+    <header ref={headerRef} className="bg-white h-[80px] border-b-[3px] flex items-center flex-wrap z-[999]">
+      <div className="flex justify-between items-center w-full max-w-[1530px] mx-auto px-[20px] flex-wrap">
         <Menu />
         <Link onClick={onClickNickName} to="/profile">
           <div className="flex items-center gap-[10px]">
