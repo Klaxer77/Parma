@@ -41,7 +41,7 @@ export default function Email() {
 
   const toggleEditable = () => {
     setEditableEmail(true);
-    inputRefEmail.current.focus();
+    inputRefEmail.current.focus()
   };
 
   const toggleEditableSave = () => {

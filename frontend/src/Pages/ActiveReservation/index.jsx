@@ -22,10 +22,9 @@ import { useNavigate } from 'react-router-dom';
 
 export default function ActiveReselve() {
   const navigate = useNavigate()
-  const [scroll, setScroll] = useState(false);
   const dispatch = useDispatch();
-  const { checkData, loading } = useSelector((state) => state.ActiveReselve);
-  const { messageCompleted } = useSelector((state) => state.ActiveReselve);
+  const { checkData } = useSelector((state) => state.ActiveReselve);
+  const { messageCompleted, loading } = useSelector((state) => state.ActiveReselve);
 
 
   useEffect(() => {
@@ -42,7 +41,6 @@ export default function ActiveReselve() {
   }, [checkData]);
 
   const fetchCheck = async () => {
-    setScroll(true);
     try {
       dispatch(setLoading(true));
       dispatch(setMessageCompleted(null))
@@ -58,13 +56,10 @@ export default function ActiveReselve() {
     }
   };
 
+
   const fetchProfile = async () => {
-    setScroll(true);
     try {
       dispatch(setLoading(true));
-      if (scroll) {
-        document.body.style.overflow = 'hidden';
-      }
       const response = await $profile.get('profile', {
         headers: {
           Authorization: `JWT ${localStorage.getItem('access')}`,
@@ -85,9 +80,6 @@ export default function ActiveReselve() {
         ),
       );
       dispatch(setDeleteReservation(response.data.reservation.id));
-      if (!scroll) {
-        document.body.style.overflow = 'auto';
-      }
       dispatch(setLoading(false));
     } catch (error) {
       setLoading(false);

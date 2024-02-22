@@ -4,10 +4,10 @@ import { useEffect, useState} from "react";
 
 export default function SuccessfulProfile() {
   const [isTrue, setIsTrue] = useState(false)
-  const { messageCompleted } = useSelector((state) => state.VerificationCode);
+  const { messageCompleted, loadingConfirmEmail } = useSelector((state) => state.VerificationCode);
 
   useEffect(() => {
-    if (messageCompleted.message) {
+    if (messageCompleted.message && !loadingConfirmEmail) {
       setTimeout(() => {
         setIsTrue(true)
       }, 5);
