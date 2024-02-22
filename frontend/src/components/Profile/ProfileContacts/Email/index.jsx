@@ -41,7 +41,7 @@ export default function Email() {
 
   const toggleEditable = () => {
     setEditableEmail(true);
-    inputRefEmail.current.focus();
+    inputRefEmail.current.focus()
   };
 
   const toggleEditableSave = () => {
@@ -84,7 +84,7 @@ export default function Email() {
             </button>
           ) : (
             <button
-              className="absolute right-[7px] w-[130px] bg-red h-[35px] rounded-[6px]"
+              className={editableEmail ? 'absolute right-[7px] w-[130px] bg-[#313131] h-[35px] rounded-[6px]' : 'absolute right-[7px] w-[130px] bg-[#21211F] h-[35px] rounded-[6px]'}
               onClick={toggleEditable}>
               Изменить
             </button>

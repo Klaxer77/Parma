@@ -16,11 +16,12 @@ import { setLoadedProfile } from '../../Redux/Profile/LoadedProfile.slice';
 import { useNavigate } from 'react-router-dom';
 import { setMessageCompleted } from '../../Redux/Profile/VerificationCode/VerificationCode.slice';
 
-
 export default function Profile() {
   const navigate = useNavigate();
   const loaded = useSelector((state) => state.ProfileInfo.loaded);
-  const { loadingChangeEmail } = useSelector((state) => state.VerificationCode);
+  const { loadingChangeEmail, messageCompleted } = useSelector(
+    (state) => state.VerificationCode,
+  );
   const loadedProfile = useSelector((state) => state.LoadedProfile.loadedProfile);
   const dispatch = useDispatch();
 
@@ -30,11 +31,14 @@ export default function Profile() {
     dispatch(setLoaded(true));
     navigate('/login');
     dispatch(setLoaded(false));
-    dispatch(setMessageCompleted({}))
+    dispatch(setMessageCompleted({}));
     dispatch(setLoadedProfile(true));
   };
 
   useEffect(() => {
+    if (!localStorage.getItem('access')) {
+      navigate('/login');
+    }
     const fetchProfile = async () => {
       dispatch(setLoaded(true));
       try {
@@ -44,22 +48,24 @@ export default function Profile() {
           },
         });
         dispatch(setInfoUser(response.data));
-        console.log(response.data);
         dispatch(setTextEmail(response.data.email));
         dispatch(setTextNumber(response.data.phone));
         dispatch(setLoaded(false));
-
       } catch (error) {
-        console.log(error);
         dispatch(setLoaded(false));
       }
     };
     if (loadedProfile) {
       fetchProfile();
     }
-    dispatch(setMessageCompleted({}))
+    dispatch(setMessageCompleted({}));
     dispatch(setLoadedProfile(false));
-  }, [loadedProfile]);
+    if (messageCompleted.message) {
+      dispatch(setLoadedProfile(true));
+    }
+  }, [loadedProfile, localStorage.getItem('access')]);
+
+
 
   return (
     <div className="w-full flex items-center justify-center mt-[40px]">

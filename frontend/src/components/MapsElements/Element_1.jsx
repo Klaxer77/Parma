@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { setIsActivePopup, setPlace, setMarkers } from '../../Redux/Map/Map.slice';
-import { setActiveStatusPopup } from '../../Redux/Map/MapPopupInfo.slice';
+import { setActiveStatusPopup, setNumberPlace } from '../../Redux/Map/MapPopupInfo.slice';
 
 export default function Element_1({ places }) {
   const { markers } = useSelector((state) => state.Map);
@@ -18,6 +18,7 @@ export default function Element_1({ places }) {
 
   const onClickGrayReservation = () => {
     dispatch(setActiveStatusPopup(false))
+    dispatch(setNumberPlace(6));
   }
 
   const onClickGreenReservation = () => {

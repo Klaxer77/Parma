@@ -39,6 +39,8 @@ class ReservationHistoryAdmin(admin.ModelAdmin):
         for reservation in queryset:
             place_name = reservation.place.name
             room_names = ", ".join(room.name for room in reservation.place.room.all())
+            start_date_local = reservation.start_date.astimezone(timezone.get_current_timezone())
+            end_date_local = reservation.end_date.astimezone(timezone.get_current_timezone())
             writer.writerow([
                 reservation.user.id, 
                 reservation.user.first_name, 
@@ -46,8 +48,8 @@ class ReservationHistoryAdmin(admin.ModelAdmin):
                 reservation.user.sur_name, 
                 place_name,
                 room_names,
-                reservation.start_date.strftime('%Y-%m-%d %H:%M'), 
-                reservation.end_date.strftime('%Y-%m-%d %H:%M')
+                start_date_local.strftime('%Y-%m-%d %H:%M'),
+            end_date_local.strftime('%Y-%m-%d %H:%M')
             ])
 
         return response

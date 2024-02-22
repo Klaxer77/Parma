@@ -4,6 +4,7 @@ import { setTextNumber } from '../../../../Redux/Profile/ProfileInfo.slice';
 import VerificationCode from '../VerificationCode';
 import { fetchChangePhone } from '../../../../Redux/Profile/VerificationCode/VerificationCode.slice';
 import SuccessfulProfile from '../../Successful';
+import InputMask from 'react-input-mask';
 
 export default function Number() {
   const dispatch = useDispatch();
@@ -40,7 +41,9 @@ export default function Number() {
 
   const toggleEditable = () => {
     setEditablePhone(true);
-    inputRefPhone.current.focus();
+    if (inputRefPhone.current) {
+      inputRefPhone.current.getInputDOMNode().focus(); 
+    }
   };
 
   const toggleEditableSave = () => {
@@ -62,8 +65,9 @@ export default function Number() {
       {showCode && <VerificationCode />}
       <div className="w-full">
         <div className="relative w-full flex items-center">
-          <input
-            className="text-white h-[50px] pl-[10px] outline-none w-full bg-[#111111] rounded-[8px]"
+          <InputMask
+           mask="+7 (999) 999-99-99"
+            className="text-white decoration-none h-[50px] pl-[10px] outline-none w-full bg-[#111111] rounded-[8px]"
             type="text"
             onChange={handleInputChange}
             readOnly={!editablePhone}
@@ -81,7 +85,7 @@ export default function Number() {
             </button>
           ) : (
             <button
-              className="absolute right-[7px] w-[130px] bg-red h-[35px] rounded-[6px]"
+            className={editablePhone ? 'absolute right-[7px] w-[130px] bg-[#313131] h-[35px] rounded-[6px]' : 'absolute right-[7px] w-[130px] bg-[#21211F] h-[35px] rounded-[6px]'}
               onClick={toggleEditable}>
               Изменить
             </button>

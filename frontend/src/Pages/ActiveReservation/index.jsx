@@ -18,26 +18,29 @@ import {
 import Loading from '../../components/Loading';
 import { $profile } from '../../Api/http';
 import SuccessfulActiveReselve from '../../components/ActiveReselve/Successful';
+import { useNavigate } from 'react-router-dom';
 
 export default function ActiveReselve() {
-  const [scroll, setScroll] = useState(false);
+  const navigate = useNavigate()
   const dispatch = useDispatch();
-  const { checkData, loading } = useSelector((state) => state.ActiveReselve);
-  const { messageCompleted } = useSelector((state) => state.ActiveReselve);
+  const { checkData } = useSelector((state) => state.ActiveReselve);
+  const { messageCompleted, loading } = useSelector((state) => state.ActiveReselve);
 
 
   useEffect(() => {
     fetchCheck();
-  }, []);
+  }, [localStorage.getItem('access')]);
 
   useEffect(() => {
+    if (!localStorage.getItem('access')) {
+      navigate('/login');
+    }
     if (checkData !== null) {
       fetchProfile();
     }
-  }, [localStorage.getItem('access')]);
+  }, [checkData]);
 
   const fetchCheck = async () => {
-    setScroll(true);
     try {
       dispatch(setLoading(true));
       dispatch(setMessageCompleted(null))
@@ -53,13 +56,10 @@ export default function ActiveReselve() {
     }
   };
 
+
   const fetchProfile = async () => {
-    setScroll(true);
     try {
       dispatch(setLoading(true));
-      if (scroll) {
-        document.body.style.overflow = 'hidden';
-      }
       const response = await $profile.get('profile', {
         headers: {
           Authorization: `JWT ${localStorage.getItem('access')}`,
@@ -80,9 +80,6 @@ export default function ActiveReselve() {
         ),
       );
       dispatch(setDeleteReservation(response.data.reservation.id));
-      if (!scroll) {
-        document.body.style.overflow = 'auto';
-      }
       dispatch(setLoading(false));
     } catch (error) {
       setLoading(false);

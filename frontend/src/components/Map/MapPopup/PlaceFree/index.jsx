@@ -2,6 +2,8 @@
 
 export default function PlaceFree() {
   return (
-    <div>Свободно</div>
+    <div>Свободно
+      
+    </div>
   )
 }
