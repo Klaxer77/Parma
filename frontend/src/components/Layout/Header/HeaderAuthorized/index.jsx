@@ -27,7 +27,7 @@ export default function HeaderAuthorized() {
 
   return (
     <header ref={headerRef} className="bg-white h-[120px] border-b-[3px] flex items-center flex-wrap z-[999]">
-      <div className="flex justify-between items-center w-full max-w-[1570px] mx-auto px-[20px] h-[90px] pb-[4px] flex-wrap">
+      <div className="flex justify-between items-center w-full max-w-[1530px] mx-auto px-[20px] h-[90px] flex-wrap">
         <Menu />
         <Link onClick={onClickNickName} to="/profile">
           <div className="flex items-center gap-[10px]">

@@ -35,6 +35,9 @@ export default function Profile() {
   };
 
   useEffect(() => {
+    if (!localStorage.getItem('access')) {
+      navigate('/login');
+    }
     const fetchProfile = async () => {
       dispatch(setLoaded(true));
       try {
@@ -59,7 +62,7 @@ export default function Profile() {
     }
     dispatch(setMessageCompleted({}))
     dispatch(setLoadedProfile(false));
-  }, [loadedProfile]);
+  }, [loadedProfile, localStorage.getItem('access'), loadingChangeEmail]);
 
   return (
     <div className="w-full flex items-center justify-center mt-[40px]">

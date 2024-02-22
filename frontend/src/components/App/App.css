@@ -31,21 +31,13 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-body::-webkit-scrollbar {
-  width: 12px;               /* ширина всей полосы прокрутки */
+body::-webkit-scrollbar {  
+  display: none;            /* ширина всей полосы прокрутки */
 }
 
-body::-webkit-scrollbar-track {
-  background: transparent;        /* цвет зоны отслеживания */
-}
-
-body::-webkit-scrollbar-thumb {
-  background-color: gray;    /* цвет бегунка */
-  border-radius: 20px;       /* округлось бегунка */  /* отступ вокруг бегунка */
-}
 
 .history-scroll::-webkit-scrollbar {
-  width: 12px;               /* ширина всей полосы прокрутки */
+  width: 4px;              /* ширина всей полосы прокрутки */
 }
 
 .history-scroll::-webkit-scrollbar-track {
@@ -53,7 +45,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .history-scroll::-webkit-scrollbar-thumb {
-  background-color: gray;    /* цвет бегунка */
+  background-color: #545B66;   /* цвет бегунка */
   border-radius: 20px;       /* округлось бегунка */  /* отступ вокруг бегунка */
 }
 

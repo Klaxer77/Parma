@@ -20,9 +20,6 @@ function App() {
   const url = window.location.href;
 
   useEffect(() => {
-    if (!localStorage.getItem('access')) {
-      navigate('/login');
-    }
     if (url == 'http://localhost:3000/home') {
       dispatch(setMenuActive(-1));
       dispatch(setMapButtonActive(false));

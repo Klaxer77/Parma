@@ -18,8 +18,10 @@ import {
 import Loading from '../../components/Loading';
 import { $profile } from '../../Api/http';
 import SuccessfulActiveReselve from '../../components/ActiveReselve/Successful';
+import { useNavigate } from 'react-router-dom';
 
 export default function ActiveReselve() {
+  const navigate = useNavigate()
   const [scroll, setScroll] = useState(false);
   const dispatch = useDispatch();
   const { checkData, loading } = useSelector((state) => state.ActiveReselve);
@@ -31,10 +33,13 @@ export default function ActiveReselve() {
   }, [localStorage.getItem('access')]);
 
   useEffect(() => {
+    if (!localStorage.getItem('access')) {
+      navigate('/login');
+    }
     if (checkData !== null) {
       fetchProfile();
     }
-  }, [localStorage.getItem('access')]);
+  }, [checkData]);
 
   const fetchCheck = async () => {
     setScroll(true);
