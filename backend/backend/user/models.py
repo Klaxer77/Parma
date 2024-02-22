@@ -43,7 +43,7 @@ class User(AbstractUser):
     sur_name = models.CharField('Отчество', max_length=150, validators=[MinLengthValidator(4)])
     gender = models.CharField('Пол', max_length=30, choices=GENDER_CHOICES)
     image = models.ImageField("Аватар", upload_to="avatar/",)
-    phone = models.CharField(max_length=15, validators=[validate_phone_number])
+    phone = models.CharField(max_length=18, validators=[validate_phone_number])
 
     objects = CustomUserManager()
     
