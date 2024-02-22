@@ -38,7 +38,7 @@ const rootReducer = combineReducers({
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['Map', 'Login', 'MapInfoPlace', 'ActiveReselve', 'History', 'LoadedProfile', 'VerificationCode', 'MapPopupInfo', 'ProfileInfo'], // что не хотим сохранять
+  blacklist: ['Map', 'Login', 'MapInfoPlace', 'ActiveReselve', 'History', 'LoadedProfile', 'VerificationCode', 'MapPopupInfo'], // что не хотим сохранять
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducer)

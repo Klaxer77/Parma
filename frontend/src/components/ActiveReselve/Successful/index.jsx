@@ -1,4 +1,4 @@
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import style from '../../Profile/Successful/Successful.module.css';
 import { useEffect, useState } from 'react';
 
