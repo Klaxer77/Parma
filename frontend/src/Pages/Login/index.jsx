@@ -138,9 +138,6 @@ export default function Login() {
           </form>
           <button
             onClick={onClickLogin}
-            className="text-[20px] bg-red max-w-[180px] w-full h-[40px] rounded-[8px] mt-[40px]">
-            Войти
-          </button>
           {errors[0] && <p className="text-red text-[16px] mt-[25px]">{errors[0]}</p>}
         </div>
       </div>
