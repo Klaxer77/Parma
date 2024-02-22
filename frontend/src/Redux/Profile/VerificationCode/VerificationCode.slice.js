@@ -64,7 +64,7 @@ const initialState = {
   errorsConfirm: null,
   messageEmail: null,
   messagePhone: null,
-  messageCompleted: {}
+  messageCompleted: {},
 }
 
 export const VerificationCode = createSlice({

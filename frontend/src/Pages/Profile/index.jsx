@@ -60,6 +60,9 @@ export default function Profile() {
     }
     dispatch(setMessageCompleted({}));
     dispatch(setLoadedProfile(false));
+    if (messageCompleted.message) {
+      dispatch(setLoadedProfile(true));
+    }
   }, [loadedProfile, localStorage.getItem('access')]);
 
 
