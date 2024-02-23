@@ -5,6 +5,7 @@ from backend.map.models import Room, Place
 from importlib import import_module
 from datetime import datetime
 from django.utils import timezone
+import pytz
 
 
 class ReservationHistoryListSeriaLizer(serializers.ModelSerializer):
@@ -208,10 +209,24 @@ class RoomSeriaLizer(serializers.ModelSerializer):
         )
         
 
+class CustomDateTimeField(serializers.DateTimeField):
+    def to_representation(self, value):
+        return value.strftime('%d.%m.%Y %H:%M')
+
+    def to_internal_value(self, data):
+        try:
+            date_obj = datetime.strptime(data, '%d.%m.%Y %H:%M')
+            # Attach timezone information to the parsed datetime
+            aware_date_obj = pytz.timezone('Asia/Yekaterinburg').localize(date_obj)
+            return aware_date_obj
+        except ValueError:
+            raise serializers.ValidationError("Некоректная дата. Используйте DD.MM.YYYY HH:MM формат.")
+        
+
 class ReservationCreateSeriaLizer(serializers.ModelSerializer):
     user = CustomTokenObtainPairSerializer(required=False)
-
-
+    start_date = CustomDateTimeField()
+    end_date = CustomDateTimeField()
     class Meta:
         model = Reservation
         fields = (
@@ -221,7 +236,6 @@ class ReservationCreateSeriaLizer(serializers.ModelSerializer):
             'start_date',
             'end_date',
         )
-     
         extra_kwargs = {
             'place': {'required': True},
         }
