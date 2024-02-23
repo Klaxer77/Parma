@@ -115,14 +115,16 @@ class ReservationCreateView(generics.CreateAPIView):
         end_date = serializer.validated_data['end_date']
         # place = self.request.META.get('HTTP_PLACE')
         user = self.request.user
-        current_time = datetime.now()
-        start_date_naive = start_date.astimezone(pytz.timezone('Asia/Yekaterinburg')).replace(tzinfo=None)
+        # current_time = timezone.now()
+        current_time_aware = datetime.now(pytz.timezone('Asia/Yekaterinburg'))
+        # start_date_naive = start_date.astimezone(pytz.timezone('Asia/Yekaterinburg')).replace(tzinfo=None)
 
-        if start_date_naive <= current_time:
+        if start_date <= current_time_aware:
             raise ValidationError({'error': 'Дата начала должна быть меньше или равна текущему времени'})
 
         if end_date <= start_date:
             raise ValidationError({'error': 'Дата окончания должна быть позже даты начала'})
+
         
         existing_reservations = Reservation.objects.filter(user=user)
         if existing_reservations.exists():
