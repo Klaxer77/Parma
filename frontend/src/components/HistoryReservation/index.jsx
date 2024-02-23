@@ -36,7 +36,7 @@ export default function HistoryReservationBlock({
           </svg>
         </div>
 
-        <div className="flex gap-[20px] mb-[20px]">
+        <div className="flex items-center gap-[20px] mb-[20px]">
           <div>
             <div className="relative h-[258px] border-[1px] border-[#4D4F59] rounded-[8px] flex flex-col items-center justify-center px-[40px]">
               <div className="mb-[10px] relative">
