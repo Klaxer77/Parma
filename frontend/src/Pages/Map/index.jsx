@@ -39,6 +39,7 @@ export default function MapOffice() {
   const [room, setRoom] = useState([]);
   const [places, setPlaces] = useState([]);
   const dispatch = useDispatch();
+  const { completed } = useSelector((state) => state.MapReservation);
   const { loading } = useSelector((state) => state.MapInfoPlace);
 
   const zoomIn = () => {
@@ -66,7 +67,7 @@ export default function MapOffice() {
       }
     };
     fetchMapAll();
-  }, []);
+  }, [completed]);
 
   useEffect(() => {
     const updatedPlaces = room.map((obj) => obj.places);

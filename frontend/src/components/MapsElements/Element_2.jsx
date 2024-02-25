@@ -23,6 +23,7 @@ export default function Element_2({ places }) {
 
   const onClickGreenReservation = () => {
     dispatch(setActiveStatusPopup(true));
+    dispatch(setNumberPlace(5));
   };
 
   useEffect(() => {
