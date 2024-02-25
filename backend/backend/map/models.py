@@ -7,6 +7,17 @@ from django.utils.text import slugify
 from django.db.models.signals import post_save, post_delete
 from django.dispatch import receiver
 from datetime import datetime
+ 
+
+def validate_empty_place(value):
+    existing_reservation = Reservation.objects.filter(place=value).exists()
+    if existing_reservation:
+        raise ValidationError("Бронь с таким местом уже существует")
+    
+def validate_user_place(value):
+    existing_user = Reservation.objects.filter(user=value).exists()
+    if existing_user:
+        raise ValidationError("Бронь с таким сотрудником уже существует")
 
 
 class Place(models.Model):
@@ -65,6 +76,7 @@ class Reservation(models.Model):
         verbose_name = 'Сотрудник',
         on_delete=models.CASCADE,
         related_name='reservation',
+        validators=[validate_user_place],
         null=True
     )
     place = models.OneToOneField(
@@ -72,6 +84,7 @@ class Reservation(models.Model):
         verbose_name='Место',
         on_delete=models.CASCADE,
         related_name='reservation_place',
+        validators=[validate_empty_place],
         null=True
     )
     start_date = models.DateTimeField(

@@ -20,8 +20,6 @@ export default function PlaceOccupied() {
     }
   }, [numberPlace]);
 
-  console.log(numberPlace);
-  console.log(infoGrayUser);
 
   useEffect(() => {
     if (infoGrayUser && infoGrayUser.reservation_place) {
