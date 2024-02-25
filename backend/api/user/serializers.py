@@ -6,7 +6,8 @@ from importlib import import_module
 from datetime import datetime
 from django.utils import timezone
 import pytz
-
+from rest_framework.exceptions import ValidationError
+from rest_framework.validators import UniqueValidator
 
 class ReservationHistoryListSeriaLizer(serializers.ModelSerializer):
     place =  serializers.SerializerMethodField()
@@ -220,13 +221,21 @@ class CustomDateTimeField(serializers.DateTimeField):
             aware_date_obj = pytz.timezone('Asia/Yekaterinburg').localize(date_obj)
             return aware_date_obj
         except ValueError:
-            raise serializers.ValidationError("Некоректная дата. Используйте DD.MM.YYYY HH:MM формат.")
+            raise serializers.ValidationError("Некоректная дата. Используйте DD.MM.YYYY HH:MM формат")
         
+class CustomPlaceValidator(UniqueValidator):
+    message = "Бронь с таким местом уже существует, пожалуйста, обновите страницу"
+
 
 class ReservationCreateSeriaLizer(serializers.ModelSerializer):
     user = CustomTokenObtainPairSerializer(required=False)
     start_date = CustomDateTimeField()
     end_date = CustomDateTimeField()
+    place = serializers.PrimaryKeyRelatedField(
+        queryset=Place.objects.all(),
+        validators=[CustomPlaceValidator(queryset=Reservation.objects.all())]
+    )
+    
     class Meta:
         model = Reservation
         fields = (
@@ -239,6 +248,10 @@ class ReservationCreateSeriaLizer(serializers.ModelSerializer):
         extra_kwargs = {
             'place': {'required': True},
         }
+
+
+        
+
         
     
         
