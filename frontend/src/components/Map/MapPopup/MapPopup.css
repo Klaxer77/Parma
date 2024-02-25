@@ -18,7 +18,7 @@
   padding: 20px; 
   width: 100%;
   max-width: 800px; 
-  height: 320px;
+  height: auto;
   border-radius: 8px;
 }
 .close {

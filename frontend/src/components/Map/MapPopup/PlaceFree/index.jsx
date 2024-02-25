@@ -1,38 +1,75 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import ru from 'date-fns/locale/ru';
 import 'react-datepicker/dist/react-datepicker.css';
 import style from './PlaceFree.module.css';
+import { fetchUserReservation } from '../../../../Redux/Map/MapReservation.slice';
+import LoadingSmall from '../../../Loading/LoadingSmall'
+import { format } from 'date-fns';
 
 export default function PlaceFree() {
+  const dispatch = useDispatch();
+  const { numberPlace } = useSelector((state) => state.MapPopupInfo);
+  const { loading, error } = useSelector((state) => state.MapReservation);
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
+  const formatDate = (date) => {
+    return format(date, 'dd.MM.yyyy HH:mm');
+  };
 
-  return (
+  const onClickReservation = () => {
+    const reservationUser = {
+      start_date: format(startDate, 'dd.MM.yyyy HH:mm'),
+      end_date: format(endDate, 'dd.MM.yyyy HH:mm'),
+      place: numberPlace,
+    };
+    console.log(reservationUser);
+    dispatch(fetchUserReservation(reservationUser));
+  };
+
+  return loading ? (
+    <LoadingSmall />
+  ) : (
     <div className="mt-[20px]">
-      <div className='flex flex-col items-center'>
+      <div className="flex flex-col items-center">
         <DatePicker
           locale={ru}
           selected={startDate}
           onChange={(date) => setStartDate(date)}
           showTimeSelect
-          dateFormat="dd.MM.yyyy, HH:mm"
+          dateFormat="dd.MM.yyyy HH:mm"
           timeFormat="HH:mm"
-          timeIntervals={15}
+          timeIntervals={30}
+          placeholderText={formatDate(startDate)}
           className={style.datePicker}
         />
         <DatePicker
-        locale={ru}
+          locale={ru}
           selected={endDate}
           onChange={(date) => setEndDate(date)}
           showTimeSelect
-          dateFormat="dd.MM.yyyy, HH:mm"
+          dateFormat="dd.MM.yyyy HH:mm"
           timeFormat="HH:mm"
           timeIntervals={30}
+          placeholderText={formatDate(endDate)}
           className={style.datePicker}
         />
-        <button className='bg-[#293240] w-full h-[50px] rounded-[8px] hover:bg-red hover:transition hover:ease-in-out'>Забронировать</button>
+        {
+          error && <p className='text-red mt-[10px]'>{error[0]}</p>
+        }
+        {
+          error && <p className='text-red mt-[10px]'>{error[1]}</p>
+        }
+        <button
+          style={{
+            transition: '0.3s',
+          }}
+          onClick={onClickReservation}
+          className="bg-[#293240] mt-[20px] w-full max-w-[400px] h-[50px] rounded-[8px] hover:bg-red hover:transition hover:ease-in-out">
+          Забронировать
+        </button>
       </div>
     </div>
   );
