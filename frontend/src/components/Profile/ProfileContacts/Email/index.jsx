@@ -9,7 +9,7 @@ export default function Email() {
   const dispatch = useDispatch();
   const { textEmail } = useSelector((state) => state.ProfileInfo);
   const [initialTextEmail, setInitialTextEmail] = useState(textEmail);
-  const { showCode, messageCompleted, errorsChangeEmail } = useSelector((state) => state.VerificationCode);
+  const { showCode, messageCompletedProfile, errorsChangeEmail } = useSelector((state) => state.VerificationCode);
   const inputRefEmail = useRef(null);
   const prevTextEmailRef = useRef();
   const [showSaveButtonEmail, setShowSaveButtonEmail] = useState(false);
@@ -92,7 +92,7 @@ export default function Email() {
         </div>
         {errorsChangeEmail && <p className="text-red mt-[10px]">{errorsChangeEmail}</p>}
         {
-          messageCompleted && <SuccessfulProfile />
+          messageCompletedProfile && <SuccessfulProfile />
         }
       </div>
     </div>

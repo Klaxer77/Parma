@@ -18,12 +18,12 @@ export default function Element_1({ places }) {
 
   const onClickGrayReservation = () => {
     dispatch(setActiveStatusPopup(false))
-    dispatch(setNumberPlace(6));
+    dispatch(setNumberPlace(1));
   }
 
   const onClickGreenReservation = () => {
     dispatch(setActiveStatusPopup(true))
-    dispatch(setNumberPlace(6));
+    dispatch(setNumberPlace(1));
   }
 
   useEffect(() => {
@@ -31,13 +31,14 @@ export default function Element_1({ places }) {
 
     places.forEach((subArray) => {
       subArray.forEach((obj) => {
-        if (obj.id === 6) {
+        if (obj.id === 1) {
           result = obj.status;
           setStatus(result);
         }
       });
     });
   }, [places, setStatus, status]);
+
 
   return (
     <div

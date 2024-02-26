@@ -15,10 +15,10 @@ import {
   setDeleteReservation,
   setMessageCompleted,
 } from '../../Redux/Profile/ActiveReselve/ActiveReselve.slice';
-import Loading from '../../components/Loading';
 import { $profile } from '../../Api/http';
 import SuccessfulActiveReselve from '../../components/ActiveReselve/Successful';
 import { useNavigate } from 'react-router-dom';
+import LoadingSmall from '../../components/Loading/LoadingSmall';
 
 export default function ActiveReselve() {
   const navigate = useNavigate()
@@ -98,7 +98,7 @@ export default function ActiveReselve() {
             messageCompleted && <SuccessfulActiveReselve />
           }
         {loading ? (
-          <Loading />
+          <LoadingSmall />
         ) : checkData === null ? (
           <p className="text-[28px] font-bold">Нет активной брони</p>
         ) : (

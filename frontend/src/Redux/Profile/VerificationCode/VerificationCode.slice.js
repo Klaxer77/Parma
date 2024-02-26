@@ -64,7 +64,7 @@ const initialState = {
   errorsConfirm: null,
   messageEmail: null,
   messagePhone: null,
-  messageCompleted: {},
+  messageCompletedProfile: {},
 }
 
 export const VerificationCode = createSlice({
@@ -81,7 +81,7 @@ export const VerificationCode = createSlice({
       state.verificationCodes = action.payload
     },
     setMessageCompleted: (state, action) => {
-      state.messageCompleted = action.payload
+      state.messageCompletedProfile = action.payload
     },
   },
   extraReducers: (builder) => {
@@ -94,7 +94,7 @@ export const VerificationCode = createSlice({
       state.showCode = true;
       state.messageEmail = action.payload;
       state.errorsChangeEmail = null;
-      state.messageCompleted = {}
+      state.messageCompletedProfile = {}
     })
     builder.addCase(fetchChangeEmail.rejected, (state, action) => {
       state.errorsChangeEmail = action.payload;
@@ -108,7 +108,10 @@ export const VerificationCode = createSlice({
     builder.addCase(fetchConfirmEmail.fulfilled, (state, action) => {
       state.loadingConfirmEmail = false;
       state.showCode = false;
-      state.messageCompleted = action.payload;
+      state.messageCompletedProfile = action.payload;
+      setTimeout(() => {
+        state.messageCompletedProfile = {}
+      }, 1);
       state.errorsConfirm = null;
     })
     builder.addCase(fetchConfirmEmail.rejected, (state, action) => {
@@ -127,7 +130,7 @@ export const VerificationCode = createSlice({
       state.showCode = true;
       state.messagePhone = action.payload;
       state.errorsChangeEmail = null;
-      state.messageCompleted = {}
+      state.messageCompletedProfile = {}
     })
     builder.addCase(fetchChangePhone.rejected, (state, action) => {
       state.errorsChangeEmail = action.payload;
@@ -141,7 +144,7 @@ export const VerificationCode = createSlice({
     builder.addCase(fetchConfirmPhone.fulfilled, (state, action) => {
       state.loadingConfirmEmail = false;
       state.showCode = false;
-      state.messageCompleted = action.payload;
+      state.messageCompletedProfile = action.payload;
       state.errorsConfirm = null;
     })
     builder.addCase(fetchConfirmPhone.rejected, (state, action) => {
