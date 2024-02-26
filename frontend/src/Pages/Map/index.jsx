@@ -32,14 +32,16 @@ import MapPopup from '../../components/Map/MapPopup';
 import Element_1 from '../../components/MapsElements/Element_1';
 import { $map } from '../../Api/http';
 import { setLoading } from '../../Redux/Map/MapInfoPlace.slice';
-import Loading from '../../components/Loading';
+import SuccessfulMapReservation from '../../components/Map/MapPopup/PlaceFree/Successful';
+import { setMessageCompletedReservation } from '../../Redux/Map/MapReservation.slice';
+import LoadingSmall from '../../components/Loading/LoadingSmall';
 
 export default function MapOffice() {
   const [scale, setScale] = useState(1);
   const [room, setRoom] = useState([]);
   const [places, setPlaces] = useState([]);
   const dispatch = useDispatch();
-  const { completed } = useSelector((state) => state.MapReservation);
+  const { messageCompletedReservation } = useSelector((state) => state.MapReservation);
   const { loading } = useSelector((state) => state.MapInfoPlace);
 
   const zoomIn = () => {
@@ -50,36 +52,38 @@ export default function MapOffice() {
     setScale((prevScale) => Math.max(prevScale - 0.2, 0.3));
   };
 
+  const fetchMapAll = async () => {
+    dispatch(setLoading(true));
+    try {
+      const response = await $map.get('map', {
+        headers: {
+          Authorization: `JWT ${localStorage.getItem('access')}`,
+        },
+      });
+      setRoom(response.data[0].room);
+      console.log(response.data);
+      dispatch(setLoading(false));
+    } catch (error) {
+      dispatch(setLoading(false));
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
-    const fetchMapAll = async () => {
-      dispatch(setLoading(true));
-      try {
-        const response = await $map.get('map', {
-          headers: {
-            Authorization: `JWT ${localStorage.getItem('access')}`,
-          },
-        });
-        setRoom(response.data[0].room);
-        dispatch(setLoading(false));
-      } catch (error) {
-        dispatch(setLoading(false));
-        console.log(error);
-      }
-    };
+    dispatch(setMessageCompletedReservation(undefined))
     fetchMapAll();
-  }, [completed]);
+  }, []);
 
   useEffect(() => {
     const updatedPlaces = room.map((obj) => obj.places);
-    console.log(updatedPlaces);
     setPlaces(updatedPlaces);
   }, [room]);
 
-  console.log(places);
 
   return (
     <>
       <MapPopup />
+      {messageCompletedReservation && <SuccessfulMapReservation fetchMapAll={fetchMapAll} />}
       <div className="w-full relative max-w-[1570px] mx-auto">
         <h3 className="text-white text-[24px] pt-[20px] text-center font-[400] mb-[50px]">Карта</h3>
         <MapInfo />
@@ -94,7 +98,7 @@ export default function MapOffice() {
           -
         </button>
         {loading ? (
-          <Loading />
+          <LoadingSmall />
         ) : (
           <div className="relative overflow-x-auto w-full max-w-[1500px] h-[100vh] test">
             <div
@@ -114,24 +118,24 @@ export default function MapOffice() {
               <Element_4 places={places} />
               <Element_8 places={places} />
               <Element_9 places={places} />
-              <Element_10 />
-              <Element_11 />
-              <Element_12 />
-              <Element_13 />
-              <Element_14 />
-              <Element_15 />
-              <Element_16 />
-              <Element_17 />
-              <Element_18 />
-              <Element_19 />
-              <Element_20 />
-              <Element_21 />
-              <Element_22 />
-              <Element_23 />
-              <Element_24 />
-              <Element_25 />
-              <Element_26 />
-              <Element_27 />
+              <Element_10 places={places} />
+              <Element_11 places={places} />
+              <Element_12 places={places} />
+              <Element_13  places={places} />
+              <Element_14  places={places} />
+              <Element_15  places={places} />
+              <Element_16  places={places} />
+              <Element_17  places={places} />
+              <Element_18  places={places} />
+              <Element_19  places={places} />
+              <Element_20  places={places} />
+              <Element_21  places={places} />
+              <Element_22  places={places} />
+              <Element_23  places={places} />
+              <Element_24  places={places} />
+              <Element_25  places={places} />
+              <Element_26  places={places} />
+              <Element_27  places={places} />
               <svg
                 className="overflow-hidden absolute -left-[18px]"
                 width="1500"

@@ -5,8 +5,8 @@ import ru from 'date-fns/locale/ru';
 import 'react-datepicker/dist/react-datepicker.css';
 import style from './PlaceFree.module.css';
 import { fetchUserReservation } from '../../../../Redux/Map/MapReservation.slice';
-import LoadingSmall from '../../../Loading/LoadingSmall'
 import { format } from 'date-fns';
+import LoadingSmallMap from '../../../Loading/LoadingSmallMap';
 
 export default function PlaceFree() {
   const dispatch = useDispatch();
@@ -15,22 +15,17 @@ export default function PlaceFree() {
   const [startDate, setStartDate] = useState(new Date());
   const [endDate, setEndDate] = useState(new Date());
 
-  const formatDate = (date) => {
-    return format(date, 'dd.MM.yyyy HH:mm');
-  };
-
   const onClickReservation = () => {
     const reservationUser = {
       start_date: format(startDate, 'dd.MM.yyyy HH:mm'),
       end_date: format(endDate, 'dd.MM.yyyy HH:mm'),
       place: numberPlace,
     };
-    console.log(reservationUser);
     dispatch(fetchUserReservation(reservationUser));
   };
 
   return loading ? (
-    <LoadingSmall />
+    <LoadingSmallMap />
   ) : (
     <div className="mt-[20px]">
       <div className="flex flex-col items-center">
@@ -42,7 +37,6 @@ export default function PlaceFree() {
           dateFormat="dd.MM.yyyy HH:mm"
           timeFormat="HH:mm"
           timeIntervals={30}
-          placeholderText={formatDate(startDate)}
           className={style.datePicker}
         />
         <DatePicker
@@ -53,7 +47,6 @@ export default function PlaceFree() {
           dateFormat="dd.MM.yyyy HH:mm"
           timeFormat="HH:mm"
           timeIntervals={30}
-          placeholderText={formatDate(endDate)}
           className={style.datePicker}
         />
         {

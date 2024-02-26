@@ -3,6 +3,7 @@ import './MapPopup.css';
 import { useSelector, useDispatch } from 'react-redux';
 import PlaceOccupied from './PlaceOccupied';
 import PlaceFree from './PlaceFree';
+import { setError } from '../../../Redux/Map/MapReservation.slice';
 
 export default function MapPopup() {
   const dispatch = useDispatch();
@@ -14,6 +15,7 @@ export default function MapPopup() {
     ids.forEach((id) => {
       dispatch(setIsActivePopup(false));
       dispatch(setMarkers({ id, newBool: false }));
+      dispatch(setError(null))
     });
   };
 

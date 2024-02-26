@@ -7,8 +7,9 @@ import { useEffect, useRef } from 'react';
 
 export default function HeaderAuthorized() {
   const headerRef = useRef();
-  const { messageCompleted } = useSelector((state) => state.VerificationCode);
+  const { messageCompletedProfile } = useSelector((state) => state.VerificationCode);
   const messageCompletedActiveReselve = useSelector((state) => state.ActiveReselve.messageCompleted);
+  const { messageCompletedReservation } = useSelector((state) => state.MapReservation);
   const dispatch = useDispatch();
   const { infoUser } = useSelector((state) => state.ProfileInfo);
 
@@ -18,10 +19,10 @@ export default function HeaderAuthorized() {
   };
 
   useEffect(() => {
-    if (messageCompleted.message || messageCompletedActiveReselve) {
+    if (messageCompletedProfile.message || messageCompletedActiveReselve || messageCompletedReservation) {
       headerRef.current.scrollIntoView({behavior: 'smooth'})
     }
-  }, [messageCompleted, messageCompletedActiveReselve])
+  }, [messageCompletedProfile, messageCompletedActiveReselve, messageCompletedReservation])
 
 
   return (

@@ -4,9 +4,14 @@
   transition: all 0.5s ease-in-out;
 }
 
+.SuccessfulReservation {
+  @apply absolute bg-green top-[80px] right-0 rounded-[8px] opacity-[0] z-[999]; 
+  transform: translateX(300%);
+  transition: all 0.5s ease-in-out;
+}
+
 .active {
   transition: all 0.5s ease-in-out;
-  right: 0;
   opacity: 100%;
   transform: translateX(0px);
 }

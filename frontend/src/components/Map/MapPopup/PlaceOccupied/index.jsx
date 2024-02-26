@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchGrayPlace, setLoading } from '../../../../Redux/Map/MapPopupInfo.slice';
-import LoadingSmall from '../../../Loading/LoadingSmall';
+import LoadingSmallMap from '../../../Loading/LoadingSmallMap';
 
 export default function PlaceOccupied() {
   const dispatch = useDispatch();
@@ -41,12 +41,12 @@ export default function PlaceOccupied() {
   return (
     <>
       {loading ? (
-        <LoadingSmall />
+        <LoadingSmallMap />
       ) : (
         <div className="mt-[25px] flex gap-[35px] items-center">
-          <div className="bg-white w-full max-w-[200px] h-[200px] rounded-[12px] flex items-center justify-center">
+          <div className="bg-white w-full max-w-[200px] h-[200px] rounded-[12px] flex items-center justify-center overflow-hidden">
             <img
-              className="w-full h-auto block"
+              className="w-full h-auto"
               src={`http://localhost:8000${imageUser}`}
               alt="ava"
             />

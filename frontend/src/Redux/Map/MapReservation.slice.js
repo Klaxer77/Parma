@@ -18,22 +18,28 @@ export const fetchUserReservation = createAsyncThunk(
 const initialState = {
   loading: false,
   error: null,
-  completed: null
+  messageCompletedReservation: null
 }
 
 export const MapReservation = createSlice({
   name: 'mapPopupInfo',
   initialState,
   reducers: {
-    
+    setMessageCompletedReservation: (state, action) => {
+      state.messageCompletedReservation = action.payload
+    },
+    setError: (state, action) => {
+      state.error = action.payload
+    }
   },
   extraReducers: (builder) => {
     builder.addCase(fetchUserReservation.pending, (state) => {
       state.loading = true;
     })
     builder.addCase(fetchUserReservation.fulfilled, (state, action) => {
-      state.loading = false
-      state.completed = action.payload
+      state.loading = false;
+      state.messageCompletedReservation = action.payload;
+      state.error = null
     })
     builder.addCase(fetchUserReservation.rejected, (state, action) => {
       state.loading = false
@@ -43,6 +49,6 @@ export const MapReservation = createSlice({
 })
 
 
-export const {  } = MapReservation.actions
+export const { setMessageCompletedReservation, setError } = MapReservation.actions
 
 export default MapReservation.reducer

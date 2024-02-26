@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setTextNumber } from '../../../../Redux/Profile/ProfileInfo.slice';
 import VerificationCode from '../VerificationCode';
-import { fetchChangePhone } from '../../../../Redux/Profile/VerificationCode/VerificationCode.slice';
+import { fetchChangePhone, setMessageCompleted } from '../../../../Redux/Profile/VerificationCode/VerificationCode.slice';
 import SuccessfulProfile from '../../Successful';
 import InputMask from 'react-input-mask';
 
@@ -10,7 +10,7 @@ export default function Number() {
   const dispatch = useDispatch();
   const { textNumber } = useSelector((state) => state.ProfileInfo);
   const [initialTextPhone, setInitialTextPhone] = useState(textNumber);
-  const { showCode, messageCompleted } = useSelector((state) => state.VerificationCode);
+  const { showCode, messageCompletedProfile } = useSelector((state) => state.VerificationCode);
   const inputRefPhone = useRef(null);
   const prevTextPhoneRef = useRef();
   const [showSaveButtonPhone, setShowSaveButtonPhone] = useState(false);
@@ -60,6 +60,8 @@ export default function Number() {
     dispatch(setTextNumber(initialTextPhone));
   };
 
+  
+
   return (
     <div className="flex justify-between gap-[65px] mb-[65px] w-full">
       {showCode && <VerificationCode />}
@@ -91,7 +93,7 @@ export default function Number() {
             </button>
           )}
         </div>
-        {messageCompleted && <SuccessfulProfile />}
+        {messageCompletedProfile && <SuccessfulProfile />}
       </div>
     </div>
   );

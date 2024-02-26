@@ -1,8 +1,8 @@
+import '../Loading.scss'
 
-
-export default function LoadingSmall() {
+export default function LoadingSmallMap() {
   return (
-    <div className="fixed left-0 top-[80px] w-full h-[100vh] flex justify-center items-center">
+    <div className="fixed left-0 top-0 w-full h-[100vh] flex justify-center items-center">
         <svg
           className="pl"
           viewBox="0 0 200 200"

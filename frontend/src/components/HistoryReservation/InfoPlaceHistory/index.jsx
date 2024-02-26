@@ -1,7 +1,6 @@
-import { useSelector } from 'react-redux';
+
 
 export default function InfoPlaceHistory({ numberPlace, room, date_start, date_end }) {
-  const { first_name } = useSelector((state) => state.ActiveReselve);
 
   return (
     <div className="flex flex-col gap-[25px] w-full z-[99]">
