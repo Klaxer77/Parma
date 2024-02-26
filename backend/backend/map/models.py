@@ -69,6 +69,8 @@ class ReservationHistory(models.Model):
     class Meta:
         verbose_name = "История брони"
         verbose_name_plural = "История брони"
+        ordering = ['-id']
+
         
 class Reservation(models.Model):
     user = models.OneToOneField(
