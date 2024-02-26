@@ -9,13 +9,11 @@ export default function HistoryReservationBlock({
   date_end,
   date_all,
 }) {
-  const { checkData } = useSelector((state) => state.ActiveReselve);
 
   let formatedDate = `${date_all}`;
   let newDateAll = formatedDate.slice(0, -5);
 
   const [dateAll] = useState(newDateAll);
-  console.log(checkData);
 
   return (
     <div className="w-full flex items-center justify-center">

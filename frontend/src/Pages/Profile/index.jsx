@@ -19,9 +19,7 @@ import { setMessageCompleted } from '../../Redux/Profile/VerificationCode/Verifi
 export default function Profile() {
   const navigate = useNavigate();
   const loaded = useSelector((state) => state.ProfileInfo.loaded);
-  const { loadingChangeEmail, messageCompleted } = useSelector(
-    (state) => state.VerificationCode,
-  );
+  const { loadingChangeEmail, messageCompletedProfile } = useSelector((state) => state.VerificationCode);
   const loadedProfile = useSelector((state) => state.LoadedProfile.loadedProfile);
   const dispatch = useDispatch();
 
@@ -58,13 +56,11 @@ export default function Profile() {
     if (loadedProfile) {
       fetchProfile();
     }
-    dispatch(setMessageCompleted({}));
     dispatch(setLoadedProfile(false));
-    if (messageCompleted.message) {
-      dispatch(setLoadedProfile(true));
+    if (messageCompletedProfile.message !== undefined) {
+      dispatch(setLoadedProfile(false));
     }
-  }, [loadedProfile, localStorage.getItem('access')]);
-
+  }, [loadedProfile, localStorage.getItem('access'), messageCompletedProfile.message]);
 
 
   return (

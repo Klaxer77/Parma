@@ -3,8 +3,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setFirstName } from '../../Redux/Profile/ActiveReselve/ActiveReselve.slice';
 import { $profile } from '../../Api/http';
 import HistoryReservationBlock from '../../components/HistoryReservation';
-import Loading from '../../components/Loading';
 import { setCheckData } from '../../Redux/Profile/HistoryReservation/History.slice';
+import LoadingSmall from '../../components/Loading/LoadingSmall';
 
 export default function HistoryReservation() {
   const [scroll, setScroll] = useState(false);
@@ -77,7 +77,7 @@ export default function HistoryReservation() {
           : 'flex flex-col gap-[10px] w-full max-w-[1330px] mx-auto mt-[40px] h-[720px] overflow-auto history-scroll'
       }>
       {loading ? (
-        <Loading />
+        <LoadingSmall />
       ) : checkData.length == 0 ? (
         <div className="w-full flex justify-center items-center bg-purple-color h-[720px]">
           <p className="text-[28px] font-bold">История брони отсутствует</p>
