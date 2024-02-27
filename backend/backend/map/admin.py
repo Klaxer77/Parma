@@ -77,13 +77,12 @@ class RoomAdmin(admin.ModelAdmin):
 
 @admin.register(Place)
 class PlaceAdmin(admin.ModelAdmin):
-    list_display = ('image_show', 'name', 'status', 'id')
+    list_display = ('image_show', 'name', 'status', 'published', 'id')
     list_display_links = ('image_show', 'name', 'status')
-    fields = ('image', 'name', 'status')
+    fields = ('image', 'name', 'status', 'published')
 
 
-    
-    
+
     def image_show(self,obj):
         if obj.image:
             return mark_safe("<img src='{}' width='60' />".format(obj.image.url))

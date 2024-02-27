@@ -33,6 +33,7 @@ class Place(models.Model):
         choices=STATUS_CHOICES,
         default='Свободно',
     )
+    published = models.BooleanField('Отобразить?', default=True)
     
     def __str__(self):
         return f'{self.name}'
