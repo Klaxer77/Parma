@@ -1,3 +1,9 @@
+.menu {
+  background-color: transparent;
+  padding: 10px;
+  border-radius: 8px;
+}
+
 .burger {
   display: flex;
   gap: 5px;
@@ -31,7 +37,7 @@
 
 
 .menu-block.active {
-  left: 20px;
+  left: 0px;
   transition: all .3s ease-in-out;
 }
 
@@ -48,6 +54,7 @@
 
     .menu {
       flex-direction: column;
+      background-color: #20232F;
     }
 
     .burger {

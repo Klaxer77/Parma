@@ -5,6 +5,7 @@ import {
   setLoading,
   setMessageCompleted,
 } from '../../../Redux/Profile/ActiveReselve/ActiveReselve.slice';
+import style from '../../../Pages/ActiveReservation/ActiveReservation.module.css';
 
 export default function InfoPlace() {
   const dispatch = useDispatch();
@@ -32,20 +33,22 @@ export default function InfoPlace() {
   };
 
   return (
-    <div className="flex flex-col gap-[25px] w-full z-[99]">
-      <div>
-        <p className="font-medium text-[14px] mb-[10px]">Сотрудник</p>
-        <p className="text-[30px] font-bold leading-[1]">{first_name}</p>
-      </div>
-
-      <div className="flex gap-[25px]">
+    <div className={`${style.wrapper_InfoPlace} flex flex-col gap-[25px] z-[99] flex-wrap w-full max-w-[925px]`}>
+      <div className='w-full'>
         <div>
-          <p className="font-medium text-[14px] mb-[10px]">Комната</p>
-          <p className="text-[30px] font-bold leading-[1]">{room}</p>
+          <p className="font-medium text-[14px] mb-[10px]">Сотрудник</p>
+          <p className="text-[30px] font-bold leading-[1]">{first_name}</p>
         </div>
-        <div>
-          <p className="font-medium text-[14px] mb-[10px]">Место</p>
-          <p className="text-[30px] font-bold text-center leading-[1]">{numberPlace}</p>
+
+        <div className="flex gap-[25px]">
+          <div>
+            <p className="font-medium text-[14px] mb-[10px]">Комната</p>
+            <p className="text-[30px] font-bold leading-[1]">{room}</p>
+          </div>
+          <div>
+            <p className="font-medium text-[14px] mb-[10px]">Место</p>
+            <p className="text-[30px] font-bold text-center leading-[1]">{numberPlace}</p>
+          </div>
         </div>
       </div>
 
@@ -70,7 +73,6 @@ export default function InfoPlace() {
         </div>
       </div>
 
-      <div>
         <button
           style={{
             transition: '0.3s',
@@ -79,7 +81,6 @@ export default function InfoPlace() {
           className="bg-[#293240] w-full h-[50px] rounded-[8px] hover:bg-red hover:transition hover:ease-in-out">
           Завершить
         </button>
-      </div>
     </div>
   );
 }

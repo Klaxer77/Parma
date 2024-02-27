@@ -1,6 +1,6 @@
-import { useSelector } from 'react-redux';
 import InfoPlaceHistory from './InfoPlaceHistory';
 import { useState } from 'react';
+import style from '../../Pages/HistoryReservation/HistoryReservation.module.css'
 
 export default function HistoryReservationBlock({
   numberPlace,
@@ -34,9 +34,8 @@ export default function HistoryReservationBlock({
           </svg>
         </div>
 
-        <div className="flex items-center gap-[20px] mb-[20px]">
-          <div>
-            <div className="relative h-[258px] border-[1px] border-[#4D4F59] rounded-[8px] flex flex-col items-center justify-center px-[40px]">
+        <div className="flex items-center gap-[20px] mb-[20px] flex-wrap">
+            <div className={`${style.wrapper} relative h-[258px] border-[1px] border-[#4D4F59] rounded-[8px] flex flex-col items-center justify-center px-[40px]`}>
               <div className="mb-[10px] relative">
                 <div className="bg-purple-color w-[40px] h-[40px] rounded-[50%] absolute left-[84px] top-[100px] flex items-center justify-center">
                   <p className="font-bold text-[16px]">{numberPlace}</p>
@@ -66,7 +65,6 @@ export default function HistoryReservationBlock({
                 </svg>
               </div>
             </div>
-          </div>
           <InfoPlaceHistory
             numberPlace={numberPlace}
             room={room}
