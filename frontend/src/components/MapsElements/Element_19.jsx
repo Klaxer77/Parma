@@ -40,7 +40,7 @@ export default function Element_19({places}) {
   }, [places, setStatus, status]);
 
   return (
-    <div onClick={() => onClickPlace(19, 19)} className="19 free absolute left-[1240px] top-[475px] z-[99] cursor-pointer">
+    <div onClick={() => onClickPlace(19, 19)} className="3 free absolute left-[1240px] top-[475px] z-[99] cursor-pointer">
       <img
         className={
           markers[18].element

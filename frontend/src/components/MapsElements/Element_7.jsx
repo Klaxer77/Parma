@@ -19,12 +19,12 @@ export default function Element_7({places}) {
 
   const onClickGrayReservation = () => {
     dispatch(setActiveStatusPopup(false))
-    dispatch(setNumberPlace(7));
+    dispatch(setNumberPlace(23));
   }
 
   const onClickGreenReservation = () => {
     dispatch(setActiveStatusPopup(true))
-    dispatch(setNumberPlace(7));
+    dispatch(setNumberPlace(23));
   }
 
   useEffect(() => {
@@ -32,7 +32,7 @@ export default function Element_7({places}) {
 
     places.forEach((subArray) => {
       subArray.forEach((obj) => {
-        if (obj.id === 7) {
+        if (obj.id === 23) {
           result = obj.status;
           setStatus(result);
         }
@@ -42,10 +42,10 @@ export default function Element_7({places}) {
 
   return (
     <div
-      onClick={() => onClickPlace(7, 7)}
-      className="7 free absolute left-[556px] top-[98px] z-[99] cursor-pointer">
+      onClick={() => onClickPlace(23, 23)}
+      className="23 free absolute left-[556px] top-[98px] z-[99] cursor-pointer">
       <img
-          className={markers[6].element ? 'marker active -top-[10px] left-[14px]' : 'marker -top-[30px] left-[14px]'}
+          className={markers[22].element ? 'marker active -top-[10px] left-[14px]' : 'marker -top-[30px] left-[14px]'}
           src="/img/icons/pin-mark.png"
           alt=""
         />

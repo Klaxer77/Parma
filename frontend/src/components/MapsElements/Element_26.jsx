@@ -18,12 +18,12 @@ export default function Element_26({places}) {
 
   const onClickGrayReservation = () => {
     dispatch(setActiveStatusPopup(false))
-    dispatch(setNumberPlace(26));
+    dispatch(setNumberPlace(16));
   }
 
   const onClickGreenReservation = () => {
     dispatch(setActiveStatusPopup(true))
-    dispatch(setNumberPlace(26));
+    dispatch(setNumberPlace(16));
   }
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function Element_26({places}) {
 
     places.forEach((subArray) => {
       subArray.forEach((obj) => {
-        if (obj.id === 26) {
+        if (obj.id === 16) {
           result = obj.status;
           setStatus(result);
         }
@@ -40,10 +40,10 @@ export default function Element_26({places}) {
   }, [places, setStatus, status]);
 
   return (
-    <div onClick={() => onClickPlace(26, 26)} className="26 free absolute left-[206px] top-[668px] z-[99] cursor-pointer">
+    <div onClick={() => onClickPlace(16, 16)} className="16 free absolute left-[206px] top-[668px] z-[99] cursor-pointer">
       <img
         className={
-          markers[25].element
+          markers[15].element
             ? 'marker active -top-[10px] left-[15px]'
             : 'marker -top-[30px] z-0 left-[15px]'
         }
@@ -79,7 +79,7 @@ export default function Element_26({places}) {
       ) : (
         <svg
         onClick={onClickGrayReservation}
-          className="cursor-pointer rotate-[56deg]"
+          className="cursor-pointer rotate-[57deg]"
           width="49"
           height="40"
           viewBox="0 0 49 40"
