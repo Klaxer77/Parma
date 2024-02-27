@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import InfoPlace from '../../components/ActiveReselve/InfoPlace';
 import NumberPlace from '../../components/ActiveReselve/NumberPlace';
@@ -19,6 +19,8 @@ import { $profile } from '../../Api/http';
 import SuccessfulActiveReselve from '../../components/ActiveReselve/Successful';
 import { useNavigate } from 'react-router-dom';
 import LoadingSmall from '../../components/Loading/LoadingSmall';
+import style from './ActiveReservation.module.css'
+
 
 export default function ActiveReselve() {
   const navigate = useNavigate()
@@ -91,8 +93,8 @@ export default function ActiveReselve() {
       <div
         className={
           checkData === null
-            ? 'bg-purple-color h-[720px] overflow-hidden w-full max-w-[1330px] rounded-[8px] p-[20px] relative flex items-center justify-center'
-            : 'bg-purple-color h-[720px] overflow-hidden w-full max-w-[1330px] rounded-[8px] p-[20px] relative'
+            ? 'bg-purple-color h-[100vh] overflow-hidden w-full max-w-[1330px] rounded-[8px] p-[20px] relative flex items-center justify-center'
+            : 'bg-purple-color h-auto overflow-hidden w-full max-w-[1330px] rounded-[8px] p-[20px] relative'
         }>
           {
             messageCompleted && <SuccessfulActiveReselve />
@@ -104,7 +106,7 @@ export default function ActiveReselve() {
         ) : (
           <>
             <svg
-              className="absolute right-0 top-[60px]"
+              className={`${style.svg} absolute right-0 top-[60px]`}
               width="524"
               height="597"
               viewBox="0 0 524 597"
@@ -130,7 +132,7 @@ export default function ActiveReselve() {
               </svg>
             </div>
 
-            <div className="flex gap-[20px] mb-[20px]">
+            <div className="flex gap-[20px] mb-[20px] flex-wrap">
               <NumberPlace />
               <InfoPlace />
             </div>

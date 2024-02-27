@@ -1,0 +1,57 @@
+
+@media only screen and (max-width:1000px) {
+  .contacts {
+    flex-direction: column !important;
+    gap: 25px !important;
+    margin-bottom: 120px !important;
+  }
+
+}
+
+@media only screen and (max-width:547px) {
+
+  .wrapper_info {
+    flex-direction: column;
+    align-items: start !important;
+    gap: 30px !important;
+  }
+
+  .wrapper_contacts {
+    background-color: transparent !important;
+    margin-bottom: 60px;
+  }
+
+  .wrapper_personalDate {
+    margin-top: 220px;
+  }
+
+  .wrapper_profileInfo {
+    justify-content: center !important;
+  }
+
+  .input {
+    border-radius: 8px;
+    width: 100% !important;
+    max-width: 100% !important;
+  }
+
+  .button_wrapper {
+    border-radius: 8px;
+    width: 145px !important;
+    justify-content: center;
+    position: absolute;
+    top: 40px;
+  }
+}
+
+@media only screen and (max-width:550px) {
+  .wrapper_info {
+    flex-direction: column;
+    align-items: start !important;
+    gap: 30px !important;
+  }
+}
+
+@media only screen and (max-width:800px) {
+  
+}

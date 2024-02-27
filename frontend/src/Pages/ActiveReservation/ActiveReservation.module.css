@@ -1,0 +1,20 @@
+@media only screen and (max-width:1336px) {
+  .wrapper {
+    @apply w-full;
+    padding-top: 20px !important;
+    padding-bottom: 20px !important;
+  }
+
+  .wrapper_InfoPlace {
+    flex-direction: row !important;
+    max-width: 100% !important;
+  }
+
+  .svg {
+    @apply hidden
+  }
+
+  .svg_PlaceGray {
+    @apply hidden
+  }
+}

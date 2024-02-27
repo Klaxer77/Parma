@@ -67,7 +67,6 @@ export default function HistoryReservation() {
     }
   };
 
-  console.log(checkData.length);
 
   return (
     <div

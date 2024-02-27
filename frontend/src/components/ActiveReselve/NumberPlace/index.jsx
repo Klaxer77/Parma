@@ -1,12 +1,11 @@
-import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import style from '../../../Pages/ActiveReservation/ActiveReservation.module.css'
 
 export default function NumberPlace() {
   const { numberPlace } = useSelector((state) => state.ActiveReselve);
 
   return (
-    <div>
-      <div className="relative border-[1px] border-[#4D4F59] rounded-[8px] flex flex-col items-center justify-center px-[50px] py-[100px]">
+      <div className={`relative border-[1px] border-[#4D4F59] rounded-[8px] flex flex-col items-center justify-center px-[50px] py-[100px] ${style.wrapper}`}>
         <div className="mb-[10px] relative">
           <div className="bg-purple-color w-[40px] h-[40px] rounded-[50%] absolute left-[84px] top-[100px] flex items-center justify-center">
             <p className="font-bold text-[16px]">{numberPlace}</p>
@@ -36,6 +35,7 @@ export default function NumberPlace() {
           </svg>
         </div>
         <svg
+        className={style.svg_PlaceGray}
           width="209"
           height="172"
           viewBox="0 0 209 172"
@@ -61,6 +61,5 @@ export default function NumberPlace() {
           </defs>
         </svg>
       </div>
-    </div>
   );
 }

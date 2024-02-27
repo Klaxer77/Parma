@@ -28,7 +28,7 @@ export default function Menu() {
           <img height={40} width={120} src="/img/icons/logo.png" alt="logo" />
         </Link>
       </div>
-      <div className={burger == true ? 'menu-block active bg-[gray]' : 'menu-block'}>
+      <div className={burger == true ? 'menu-block active' : 'menu-block'}>
         <nav className="flex gap-[20px] flex-wrap z-[999] menu">
           {menu.map((value, index) => (
             <Link

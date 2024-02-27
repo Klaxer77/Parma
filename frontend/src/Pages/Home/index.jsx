@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { setMapButtonActive, setMenuActive } from '../../Redux/Menu/Menu.slice';
+import style from './Home.module.css'
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -12,12 +13,12 @@ export default function Home() {
 
   return (
     <>
-        <div className="mt-[150px] px-[20px] flex gap-[100px] items-center w-full max-w-[1570px] mx-auto">
-          <div className=''>
-            <h1 className="text-[58px] mb-[80px] leading-[1]">
+        <div className={`mt-[150px] px-[20px] flex gap-[100px] items-center w-full max-w-[1570px] mx-auto ${style.wrapper}`}>
+          <div>
+            <h1 className={`text-[58px] mb-[80px] leading-[1] ${style.h1}`}>
               Система бронирования <br /> рабочих мест
             </h1>
-            <h2 className="text-[20px] font-light mb-[40px]">
+            <h2 className={`text-[20px] font-light mb-[40px] ${style.h2}`}>
               Платформа создана для легкости перехода к кoворкингу, способствует <br />{' '}
               эффективному использованию рабочего пространства и поднимает творческий <br />{' '}
               потенциал вашей команды на новый уровень.
@@ -28,7 +29,7 @@ export default function Home() {
             </button>
             </Link>
           </div>
-          <div>
+          <div className={style.img_block}>
             <img width={415} src="/img/main-banner.webp" alt="" />
           </div>
         </div>
