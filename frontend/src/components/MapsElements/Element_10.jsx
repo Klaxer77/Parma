@@ -20,7 +20,7 @@ export default function Element_10({places}) {
 
   const onClickGrayReservation = () => {
     dispatch(setActiveStatusPopup(false))
-    dispatch(setNumberPlace(10));
+    dispatch(setNumberPlace(13));
   }
 
   const onClickGreenReservation = () => {
