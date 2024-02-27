@@ -21,8 +21,8 @@ export default function MapPopup() {
 
 
   return (
-    <div class={isActivePopup ? 'modal show' : 'modal'}>
-      <div class="modal-content">
+    <div className={isActivePopup ? 'modal show' : 'modal'}>
+      <div className="modal-content">
         <span
           onClick={() =>
             onClickClose([
@@ -30,7 +30,7 @@ export default function MapPopup() {
               25, 26, 27,
             ])
           }
-          class="close cursor-pointer">
+          className="close cursor-pointer">
           &times;
         </span>
         <p className="text-[26px] font-medium">место {place}</p>

@@ -40,7 +40,7 @@ export default function InfoPlace() {
           <p className="text-[30px] font-bold leading-[1]">{first_name}</p>
         </div>
 
-        <div className="flex gap-[25px]">
+        <div className="flex gap-[25px] mt-[15px]">
           <div>
             <p className="font-medium text-[14px] mb-[10px]">Комната</p>
             <p className="text-[30px] font-bold leading-[1]">{room}</p>

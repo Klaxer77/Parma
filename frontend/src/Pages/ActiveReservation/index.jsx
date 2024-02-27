@@ -90,7 +90,12 @@ export default function ActiveReselve() {
 
   return (
     <div className="w-full flex items-center justify-center mt-[40px]">
-      <div
+      {
+        loading ? <LoadingSmall /> :
+        checkData === null ? 
+          <p className="text-[28px] font-bold">Нет активной брони</p>
+          :
+          <div
         className={
           checkData === null
             ? 'bg-purple-color h-[100vh] overflow-hidden w-full max-w-[1330px] rounded-[8px] p-[20px] relative flex items-center justify-center'
@@ -99,11 +104,7 @@ export default function ActiveReselve() {
           {
             messageCompleted && <SuccessfulActiveReselve />
           }
-        {loading ? (
-          <LoadingSmall />
-        ) : checkData === null ? (
-          <p className="text-[28px] font-bold">Нет активной брони</p>
-        ) : (
+           
           <>
             <svg
               className={`${style.svg} absolute right-0 top-[60px]`}
@@ -141,8 +142,9 @@ export default function ActiveReselve() {
               завершите предыдущую.
             </p>
           </>
-        )}
+        )
       </div>
+      }
     </div>
   );
 }
