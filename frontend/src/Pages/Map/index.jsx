@@ -68,7 +68,7 @@ export default function MapOffice() {
   };
 
   useEffect(() => {
-    dispatch(setMessageCompletedReservation(undefined))
+    dispatch(setMessageCompletedReservation(undefined));
     fetchMapAll();
   }, []);
 
@@ -76,7 +76,6 @@ export default function MapOffice() {
     const updatedPlaces = room.map((obj) => obj.places);
     setPlaces(updatedPlaces);
   }, [room]);
-
 
   return (
     <>
@@ -107,23 +106,8 @@ export default function MapOffice() {
                 position: 'relative',
                 zIndex: '99',
               }}>
-              <Element_1 places={places} />
-              <Element_2 places={places} />
-              <Element_5 places={places} />
-              <Element_6 places={places} />
-              <Element_7 places={places} />
-              <Element_3 places={places} />
-              <Element_4 places={places} />
-              <Element_8 places={places} />
-              <Element_9 places={places} />
-              <Element_10 places={places} />
-              <Element_11 places={places} />
-              <Element_12 places={places} />
-              <Element_13  places={places} />
-              <Element_14  places={places} />
-              <Element_15  places={places} />
-              <Element_16  places={places} />
-              <Element_17  places={places} />
+
+              <Element_17 places={places} />
               <Element_18  places={places} />
               <Element_19  places={places} />
               <Element_20  places={places} />
@@ -131,8 +115,24 @@ export default function MapOffice() {
               <Element_22  places={places} />
               <Element_23  places={places} />
               <Element_24  places={places} />
+              <Element_11 places={places} />
+              <Element_12 places={places} />
+              <Element_13  places={places} />
+              <Element_14  places={places} />
+              <Element_9 places={places} />
+              <Element_10 places={places} />
               <Element_25  places={places} />
               <Element_26  places={places} />
+              <Element_1 places={places} />
+              <Element_2 places={places} />
+              <Element_3 places={places} />
+              <Element_4 places={places} />
+              <Element_5 places={places} />
+              <Element_6 places={places} />
+              <Element_7 places={places} />
+              <Element_8 places={places} />
+              <Element_15  places={places} />
+              <Element_16  places={places} />
               <Element_27  places={places} />
               <svg
                 className="overflow-hidden absolute -left-[18px]"
