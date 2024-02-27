@@ -32,20 +32,20 @@ export default function Element_3({ places }) {
 
   const onClickGrayReservation = () => {
     dispatch(setActiveStatusPopup(false))
-    dispatch(setNumberPlace(3));
+    dispatch(setNumberPlace(19));
   }
 
   const onClickGreenReservation = () => {
     dispatch(setActiveStatusPopup(true))
-    dispatch(setNumberPlace(3));
+    dispatch(setNumberPlace(19));
   }
 
   return (
     <div
-      onClick={() => onClickPlace(3, 3)}
-      className="3 free absolute left-[475px] top-[210px] z-[99] cursor-pointer">
+      onClick={() => onClickPlace(19, 19)}
+      className="19 free absolute left-[475px] top-[210px] z-[99] cursor-pointer">
         <img
-          className={markers[2].element ? 'marker active -top-[5px] left-[8.5px]' : 'marker -top-[25px] left-[8.5px]'}
+          className={markers[18].element ? 'marker active -top-[5px] left-[8.5px]' : 'marker -top-[25px] left-[8.5px]'}
           src="/img/icons/pin-mark.png"
           alt=""
         />

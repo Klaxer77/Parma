@@ -18,12 +18,12 @@ export default function Element_25({places}) {
 
   const onClickGrayReservation = () => {
     dispatch(setActiveStatusPopup(false))
-    dispatch(setNumberPlace(25));
+    dispatch(setNumberPlace(15));
   }
 
   const onClickGreenReservation = () => {
     dispatch(setActiveStatusPopup(true))
-    dispatch(setNumberPlace(25));
+    dispatch(setNumberPlace(15));
   }
 
   useEffect(() => {
@@ -31,7 +31,7 @@ export default function Element_25({places}) {
 
     places.forEach((subArray) => {
       subArray.forEach((obj) => {
-        if (obj.id === 25) {
+        if (obj.id === 15) {
           result = obj.status;
           setStatus(result);
         }
@@ -40,10 +40,10 @@ export default function Element_25({places}) {
   }, [places, setStatus, status]);
 
   return (
-    <div onClick={() => onClickPlace(25, 25)} className="25 free absolute left-[243px] top-[644px] z-[99] cursor-pointer">
+    <div onClick={() => onClickPlace(15, 15)} className="15 free absolute left-[243px] top-[644px] z-[99] cursor-pointer">
       <img
         className={
-          markers[24].element
+          markers[14].element
             ? 'marker active -top-[0px] left-[5px]'
             : 'marker -top-[20px] z-0 left-[5px]'
         }
