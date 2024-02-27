@@ -155,6 +155,7 @@ class PlaceSerialLizer(serializers.ModelSerializer):
             'name',
             'image',
             'status',
+            'published',
             'reservation_place',
             'room',
             'remaining_time',
