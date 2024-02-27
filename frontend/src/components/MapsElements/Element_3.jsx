@@ -15,7 +15,7 @@ export default function Element_3({ places }) {
 
     places.forEach((subArray) => {
       subArray.forEach((obj) => {
-        if (obj.id === 3) {
+        if (obj.id === 19) {
           setPublished(obj.published);
           result = obj.status;
           setStatus(result);
@@ -41,6 +41,8 @@ export default function Element_3({ places }) {
     dispatch(setActiveStatusPopup(true))
     dispatch(setNumberPlace(19));
   }
+
+  console.log(published);
 
   return (
     published &&
