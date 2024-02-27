@@ -5,6 +5,7 @@ import { setActiveStatusPopup, setNumberPlace } from '../../Redux/Map/MapPopupIn
 
 export default function Element_4({places}) {
   const { markers } = useSelector((state) => state.Map);
+  const [published, setPublished] = useState();
   const [status, setStatus] = useState();
   const dispatch = useDispatch();
 
@@ -32,6 +33,7 @@ export default function Element_4({places}) {
     places.forEach((subArray) => {
       subArray.forEach((obj) => {
         if (obj.id === 20) {
+          setPublished(obj.published);
           result = obj.status;
           setStatus(result);
         }
@@ -40,6 +42,7 @@ export default function Element_4({places}) {
   }, [places, setStatus, status]);
 
   return (
+    published && 
     <div onClick={() => onClickPlace(20, 20)} className="20 free absolute left-[555px] top-[185px] z-[99] cursor-pointer">
       <img
         className={markers[19].element ? 'marker active top-0 left-[13px]' : 'marker -top-[20px] z-0 left-[13px]'}

@@ -36,7 +36,6 @@ export default function PlaceOccupied() {
     }
   }, [infoGrayUser, numberPlace]);
 
-  console.log(loading);
 
   return (
     <>
