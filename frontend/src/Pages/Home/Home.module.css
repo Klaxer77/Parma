@@ -1,0 +1,21 @@
+@media only screen and (max-width:991px) {
+  .img_block {
+    display: none;
+  }
+
+}
+
+@media only screen and (max-width:490px) {
+  .wrapper {
+    margin-top: 100px !important;
+  }
+
+  .h1 {
+    font-size: 36px !important;
+    margin-bottom: 40px !important;
+  }
+
+  .h2 {
+    font-size: 15px !important;
+  }
+}

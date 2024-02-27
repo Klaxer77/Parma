@@ -1,20 +1,23 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { setTextEmail } from '../../../../Redux/Profile/ProfileInfo.slice';
 import VerificationCode from '../VerificationCode';
 import { fetchChangeEmail } from '../../../../Redux/Profile/VerificationCode/VerificationCode.slice';
-import SuccessfulProfile from '../../Successful'
+import SuccessfulProfile from '../../Successful';
+import style from '../ProfileContacts.module.css'
+
 
 export default function Email() {
   const dispatch = useDispatch();
   const { textEmail } = useSelector((state) => state.ProfileInfo);
   const [initialTextEmail, setInitialTextEmail] = useState(textEmail);
-  const { showCode, messageCompletedProfile, errorsChangeEmail } = useSelector((state) => state.VerificationCode);
+  const { showCode, messageCompletedProfile, errorsChangeEmail } = useSelector(
+    (state) => state.VerificationCode,
+  );
   const inputRefEmail = useRef(null);
   const prevTextEmailRef = useRef();
   const [showSaveButtonEmail, setShowSaveButtonEmail] = useState(false);
   const [editableEmail, setEditableEmail] = useState(false);
-
 
   useEffect(() => {
     setShowSaveButtonEmail(false);
@@ -22,7 +25,7 @@ export default function Email() {
 
   useEffect(() => {
     setInitialTextEmail(textEmail);
-  }, []); 
+  }, []);
 
   useEffect(() => {
     prevTextEmailRef.current = textEmail;
@@ -41,7 +44,7 @@ export default function Email() {
 
   const toggleEditable = () => {
     setEditableEmail(true);
-    inputRefEmail.current.focus()
+    inputRefEmail.current.focus();
   };
 
   const toggleEditableSave = () => {
@@ -51,7 +54,7 @@ export default function Email() {
         new_email: textEmail,
       };
       dispatch(fetchChangeEmail(email));
-      setInitialTextEmail(prevTextEmailRef.current)
+      setInitialTextEmail(prevTextEmailRef.current);
     }
   };
 
@@ -59,14 +62,13 @@ export default function Email() {
     dispatch(setTextEmail(initialTextEmail));
   };
 
-
   return (
-    <div className="flex justify-between gap-[65px] mb-[65px] w-full">
+    <div className="flex justify-between gap-[65px] w-full">
       {showCode && <VerificationCode />}
       <div className="w-full">
-        <div className="relative w-full flex items-center">
+        <div className={`relative w-full flex items-center flex-wrap justify-between bg-[#111111] rounded-[8px] ${style.wrapper_contacts}`}>
           <input
-            className="text-white h-[50px] pl-[10px] outline-none w-full bg-[#111111] rounded-[8px]"
+            className={`text-white max-w-[250px] w-full h-[50px] pl-[10px] outline-none bg-[#111111] rounded-l-[8px] ${style.input}`}
             type="text"
             onChange={handleInputChange}
             readOnly={!editableEmail}
@@ -74,26 +76,32 @@ export default function Email() {
             ref={inputRefEmail}
           />
           {showSaveButtonEmail && editableEmail && textEmail === textEmail ? (
-            <button
-              className="absolute right-[7px] w-[130px] bg-red h-[35px] rounded-[6px]"
-              onClick={() => {
-                toggleEditableSave();
-                resetTextEmail();
-              }}>
-              Сохранить
-            </button>
+            <div className={`${style.button_wrapper} bg-[#111111] rounded-r-[8px] h-[50px] w-[137px] flex items-center`}>
+              <button
+                className="w-[130px] bg-red h-[35px] rounded-[6px]"
+                onClick={() => {
+                  toggleEditableSave();
+                  resetTextEmail();
+                }}>
+                Сохранить
+              </button>
+            </div>
           ) : (
-            <button
-              className={editableEmail ? 'absolute right-[7px] w-[130px] bg-[#313131] h-[35px] rounded-[6px]' : 'absolute right-[7px] w-[130px] bg-[#21211F] h-[35px] rounded-[6px]'}
-              onClick={toggleEditable}>
-              Изменить
-            </button>
+            <div className={`${style.button_wrapper} bg-[#111111] rounded-r-[8px] h-[50px] w-[137px] flex items-center`}>
+              <button
+                className={
+                  editableEmail
+                    ? 'w-[130px] bg-[#313131] h-[35px] rounded-[6px]'
+                    : 'w-[130px] bg-[#21211F] h-[35px] rounded-[6px]'
+                }
+                onClick={toggleEditable}>
+                Изменить
+              </button>
+            </div>
           )}
         </div>
         {errorsChangeEmail && <p className="text-red mt-[10px]">{errorsChangeEmail}</p>}
-        {
-          messageCompletedProfile && <SuccessfulProfile />
-        }
+        {messageCompletedProfile && <SuccessfulProfile />}
       </div>
     </div>
   );

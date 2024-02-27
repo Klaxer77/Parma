@@ -1,11 +1,11 @@
-import React from 'react';
+import style from '../ProfileContacts/ProfileContacts.module.css'
 import { useSelector } from 'react-redux'; 
 
 export default function PersonalDate() {
   const { infoUser } = useSelector(state => state.ProfileInfo)
 
   return (
-    <div className='mb-[40px]'>
+    <div className={`mb-[40px] ${style.wrapper_personalDate}`}>
       <p className="text-[20px] mb-[20px]">Личные данные</p>
       <div className="flex flex-col gap-[15px] mt-[10px]">
 

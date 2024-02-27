@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import style from './Successful.module.css';
 import { useEffect, useState } from 'react';
 import { setLoadedProfile } from '../../../Redux/Profile/LoadedProfile.slice';
+import { setMessageCompleted } from '../../../Redux/Profile/VerificationCode/VerificationCode.slice';
 
 
 export default function SuccessfulProfile() {
@@ -16,6 +17,7 @@ export default function SuccessfulProfile() {
       }, 5);
       setTimeout(() => {
         setIsTrue(false);
+        dispatch(setMessageCompleted({}))
       }, 5000);
       dispatch(setLoadedProfile(false));
     }
