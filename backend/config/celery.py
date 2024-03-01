@@ -17,7 +17,7 @@ app.autodiscover_tasks()
 app.conf.beat_schedule = {
     'move-reservation-to-history': {
         'task': 'backend.map.tasks.move_expired_reservations_to_history',
-        'schedule': 5,
+        'schedule': 2,
     },
     'remove_code_confirm_email': {
         'task': 'backend.map.tasks.remove_code_confirm_email',
