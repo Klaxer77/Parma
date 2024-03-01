@@ -26,7 +26,7 @@ class Place(models.Model):
         ('Свободно', 'Свободно'),
     ]
     name = models.IntegerField('Номер места', unique=True)
-    image = models.ImageField("Фото места", upload_to="place/")
+    image = models.ImageField("Фото места", upload_to="place/", default='f')
     status = models.CharField(
         "Статус",
         max_length=13,
