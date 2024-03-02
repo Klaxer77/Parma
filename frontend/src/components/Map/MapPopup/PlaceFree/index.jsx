@@ -29,6 +29,8 @@ export default function PlaceFree() {
   ) : (
     <div className="mt-[20px]">
       <div className="flex flex-col items-center">
+        <div className='flex items-center'>
+        <p>Начало:</p>
         <DatePicker
           locale={ru}
           selected={startDate}
@@ -39,6 +41,9 @@ export default function PlaceFree() {
           timeIntervals={30}
           className={style.datePicker}
         />
+        </div>
+        <div className='flex items-center'>
+          <p>Конец:</p>
         <DatePicker
           locale={ru}
           selected={endDate}
@@ -49,6 +54,7 @@ export default function PlaceFree() {
           timeIntervals={30}
           className={style.datePicker}
         />
+        </div>
         {
           error && <p className='text-red mt-[10px]'>{error[0]}</p>
         }
