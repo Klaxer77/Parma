@@ -76,7 +76,7 @@ DATABASES = {
         "ENGINE": os.environ.get("SQL_ENGINE", 'django.db.backends.sqlite3'),
         "NAME": os.environ.get("SQL_DATABASE", os.path.join(BASE_DIR, "db.sqlite3")),
         "USER": os.environ.get("SQL_USER", "user"),
-        "PASSWORD": os.environ.get("SQL_PASSWORD", "treker123"),
+        "PASSWORD": os.environ.get("SQL_PASSWORD", "sdffsff4567"),
         "HOST": os.environ.get("SQL_HOST", "localhost"),
         "PORT": os.environ.get("SQL_PORT", "5432"),
     }
@@ -112,7 +112,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_HOST_USER = 'parma.verify.code@gmail.com'
-EMAIL_HOST_PASSWORD = 'hewa ahxl uazv qnbu'
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'ghjy fhty vnhjt')
 EMAIL_PORT = 587
 EMAIL_ADMIN=['parma.verify.code@gmail.com']
 EMAIL_SERVER = 'parma.verify.code@gmail.com'

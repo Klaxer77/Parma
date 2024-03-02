@@ -10,7 +10,12 @@ backend/db.sqlite3
 # media
 backend/db.sqlite3
 
+blockshemasaita (2).drawio
+
 .vscode
+
+backend/.env.dev
+.env.dev
 
 # Backup files # 
 *.bak 
