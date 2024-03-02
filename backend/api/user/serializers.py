@@ -218,7 +218,6 @@ class CustomDateTimeField(serializers.DateTimeField):
     def to_internal_value(self, data):
         try:
             date_obj = datetime.strptime(data, '%d.%m.%Y %H:%M')
-            # Attach timezone information to the parsed datetime
             aware_date_obj = pytz.timezone('Asia/Yekaterinburg').localize(date_obj)
             return aware_date_obj
         except ValueError:
