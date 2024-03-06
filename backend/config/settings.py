@@ -117,7 +117,7 @@ EMAIL_PORT = 587
 EMAIL_ADMIN=['parma.verify.code@gmail.com']
 EMAIL_SERVER = 'parma.verify.code@gmail.com'
 DEFAULT_FROM_EMAIL = 'parma.verify.code@gmail.com'
-#adwadawd
+
 
 #Cookiee
 SESSION_COOKIE_HTTPONLY = False
