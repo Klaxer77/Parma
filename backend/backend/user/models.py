@@ -100,8 +100,7 @@ class ConfirmationCodePhone(models.Model):
     class Meta:
         verbose_name = "Код подтверждения номера телефона"
         verbose_name_plural = "Коды подтверждения номера телефона"
-    
-
+        
     
     
     
