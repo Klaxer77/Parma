@@ -117,7 +117,7 @@ EMAIL_PORT = 587
 EMAIL_ADMIN=['parma.verify.code@gmail.com']
 EMAIL_SERVER = 'parma.verify.code@gmail.com'
 DEFAULT_FROM_EMAIL = 'parma.verify.code@gmail.com'
-
+#adwadawd
 
 #Cookiee
 SESSION_COOKIE_HTTPONLY = False
@@ -127,6 +127,7 @@ CSRF_TRUSTED_ORIGINS = ['http://localhost:3001', 'http://127.0.0.1:3000', 'http:
 CORS_ALLOW_CREDENTIALS = True
 CSRF_COOKIE_SECURE=True
 CSRF_COOKIE_HTTPONLY=True
+
 
 
 #DJOSER
