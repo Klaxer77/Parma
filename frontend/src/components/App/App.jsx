@@ -51,7 +51,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route path="/map" element={<MapOffice />}></Route>
-            <Route path="/home" element={<Home />}></Route>
+            <Route index element={<Home />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
             <Route path="/history" element={<HistoryReservation />}></Route>
             <Route path="/active" element={<ActiveReservation />}></Route>
