@@ -6,7 +6,7 @@ export const $profile = axios.create({
 });
 
 export const $login = axios.create({
-  baseURL: 'http://84.38.183.246/auth/jwt/create/',
+  baseURL: 'http://84.38.183.246/auth/jwt',
 });
 
 export const $map = axios.create({
@@ -34,7 +34,8 @@ $profile.interceptors.request.use(
   }
 );
 
-const baseUrl = 'http://localhost:3000/'
+const baseURL = 'http://84.38.183.246'
 
-export default baseUrl
+export default baseURL
+
 

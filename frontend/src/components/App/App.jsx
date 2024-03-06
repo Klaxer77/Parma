@@ -11,6 +11,7 @@ import { setMapButtonActive, setMenuActive } from '../../Redux/Menu/Menu.slice';
 import NotFound from '../../Pages/NotFound';
 import HistoryReservation from '../../Pages/HistoryReservation';
 import ActiveReservation from '../../Pages/ActiveReservation' 
+import baseURL from '../../Api/http';
 
 
 function App() {
@@ -20,23 +21,23 @@ function App() {
   const url = window.location.href;
 
   useEffect(() => {
-    if (url == 'http://localhost:3000/home') {
+    if (url == `${baseURL}/home`) {
       dispatch(setMenuActive(-1));
       dispatch(setMapButtonActive(false));
     }
-    if (url == 'http://localhost:3000/login') {
+    if (url == `${baseURL}/login`) {
       dispatch(setMenuActive(-1));
       dispatch(setMapButtonActive(false));
     }
-    if (url == 'http://localhost:3000/profile') {
+    if (url == `${baseURL}/profile`) {
       dispatch(setMenuActive(0));
       dispatch(setMapButtonActive(false));
     }
-    if (url == 'http://localhost:3000/historyReserv') {
+    if (url == `${baseURL}/historyReserv`) {
       dispatch(setMenuActive(2));
       dispatch(setMapButtonActive(false));
     }
-    if (url == 'http://localhost:3000/map') {
+    if (url == `${baseURL}/map`) {
       dispatch(setMenuActive(3));
       dispatch(setMapButtonActive(true));
     }
