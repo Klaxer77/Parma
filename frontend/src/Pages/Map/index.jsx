@@ -83,7 +83,7 @@ export default function MapOffice() {
       <MapPopup />
       {messageCompletedReservation && <SuccessfulMapReservation fetchMapAll={fetchMapAll} />}
       <div className="w-full relative max-w-[1570px] mx-auto">
-        <h3 className="text-white text-[24px] pt-[20px] text-center font-[400] mb-[50px]">Карта</h3>
+        <h3 className="text-white text-[24px] pt-[20px] text-center font-[400] mb-[50px]">Картааа</h3>
         <MapInfo />
         <button
           className="text-white btn-size fixed bottom-[190px] right-[30px] z-[999] w-[40px] h-[40px] rounded-[5px] bg-red"
