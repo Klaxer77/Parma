@@ -7,7 +7,6 @@ ENV PATH /app/node_modules/.bin:$PATH
 COPY package.json /app/package.json
 
 RUN npm i
-RUN npm install -g npm@10.5.0
 
 COPY . /app
 
