@@ -8,6 +8,7 @@ export const fetchLogin = createAsyncThunk(
   async (user, { rejectWithValue }) => {
     try {
       const response = await $login.post('/create/', user);
+      console.log($login);
       return response.data.access
     } catch (error) {
       return rejectWithValue([error.response.data.detail, error.response.data.email, error.response.data.password]);
