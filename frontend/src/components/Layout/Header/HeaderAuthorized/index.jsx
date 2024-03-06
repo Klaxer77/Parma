@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { setMapButtonActive, setMenuActive } from '../../../../Redux/Menu/Menu.slice';
 import { useEffect, useRef } from 'react';
+import baseURL from '../../../../Api/http';
 
 export default function HeaderAuthorized() {
   const headerRef = useRef();
@@ -34,7 +35,7 @@ export default function HeaderAuthorized() {
             <div className="rounded-[50%] overflow-hidden w-[50px] h-[50px] border-[2px] border-red flex justify-center items-center ">
               <img
                 className="w-full h-auto block"
-                src={`${baseUrl}/${infoUser.image}`}
+                src={`${baseURL}/${infoUser.image}`}
                 alt=""
               />
             </div>
