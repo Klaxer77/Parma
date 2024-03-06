@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const $profile = axios.create({
-  // baseURL: 'http://84.38.183.246/api/v1/user/',
+
   baseURL: 'http://localhost:8000/api/v1/user/',
   withCredentials: true,
 });
@@ -13,9 +13,7 @@ export const $login = axios.create({
 });
 
 export const $map = axios.create({
-  // baseURL: 'http://84.38.183.246/api/v1/',
-  baseURL: 'http://localhost:8000/api/v1/',
-  withCredentials: true,
+  baseURL: 'http://84.38.183.246/auth/jwt',
 });
 
 $map.interceptors.request.use(
@@ -38,7 +36,7 @@ $profile.interceptors.request.use(
   }
 );
 
-const baseURL = 'http://84.38.183.246'
+const baseURL = 'http://localhost/:8000'
 
 export default baseURL
 
