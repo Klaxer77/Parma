@@ -34,7 +34,7 @@ export default function HeaderAuthorized() {
             <div className="rounded-[50%] overflow-hidden w-[50px] h-[50px] border-[2px] border-red flex justify-center items-center ">
               <img
                 className="w-full h-auto block"
-                src={`http://localhost:8000${infoUser.image}`}
+                src={`${baseUrl}/${infoUser.image}`}
                 alt=""
               />
             </div>
