@@ -119,7 +119,7 @@ EMAIL_SERVER = 'parma.verify.code@gmail.com'
 DEFAULT_FROM_EMAIL = 'parma.verify.code@gmail.com'
 
 
-#Cookie
+#Cookiee
 SESSION_COOKIE_HTTPONLY = False
 SESSION_COOKIE_SAMESITE = None
 CSRF_COOKIE_SAMESITE = None
