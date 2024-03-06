@@ -123,10 +123,31 @@ DEFAULT_FROM_EMAIL = 'parma.verify.code@gmail.com'
 SESSION_COOKIE_HTTPONLY = False
 SESSION_COOKIE_SAMESITE = None
 CSRF_COOKIE_SAMESITE = None
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3001', 'http://127.0.0.1:3000', 'http://84.38.183.246', 'http://127.0.0.1:80']
+CSRF_TRUSTED_ORIGINS=["http://84.38.183.246"]
 CORS_ALLOW_CREDENTIALS = True
 CSRF_COOKIE_SECURE=True
 CSRF_COOKIE_HTTPONLY=True
+
+#CORS
+CORS_ORIGIN_WHITELIST = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    'http://localhost:3001',
+    'http://127.0.0.1:3001',
+    'http://84.38.183.246', 
+    'http://127.0.0.1:80',
+]
+
+CORS_ALLOW_ALL_ORIGINS = False
+CORS_ALLOWED_ORIGINS = [
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    'http://localhost:3001',
+    'http://127.0.0.1:3001',
+    'http://84.38.183.246', 
+    'http://127.0.0.1:80',
+]
+
 
 
 
@@ -185,32 +206,7 @@ SIMPLE_JWT = {
 
 
 
-#CORS
-CORS_ORIGIN_WHITELIST = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'http://localhost:3001',
-    'http://127.0.0.1:3001',
-    'http://84.38.183.246', 
-    'http://127.0.0.1:80',
-]
 
-CORS_ALLOW_ALL_ORIGINS = False
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-    'http://127.0.0.1:3000',
-    'http://localhost:3001',
-    'http://127.0.0.1:3001',
-    'http://84.38.183.246', 
-    'http://127.0.0.1:80',
-]
-
-#Cookie
-SESSION_COOKIE_HTTPONLY = False
-SESSION_COOKIE_SAMESITE = None
-CSRF_COOKIE_SAMESITE = None
-CSRF_TRUSTED_ORIGINS = ['http://localhost:3001', 'http://127.0.0.1:3000', 'http://84.38.183.246', 'http://127.0.0.1:80']
-CORS_ALLOW_CREDENTIALS = True
 
 
 # Password validation
