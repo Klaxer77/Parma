@@ -29,7 +29,6 @@ services:
       - vue_dist:/app//dist
     depends_on:
       - web
-    mem_limit: 2g
   nginx:
     build: ./nginx
     ports:
