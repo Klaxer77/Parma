@@ -1,16 +1,19 @@
 import axios from 'axios';
 
 export const $profile = axios.create({
-  baseURL: 'http://84.38.183.246/api/v1/user/',
+  // baseURL: 'http://84.38.183.246/api/v1/user/',
+  baseURL: 'http://localhost:8000/api/v1/user/',
   withCredentials: true,
 });
 
 export const $login = axios.create({
-  baseURL: 'http://84.38.183.246/auth/jwt/create/',
+  // baseURL: 'http://84.38.183.246/auth/jwt/create/',
+  baseURL: 'http://localhost:8000/auth/jwt/create/',
 });
 
 export const $map = axios.create({
-  baseURL: 'http://84.38.183.246/api/v1/',
+  // baseURL: 'http://84.38.183.246/api/v1/',
+  baseURL: 'http://localhost:8000/api/v1/',
   withCredentials: true,
 });
 
